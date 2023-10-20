@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端登录页面</title>
+
+</head>
+<body>
+  <div class="container">
+    <h2>移动端登录</h2>
+    <form id="login-form">
+      <label for="username">用户名:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">密码:</label>
+      <input type="password" id="password" name="password" required>
+      <p class="error-message" id="error-message"></p>
+      <input type="submit" value="登录">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // 阻止表单默认提交行为
+
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var errorMessage = document.getElementById('error-message');
+
+      if (username.trim() === '' || password.trim() === '') {
+        errorMessage.textContent = '用户名和密码不能为空';
+      } else {
+        // 执行登录逻辑
+        // 您可以在这里通过AJAX或其他方式将表单数据发送到服务器进行验证和处理
+        // 示例中仅给出了前端验证逻辑
+        console.log('用户名:', username);
+        console.log('密码:', password);
+
+        // 清空错误信息
+        errorMessage.textContent = '';
+      }
+    });
+</script>
+</body>
+</html>

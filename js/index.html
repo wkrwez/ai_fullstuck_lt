@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送花-设计模式</title>
+</head>
+<body>
+    <script>
+        // js代码  强大的表现力
+        // alert('hello')
+        // console.log('adadad')检查调试  typeof可以获得数据类型
+        // document.write('dasda')输出
+        // prompt('请输入名字')弹出一个输入框
+        //   js{}  对象字面量
+        const wkr = {
+            name:'吴凯瑞', //string
+            age: 21, //number  不分整数和小数 不太适合计算
+            hometown: '南昌',
+            isSingle: true , //Boolean
+            sendFlower:function(target) {
+                target.receiveFlower(wkr);
+            }
+        }
+
+        const lt ={
+            name:'刘涛',
+            age :21,
+            hometown:'宜春',
+            isSingle: true
+        }
+//送花？
+        const xm ={
+            name: '小梅',
+            hometown:'上饶',
+            xq: 50,
+            receiveFlower: function( sender){
+                console.log(xm.name+'收到'+sender.name+'花了');
+                if(xm.xq < 80){
+                    console.log('谢谢，但是我不喜欢');
+                }else{
+                    console.log('海伦斯走一波');
+                }
+               
+            }
+        }
+
+       const xh={
+            name:'小红',
+            hometown:'南昌',
+            receiveFlower: function(sender ){
+                // console.log('收到花了');
+            //     if(sender.name == '吴凯瑞'){
+            //         console.log('让我们在一起吧');
+            //     }
+            //     else{
+            //         console.log('收到'+sender.name+'送的花')
+            //     }
+            // 设计模式 代理模式
+            
+            setTimeout(()=>{
+                 xm.xq=99;
+                 xm.receiveFlower(sender);
+            },3000)
+            }
+           
+        } 
+    </script>
+</body>
+</html>
