@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="warpBg">
+      <div id="headTitle">
+        <img src="./img/bird0.png" alt="" id="headBrid">
+      </div>
+      <button id="statrtBtn"></button>
+      <div id="grassLand1"></div>
+    <div id="grassLand2"></div>
+    </div>
+    <script>
+        var jsHeadTitle = document.getElementById('headTitle');
+        var jsHeadBird = document.getElementById('headBrid')
+        // 标题的摆动
+        var Y = 3 ;
+        var imgArr=['./img/bird0.png','./img/bird1.png'];
+        var index=0;
+        setInterval(headWave,200)/*定时器,里面函数不用大括号*/
+        function headWave(){
+            Y = Y*-1;
+            jsHeadTitle.style.top=jsHeadTitle.offsetTop + Y +'px';
+            jsHeadBird.src = imgArr[index++]
+            if(index>1){
+                index=0;
+            }
+            
+        }
+
+        // 草地移动
+        var jsGrassLand1=document.getElementById('grassLand1');
+        var jsGrassLand2=document.getElementById('grassLand2');
+        setInterval(landrun,30)
+        function landrun(){
+            jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + 'px';/*定位就可以直接获取位置*/
+            jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + 'px';
+
+            if(jsGrassLand1.offsetLeft<=-343){//超出屏幕
+                jsGrassLand1.style.left = 343 + 'px';
+            }
+            if(jsGrassLand2.offsetLeft<=-343){//超出屏幕
+                jsGrassLand2.style.left = 343 + 'px';
+            }
+        }
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    background: #4c4c4c url('./微信图片_20231024162828.jpg') no-repeat;
+    background-size: cover;
+    /*设置body为弹性盒子，使盒子到屏幕中间*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper{
+    width: 850px;
+    display: flex;
+}
+.speed{
+    
+    background-color: #fff;
+    margin: 10px;
+    flex: 1;
+    border-radius: 50px;
+    overflow: hidden;/*超出则隐藏*/
+}
+.speed-bar{
+    width: 100%;
+    height: 16.3%;
+    background: linear-gradient(to bottom,#23761a,#c16ecf);
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    color: pink;
+}
