@@ -1,55 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>小鸟飞行游戏</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
     <div id="warpBg">
-      <div id="headTitle">
-        <img src="./img/bird0.png" alt="" id="headBrid">
-      </div>
-      <button id="statrtBtn"></button>
-      <div id="grassLand1"></div>
-    <div id="grassLand2"></div>
+        <div id="headTitle">
+            <img src="./img/bird0.png" alt="" id="headBrid">
+        </div>
+        <button id="statrtBtn"></button>
+        <div id="grassLand1"></div>
+        <div id="grassLand2"></div>
     </div>
+    <script src="./bird.js"></script>
+    <script src="./utils.js"></script>
+    <script src="./block.js"></script>
     <script>
         var jsHeadTitle = document.getElementById('headTitle');
-        var jsHeadBird = document.getElementById('headBrid')
+        var jsHeadBird = document.getElementById('headBrid');
+        var jsWarpBg = document.getElementById('warpBg');
+        var blockArr = []
         // 标题的摆动
-        var Y = 3 ;
-        var imgArr=['./img/bird0.png','./img/bird1.png'];
-        var index=0;
-        setInterval(headWave,200)/*定时器,里面函数不用大括号*/
-        function headWave(){
-            Y = Y*-1;
-            jsHeadTitle.style.top=jsHeadTitle.offsetTop + Y +'px';
+        var Y = 3;
+        var imgArr = ['./img/bird0.png', './img/bird1.png'];
+        var index = 0;
+        var headWaveTimer = setInterval(headWave, 200)/*定时器,里面函数不用大括号*/
+        function headWave() {
+            Y = Y * -1;
+            jsHeadTitle.style.top = jsHeadTitle.offsetTop + Y + 'px';
             jsHeadBird.src = imgArr[index++]
-            if(index>1){
-                index=0;
+            if (index > 1) {
+                index = 0;
             }
-            
+
         }
 
         // 草地移动
-        var jsGrassLand1=document.getElementById('grassLand1');
-        var jsGrassLand2=document.getElementById('grassLand2');
-        setInterval(landrun,30)
-        function landrun(){
+        var jsGrassLand1 = document.getElementById('grassLand1');
+        var jsGrassLand2 = document.getElementById('grassLand2');
+        var landTimer = setInterval(landrun, 30)
+        function landrun() {
             jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + 'px';/*定位就可以直接获取位置*/
             jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + 'px';
 
-            if(jsGrassLand1.offsetLeft<=-343){//超出屏幕
+            if (jsGrassLand1.offsetLeft <= -343) {//超出屏幕
                 jsGrassLand1.style.left = 343 + 'px';
             }
-            if(jsGrassLand2.offsetLeft<=-343){//超出屏幕
+            if (jsGrassLand2.offsetLeft <= -343) {//超出屏幕
                 jsGrassLand2.style.left = 343 + 'px';
             }
+            //管道的移动
+            var blockDistance = baseObj.randomNum(120, 130)
+            if (blockArr.length > 0) {
+                for (var i = 0; i < blockArr.length; i++) {
+                    blockArr[i].moveBlock()
+
+                    //检测碰撞
+
+                    var x = baseObj.rectangleCrashExamine(blockArr[i].upDivWrap, bird.div)
+                    var y = baseObj.rectangleCrashExamine(blockArr[i].downDivWrap, bird.div)
+                    var z = bird.div.offsetTop >= 390
+                    if (x || y || z) {
+                        clearInterval(landTimer)
+                        jsWarpBg.onclick=null
+                    }
+                }
+
+                //下一根管道的生成
+                if (blockArr[blockArr.length - 1].downDivWrap.offsetLeft < (450 - blockDistance)) {
+                    var newBlock = new Block()
+                    newBlock.createBlock()
+                    blockArr.push(newBlock)
+
+                }
+                //清除左侧多余的管道
+                if (blockArr[0].downDivWrap.offsetLeft < -70) {
+                    jsWarpBg.removeChild(blockArr[0].upDivWrap)
+                    jsWarpBg.removeChild(blockArr[0].downDivWrap)
+                    blockArr.shift()     //移除数组第一项
+                }
+
+
+            }
+
+
+
+
+
         }
-        
+
+        //点击开始
+        var jsStatrtBtn = document.getElementById('statrtBtn')
+        jsStatrtBtn.onclick = function () {//绑定点击事件
+            //让标题和按钮消失
+            jsHeadTitle.style.display = 'none';
+            jsStatrtBtn.style.display = 'none';
+            clearInterval(headWaveTimer)//清除定时器
+
+            //小鸟出现
+
+            bird.showBird(jsWarpBg)
+
+            bird.flyBrid()
+            bird.wingWave()
+            jsWarpBg.onclick = function () {
+                bird.fallSpeed = -8
+            }
+            //管道出现 
+            var b = new Block()
+            b.createBlock()
+            blockArr.push(b)
+            //  setInterval(b.moveBlock,20) 定时器不能识别this
+
+
+
+        }
+
 
     </script>
 </body>
+
 </html>
