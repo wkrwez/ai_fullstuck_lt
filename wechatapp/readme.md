@@ -48,7 +48,7 @@
    - 选择器前加限定
 
 
-- js
+- js     
     - data 里面的数据可以绑定到页面上
     - 模板不是静态页面， 由数据驱动的动态
 
@@ -62,11 +62,11 @@
         不是页面， 他是活得，动态部分绑定了数据{{}}和指令wx：for的
         只要数据发生改变，他会自动刷新
 
-- js   
+- js
      data  可以绑定到模板的数据{{}}  
-     onload 生命周期  wx.request 去取下数据（后台） 
+     onload 生命周期  wx.request 去取下数据（后台）  
      this.setData（{  
-        slides：res.data.slides 
+        slides：res.data.slides  
      }）
 
 
