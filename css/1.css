@@ -1,0 +1,19 @@
+.button1 {
+    width: 200px;
+    height: 46px;
+    line-height: 46px;
+    background: #2e82ff;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 27px;
+    animation: zoomIn 1.5s infinite;
+    text-align: center;
+}
+@keyframes zoomIn {
+    50% {
+     transform: scale(1.2);
+    }
+    100% {
+     transform: scale(1);
+    }
+}

@@ -19,18 +19,19 @@
 // }
 // console.log(a);
 
-// let a = 1
+//  let a = 1
 //  if(true){
 //   console.log(a);
 //   let a = 2
+//  }
 
 
 // function foo(str){
-//     eval(str)
+//      eval(str)
 //     var a = 1
 //     console.log(a,b);
-// }
-// foo('var b = 2')
+//  }
+//  foo('var b = 2')
 
 
 // var obj={
@@ -61,8 +62,12 @@
 // console.log(a)
 
 
-// function foo(){
-//      c=3
-// }
-// foo()
-// console.log(c);
+//  function foo(){
+//       c=3
+//  }
+//  foo()
+//  console.log(c);
+
+
+console.log(a);
+const a=1;
