@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			html,body{
+				height: 100%;
+				margin: 0px;
+				
+			}
+			body{
+				background:linear-gradient(to left, transparent,pink, #03e9f4 ) ;
+				}
+			#d123{
+				margin: 0px;
+				height: 400px;
+				width: 400px;
+				position: absolute;
+				top: 26%;
+				left: 37.5%;
+				/* transform: translate(-50%,-50%); */
+				border-radius: 50%;
+				animation:name 4s ease-in-out infinite;
+				background:linear-gradient(to right, #03e9f4 ,pink, transparent)
+			}
+		
+			@keyframes name{
+				from{
+					transform: rotateZ(0deg);
+					}
+				50%{
+				}
+				to{
+					transform: rotateZ(360deg);
+					}
+			}
+			
+			form{
+				height:220px;
+				width: 300px;
+				background: rgba(255,255,250,.5);
+				position:absolute ;
+				left: 50%;
+				top:50%;
+				/* 在自己的基础上往右边和下面走-50% */
+				transform: translate(-50%,-50%);
+				border-radius: 10px;
+			}
+			form>h2{
+				text-align: center;
+				margin-left: 10px;
+				
+			}
+			p{
+				text-align: center;
+				height: 40px;
+				margin: 0px;
+				position: relative;
+				margin: 15px auto;
+			}
+			input{
+				display: block;
+				width:30%;
+				margin: auto;
+				border-radius:20px;
+				transition: 1.4s;
+				text-align: center;
+				border: none;
+			}
+			
+			input:focus{
+				width:80%;
+				background: pink;
+				border: none;
+				box-shadow: 0 0 15px rgba(0,255,255,.6), 0 0 25px rgba(0,255,255,.6), 0 0 50px rgba(0,255,255,.6),
+					0 0 100px rgba(0,255,255,.6);
+			}
+			
+			label{
+				position: absolute;
+				left: 20px;
+				transition:1.4s;
+				top:0px;
+			}
+			
+			p:focus-within label{
+				top: -20px;
+				left:110px;
+			}
+			#s1{
+				position: absolute;
+				font-size: 12px;
+				top: 100px;
+				color: red;
+			}
+			#s2{
+				color: red;
+				position: absolute;
+				font-size: 12px;
+				bottom: 50px;
+			}
+			#a {
+				position: relative;
+				left: 20px;
+				padding:0px;
+				height: 30px;
+				width: 50px;
+				color: rgba(0,0,0,.5);
+				border-radius:6px;
+				border: none;
+				/* 同样加个过渡 */
+				transition: all 1s;
+			}
+			 #a:hover {
+				color: #fff;
+				border-radius: 5px;
+				background-color: rgba(0,0,0,.6);
+				/* 设置上右下左每个位置的参数 每个参数为水平阴影位置 垂直阴影 模糊距离 */
+				box-shadow: 0 0 15px rgba(0,0,0,.6), 0 0 25px rgba(0,0,0,.6), 0 0 50px rgba(0,0,0,.6),
+					0 0 100px rgba(0,0,0,.6);
+			}
+			#a1 {
+				position: relative;
+				left: 180px;
+				padding:0px;
+				height: 30px;
+				width: 50px;
+				color: rgba(0,0,0,.5);
+				border-radius:6px;
+				border: none;
+				/* 同样加个过渡 */
+				transition: all 1s;
+			}
+			 #a1:hover {
+				color: #fff;
+				border-radius: 5px;
+				background-color: rgba(0,0,0,.6);
+				/* 设置上右下左每个位置的参数 每个参数为水平阴影位置 垂直阴影 模糊距离 */
+				box-shadow: 0 0 15px rgba(0,0,0,.6), 0 0 25px rgba(0,0,0,.6), 0 0 50px rgba(0,0,0,.6),
+					0 0 100px rgba(0,0,0,.6);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="d123">
+		</div>
+			<form action="" method="">
+			<h2>登录界面</h2>
+			<p><label id="dl1">用户名：</label><input type="text" onkeyup="onname(this,2)" id="uname" maxlength="10" placeholder="请输入账户"/></p >
+			<p><label id="dl2">用户密码：</label><input type="password" onkeyup="onname(this,3)" id="upwd" maxlength="10" placeholder="请输入密码"/></p >
+			<button id="a" type="button" onclick="tz(2)">登录</button> <button id="a1" type="button" onclick="tz(3)">注册</button>
+			<span id="s1"></span>
+			<span id="s2"></span>
+		</form>
+		<script type="text/javascript">
+			function onname(t,id){
+				var cname=t.value.length
+				console.log(t.value.length)
+				if(id=="2"){
+					var sp=document.getElementById("s1");
+					if(cname>4){
+						sp.textContent="√"
+						sp.style.color="green"
+						return true
+					}
+					if(cname>0&&cname<3){
+						sp.textContent="用户名不格式正确"
+						sp.style.color="red"
+						return false
+					}
+					
+					if(cname==0){
+						sp.textContent=""
+						return false
+					}
+				}
+				if(id=="3"){
+					var sp2=document.getElementById("s2");
+					if(cname>4){
+						sp2.textContent="√"
+						sp2.style.color="green"
+						return true
+					}
+					if(cname>0&&cname<3){
+						sp2.textContent="密码格式不正确"
+						sp2.style.color="red"
+						return false
+					}
+					
+					if(cname==0){
+						sp2.textContent=""
+						return false
+					}
+				}
+			}
+			function tz(dd){
+				if(dd==3){
+					window.location.href="zc.html"
+				}
+				var b=document.getElementById("uname").value.length
+				var c=document.getElementById("upwd").value.length
+				if(c>4&&b>4){window.location.href="new_file.html"}
+					
+				
+			}
+		</script>
+	</body>
+</html>
