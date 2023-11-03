@@ -9,3 +9,7 @@
 
 - pipeline 核心模块，启动模块
    像水管子
+
+
+- pipeline(task, model)
+   - 遥遥领先，中文模型

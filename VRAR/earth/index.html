@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D地球</title>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.min.js"></script>
+</head>
+<body>
+  <!-- html5里的绘图专属标签 游戏 3D webgl方向 
+    c++ openGL  -->
+    <canvas id="webglcanvas"></canvas>
+    <script>
+    // THREE 面向对象思想给我们提供了一堆的类
+    // Scene 场景  
+    // Camera 相机
+    // Renderer 渲染器
+    // Gemotry  3D 模型 
+    // Material 材质 
+    // Light灯光
+    var canvas;
+    var camera, scene, renderer;
+    
+    init();
+    animate();
+    function init() {
+        // canvas 容器
+        canvas = document.getElementById('webglcanvas');
+        console.log(canvas)
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // 实例相机
+        camera = new THREE.PerspectiveCamera(60,
+         window.innerWidth/window.innerHeight, 1, 2000);
+        camera.position.z = 500;
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
+        group = new THREE.Group(); // 一组物体
+        scene.add(group);
+        // 加载器 
+        var loader = new THREE.TextureLoader();
+        loader.load('./earth.jpg', function(textture){
+            // 3D形状
+            var geometry = new THREE.SphereGeometry(200, 20, 20);
+            // 材质
+            var material = new THREE.MeshBasicMaterial({map: textture});
+            // 网格
+            var mesh = new THREE.Mesh(geometry, material);
+            group.add(mesh);
+        })
+        // camera 拍着scene, renderer把胶片放映出来
+        renderer = new THREE.WebGLRenderer({canvas: canvas});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // renderer.render(scene, camera);
+
+    }
+    function animate() {
+        //按浏览器的刷新频率去执行
+        requestAnimationFrame(animate);
+        render();
+    }
+    function render() {
+        group.rotation.y -=0.005;
+        renderer.render(scene, camera);
+    }
+    </script>
+</body>
+</html>
