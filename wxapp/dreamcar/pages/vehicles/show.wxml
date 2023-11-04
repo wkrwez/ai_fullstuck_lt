@@ -1,0 +1,60 @@
+<!-- 盒子 -->
+<view class="section">
+  <view class="cover">
+    <image src="https://resources.ninghao.net/landrover/range-rover-small.jpg"/>
+    <view class="content">
+      <view class="header">
+        揽胜
+        <view class="sub-header">
+        Range Rover
+        </view>
+      </view>
+      <view class="meta">RMB 1,588,000</view>
+    </view>
+  </view>
+  <view class="spec">
+    <view class="item">
+      <view class="header">
+      二氧化碳排放
+      </view>
+      <view class="value">
+        <text>262</text>克/公里
+      </view>
+    </view>
+    <view class="item">
+      <view class="header">
+      综合燃油
+      </view>
+      <view class="value">
+        <text>10.7</text>升/公里
+      </view>
+    </view>
+  </view>
+  <view class="action">
+    <view class="description">
+    世界顶级奢华SUV的极致巅峰
+    </view>
+    <button 
+    bindtap="testDrive"
+    class="button primary">预约试驾</button>
+  </view>
+</view>
+<swiper 
+indicator-dots="{{true}}"
+class="section story white">
+  <!-- block 不会出现在DOM , 承载指令的 -->
+  <block wx:for="{{design}}" wx:key="id">
+    <swiper-item>
+      <view class="content">
+        <view class="sub-header">外观</view>
+        <view class="header">{{item.header}}</view>
+        <view class="description">
+          {{item.description}}
+        </view>
+        <image 
+        src="{{item.image}}"
+        mode="aspectFill"/>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>

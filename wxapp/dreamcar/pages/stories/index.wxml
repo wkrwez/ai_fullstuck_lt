@@ -1,0 +1,5 @@
+<!--pages/stories/index.wxml-->
+<button bindtap="goback">跳回去vehicles</button>
+
+
+<text>pages/stories/index.wxml</text>

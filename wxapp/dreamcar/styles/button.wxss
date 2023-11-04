@@ -1,0 +1,14 @@
+.button{
+     display: inline-block; 
+     margin: 8rpx; 
+    background: #e0e1e2;
+     padding: 24rpx 48rpx; 
+     color: rgb(0,0,0,0.6); 
+    border-radius: 2rpx;
+    font-size: 32rpx;
+    transition: .3s all;
+}
+.button.primary{
+    background: #000000;
+    color: rgba(255, 255, 255, 0.9)
+}
