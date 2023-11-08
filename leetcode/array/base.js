@@ -1,17 +1,17 @@
-var str = 'hello world'//string 字符串
-var num = 123 // number 数字 
-var flag = false // boolean 布尔
-var un = undefined //
-var n = null
+// var str = 'hello world'//string 字符串
+// var num = 123 // number 数字 
+// var flag = false // boolean 布尔
+// var un = undefined //
+// var n = null
 
-// 引用类型  对象
-var obj = {
-    name: '洋洋',
-    age: 18,
-    like:{
-        item1:'eat'
-    }
-}
+// // 引用类型  对象
+// var obj = {
+//     name: '洋洋',
+//     age: 18,
+//     like:{
+//         item1:'eat'
+//     }
+// }
 
 // console.log(obj.name)
 
@@ -43,22 +43,26 @@ var obj = {
 // console.log(arr);
 
 
-var arr =[
-    [1,2,3,4,5],
-    [1,2,3,4,5],
-    [1,2,3,4,5],
-    [1,2,3,4,5],
-    [1,2,3,4,5],
-]
+// var arr =[
+//     [1,2,3,4,5],
+//     [1,2,3,4,5],
+//     [1,2,3,4,5],
+//     [1,2,3,4,5],
+//     [1,2,3,4,5],
+// ]
 
-for(var i = 0;i < arr.length; i++){
-    for(var j=0;j<arr[i].length;j++){
-        arr[i][j] = arr[i][j] * 10
-    }
-}
+// for(var i = 0;i < arr.length; i++){
+//     for(var j=0;j<arr[i].length;j++){
+//         arr[i][j] = arr[i][j] * 10
+//     }
+// }
 
-console.log(arr);
+// console.log(arr);
 // console.log(arr[1][3]);
 
+
+var arr =[1,2,3,4]
+ arr.splice(1,1)
+console.log(arr.splice(1,2));
 
 
