@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.music__head{
+    height: 303px;
+    position: relative;
+   
+
+}
+
+.music__head .bg{
+    width: 100%;
+    height: 100%;
+    background: url(https://rmrbcmsonline.peopleapp.com/upload/zw/bjh_image/1568713675_285644c3d4e8c328deea67f68456f44a.png) ;
+    filter: blur(10px);  /* 虚化 */
+}
+
+.music__head-title{
+
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    padding: 0 59px;
+    box-sizing: border-box;
+}
+
+.music__head-title .back{
+    float: left;               /* 浮动和定位会脱离文档流 */
+}
+
+.music__head-title .title{
+    text-align: center;         /* 非块级元素居中 */
+    font-size: 16px;
+    color: aliceblue;
+}
+
+.back{
+    color:white;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            /* display: inline-block; */
+            width: 200px;
+            height: 100px;
+            background-color: aqua;
+            /* 用了浮动，父容器会没有高度 */
+             float:left;
+        }
+ 
+        .box{
+            /* 用了浮动后，用弹性可以让box有高度 */
+            overflow: hidden; 
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+</body>
+</html>

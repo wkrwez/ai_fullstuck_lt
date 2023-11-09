@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        ul{
+            font-size: 0;
+            
+        }
+        ul li{
+            list-style: none;
+            width: 200px;
+            height: 100px;
+             /* display: inline-block;*/
+             font-size: 16px;
+              float: left;    
+             
+        }
+         /* 子容器选择器 */
+        li:nth-child(1){
+            background-color: red;
+            
+        }
+        li:nth-child(2){
+            background-color: rgb(102, 14, 217);
+        }
+        li:nth-child(3){
+            background-color: rgb(67, 217, 22);
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+</body>
+</html>
