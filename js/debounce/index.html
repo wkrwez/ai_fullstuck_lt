@@ -1,0 +1,25 @@
+<!-- Document type html5的版本 canvas 3D地球
+     浏览器是网页的运行程序 宿主，web工程师B/S 架构，c++/java Client/s架构
+     window BOM :Browser Object Model
+     document DOM :Document Object Model
+     每一个标签，都可以来到js内存中成为一个DOM对象
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大厂编程素养之从底层看html/JS开发</title>
+</head>
+<body>
+    <input type="text" id="unDebounce">
+    <script>
+        //？对象
+        // 页面 叫？ document
+        let inputa = document.getElementById('unDebounce');
+        //typeof  运算符 获取数据类型，不靠谱
+        // console.log(typeof inputa);  //怎么反映它是DOM对象？
+        console.log(Object.prototype.toString.call(inputa));
+    </script>
+</body>
+</html>

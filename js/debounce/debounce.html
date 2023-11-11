@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能优化</title>
+</head>
+<body>
+    <input type="text" id="unDebounce">
+    <script>
+    // 同步的代码
+    const inputA = document.getElementById('unDebounce')
+    console.log(Object.prototype.toString.call(inputA))
+    // 1. 事件监听 红宝书 
+    // js是基于事件驱动的语言·
+    // 异步的代码
+    // 事件的异步代码在底层是怎么操作的？
+    // 有个地方把这个关系存起来， 等到keyup事件发生后，再去执行这个函数
+    // eventBus 
+    inputA.addEventListener('keyup', function(e) {
+        // console.log(e.keyCode, 'keyup 了')
+        // console.log(Object.prototype.toString.call(e))
+        // DOM编程
+         console.log(this.value);
+
+    })
+
+    //匿名函数
+    //当函数以普通函数运行的方式，被运行this指向window
+    function doSomething(){
+        console.log(this,'debounce');
+    }
+    </script>
+</body>
+</html>

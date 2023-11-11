@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包升级</title>
+</head>
+<body>
+    <input type="text" name="" id="unDebounce">
+    <script>
+        const inputA = document.getElementById('unDebounce')
+        //执行的太频繁了
+        // 服务器就挂了
+        function ajax(content){
+            console.log('ajax request',content);
+        }
+        inputA.addEventListener('keyup',function(){
+            //内部逻辑比较复杂
+            let value = this.value
+            //封装一个函数来拆分？
+            // > 10行代码，拆分成多个函数
+            ajax(value)
+        })
+        // 一段时间内执行一次
+        function debounce(fn,delay){
+            //闭包 fn  delay  自由变量
+            return function(args){
+                //控制？
+                // fn()
+                // let that = this;
+                clearTimeout(fn.id)
+                fn.id=setTimeout(function(){
+                    fn()
+                },delay)
+
+            }
+        }
+        let debounceAjax=debounce(ajax,2000)
+    </script>
+</body>
+</html>
