@@ -8,6 +8,10 @@
 // add()
 
 
+function foo() {
+    foo()
+}
+foo()
 
 
 
