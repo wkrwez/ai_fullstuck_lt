@@ -1,0 +1,34 @@
+<!-- <script>
+    Person.prototype.say = function(){//函数自带的属性,不会添加到Person
+   console.log('jxb 真好吃');
+}
+function Person(){
+   this.name = '冷少'// this是一个对象
+   this.age = 18
+}
+Person.eat= function(){
+    console.log('eating jxb');
+}
+
+let p = new Person()
+let p2 = new Person()
+console.log(p.say==p2.say);   //true,公共祖先
+</script> -->
+
+<script>
+
+Car.prototype.name = 'BMW'
+Car.prototype.long = 4900   //把this注释掉虽然打印看不到，但是在浏览器上面可以看到
+Car.prototype.height = 1400
+function Car(ower,color){
+    // this.name = 'BMW'
+    // this.long = 4900
+    // this.height = 1400
+    this.ower = ower
+    this.color = color
+}
+
+ let car = new Car('李总','red')
+let car2 = new Car('戴总','pink')
+console.log(car);
+</script>

@@ -1,0 +1,15 @@
+<script>
+    function Bus(){
+
+    }
+    Car.prototype ={  //构造函数的显式原型和实列对象的隐式原型肯定有关系  实例对象上的constructor 为什么因为这个改成了Bus
+        constructor :Bus  //看看没有这段代码时的con
+    }
+    function Car(){
+
+}
+let car = new Car()//
+// constructor 构造器属性，用于记录对象是由谁创建的
+console.log(car.constructor);
+console.log(car);  //2.png
+</script>

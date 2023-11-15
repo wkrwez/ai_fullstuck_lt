@@ -12,10 +12,10 @@ let date = new Date() */
 
 
 
-/* let a = 1
+let a = 1
 let b = a
 a = 2
-console.log(b); */
+console.log(b); 
 //1.jpg
 
 
@@ -28,9 +28,9 @@ console.log(b); */
 把引用类型{}存入堆，赋予一个引用地址并把地址1010赋给a
  */
 //2.jpg
-let a={
-    age:18
-}
-let b = a     /* a赋给b其实就是把a的地址赋给b */
- a.age = 20   /* 找到a的地址并赋值20 */
-console.log(b.age);  //20
+// let a={
+//     age:18
+// }
+// let b = a     /* a赋给b其实就是把a的地址赋给b */
+//  a.age = 20   /* 找到a的地址并赋值20 */
+// console.log(b.age);  //20
