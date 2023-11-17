@@ -13,6 +13,7 @@ Person.eat= function(){
 let p = new Person()  //实例对象显式的继承了构造函数添加到this上的属性，隐式的继承函数原型上的属性和方法
 let p2 = new Person()
 // console.log(p);
-// Person.eat();
-// p.eat() //无法调用  上面附在this上，eat附在eat()上,但是say可以通过p访问到
+ Person.eat();
+p.eat() //无法调用  上面附在this上，eat附在eat()上,但是say可以通过p访问到
 p.say()//打印console.log(p);里面没有say，但是可以用p来调用
+console.log(p);

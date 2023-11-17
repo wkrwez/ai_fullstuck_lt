@@ -24,7 +24,7 @@
 
 
 
-//下面的this都是foo的
+// 下面的this都是foo的
 var obj ={
     a:1
 }
@@ -34,7 +34,7 @@ function foo(){
         var baz = ()=>{
             console.log(this);  
         }
-        baz()
+        baz.call(obj)
     }
     bar()
 }

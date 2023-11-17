@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端存储</title>
+</head>
+<body>
+<!-- 前端分为哪些考点？
+- JS语法 
+- html5 
+- es6+
+   let const  
+- css3
+   transform
+- vue react
+-  -->
+<div class="warrp">
+    <h2>Todo Lists</h2>
+    <p></p>
+    <ul class="todos">
+        <li>Loading Todos</li>
+    </ul>
+    <form class="add-items">
+        <input type="text"name = "item" placeholder="请输入任务" required>
+        <input type="submit" value="+ Add Ttem">
+    </form>
+</div>
+<script>
+    // DOM编程
+
+    const oForm = document.querySelector('.add-items')
+    const todosList = document.querySelector('.todos')
+    const todos =JSON.parse(localStorage.getItem('today'))|| [];
+    //事件监听  DOM2级事件  onClick  DOM  0  级事件
+    // oForm.addEventListener('submit',function(event){
+    //     // console.log('123');
+    //     // 获得用户的输入，加入ul列表
+    //     // form表单提交默认会刷新页面
+    //     // css reset
+    //     event.preventDefault()   //不让提交   DOM event 考点
+    // })
+    oForm.addEventListener('submit',addItem)
+    //this指向由调用方法决定
+    function addItem(event){
+        event.preventDefault();
+        // 性能优化 ->DOM树状结构
+        console.log(this);
+        const text = (this.querySelector('[name=item]')).value
+        if(!text)return
+        // console.log(text);
+        const item = {
+            text,
+            done:false
+        }
+       todos.push(item)
+       //本地存储 BOM
+       window.localStorage.setItem('todos',JSON.stringify(todos))
+       populateList(todos,todosList)
+         this.reset();//重置表单
+    }
+    function populateList(todos = [], todosList) {
+    todosList.innerHTML = '';
+    todos.forEach((todo, i) => {
+        todosList.innerHTML += `
+            <li>
+                <input type="checkbox" data-index=${i} id="item${i}" ${todo.done ? 'checked' : ''}>
+                <label for="item${i}">${todo.text}</label>
+            </li>
+        `
+    })
+
+}
+if(todos.length>0){
+    //复用
+    populateList(todos,todosList);
+}
+        
+    
+
+</script>
+</body>
+</html>

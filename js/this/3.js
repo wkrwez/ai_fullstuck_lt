@@ -7,15 +7,15 @@
 // foo()
 
 
-//
-function foo(){
-    console.log(this.a); 
-}
-var obj = {
-    a :1,
-    foo:foo  //引用foo函数，所以this指向obj
-}
-obj.foo()   
+
+// function foo(){
+//     console.log(this.a); 
+// }
+// var obj = {
+//     a :1,
+//     foo:foo  //引用foo函数，所以this指向obj
+// }
+// obj.foo()   
 
 
 //
