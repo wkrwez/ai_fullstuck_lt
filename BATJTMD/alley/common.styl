@@ -1,0 +1,50 @@
+$bg-url = 'https://images.unsplash.com/photo-1440613905118-99b921706b5c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=255b304482a2f50d0917f3de7b06251e%27'
+
+*
+    margin 0
+    padding 0
+
+html, body
+    width 100%
+    height 100%
+
+.page
+    height 100%
+    overflow hidden
+    background-image url($bg-url)
+    background-repeat no-repeat
+    background-size cover
+    background-position bottom center
+    .page__hd
+        color black
+        font-size .46rem
+        width 1.86667rem
+        height 0.555rem
+        margin 2.96rem auto
+    .page__ft
+        display flex
+        padding-top 0.59rem
+        margin-bottom 0.259rem
+        color rgba(255, 255, 255, 0.5)
+        font-size 0.444rem
+        .page__call
+            flex 1
+            margin-left 0.25rem
+        .page__cancel
+            width 1.88rem
+    .content
+        width 6.96rem
+        display flex
+        margin-left 1.45rem
+        .number
+            width 1.62rem
+            height 1.62rem
+            line-height 1.62rem
+            border-radius 50%
+            border 2px solid #81969c
+            text-align center
+            font-weight 100
+            color #e8ffff
+            margin-bottom .72rem
+        .content__mid, .content__left
+            margin-right 1.03rem
