@@ -3,7 +3,7 @@
 // var a = 1
 // function foo(){
     
-//     console.log(this.a);   //this代表foo，指向全局,
+//     console.log(this.a);   //this代表foo的作用域，函数在哪里调用，this就指向哪里指向全局,
 // }
 // foo()
 

@@ -6,17 +6,17 @@
 // }
 // obj.say()  //打印名字
 
-//  function foo(){
-//   var a= 1
-//   console.log(this.a);
-// }
-// foo.b = 2
-// foo()
+ function foo(){
+  var a= 1
+  console.log(this.a);
+}
+foo.b = 2
+foo()
 
 
 
-let obj = {}
-obj.a  //要是里面没有a就会添加一个a进去再读取   
+// let obj = {}
+// obj.a  //要是里面没有a就会添加一个a进去再读取   
 
 
 
