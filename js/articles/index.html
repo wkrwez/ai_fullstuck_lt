@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./common.css">
+</head>
+<body>
+    <ul id="bands"></ul>
+    
+    <script>
+        // 将bards渲染到ul中，以除了The A An 这些开头的单词排序
+        
+        const bands =[
+    'The Plot in You', 
+    'The Devil Wears Prada',
+    'Pierce the Veil',
+    'Norma Jean',
+    'The Bled',
+    'Say Anything',
+    'The Midway State',
+    'We Came as Romans',
+    'Counterparts',
+    'Oh, Sleeper',
+    'A Skylit Drive',   
+    'Anywhere But Here',
+    'An Old Dog'
+]
+/*
+- 把每个item的有The|a|An 的去掉，留下余下的
+    - 遍历每个元素 做一个操作，并返回
+    - stripThe 去除The|a|An
+- 排序
+    - sort  assc 
+- 渲染列表
+    - innerHtml+= */
+
+const sortedBands = bands.concat().sort()
+// console.log(sortedBands);
+document.querySelector('#bands').innerHTML=
+sortedBands
+   .map(band => `<li>${band}</li>`)
+   .join('')
+    </script>
+</body>
+</html>

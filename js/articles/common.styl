@@ -1,0 +1,24 @@
+body 
+    margin 0
+    font-family sans-serif
+    background url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000")
+    min-height 100vh
+    background-size contain //调整图片大小
+    background-repeat no-repeat
+    background-position center
+    display flex
+    align-items center
+
+#bands
+    list-style inside square
+    font-size 20px
+    background white
+    width 500px
+    margin auto
+    padding 0
+    box-shadow 0 0 0 20px rgba(0,0,0,0.05)
+    li  
+        border-bottom 1px solid green  //底部的下划线
+        padding 20px
+        &:last-child  //最后一个元素    &表示和li同一级,但是只选择li的最后一个元素
+            border-bottom 0   //最后一个元素不要下划线

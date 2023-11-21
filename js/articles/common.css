@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+  min-height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+#bands {
+  list-style: inside square;
+  font-size: 20px;
+  background: #fff;
+  width: 500px;
+  margin: auto;
+  padding: 0;
+  box-shadow: 0 0 0 20px rgba(0,0,0,0.05);
+}
+#bands li {
+  border-bottom: 1px solid #008000;
+  padding: 20px;
+}
+#bands li:last-child {
+  border-bottom: 0;
+}
