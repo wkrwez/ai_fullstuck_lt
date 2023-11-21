@@ -1,0 +1,31 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "胡总"
+    },
+    {
+      "id": 2,
+      "title": "ajax",
+      "author": "陈总"
+    },
+    {
+      "title": "你不知道的JavaScript",
+      "author": "李总",
+      "id": 3
+    },
+    {
+      "title": "JavaScript高级程序设计",
+      "author": "戴总",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}
