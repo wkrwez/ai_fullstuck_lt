@@ -11,7 +11,7 @@ var array = [1,1,'1','1']
 
 // function uniq(arr){
 //     var res = []
-//     // 暴力破解法 时间复杂度O（n*2）
+//     // 暴力破解法 时间复杂度O（n^2）
 //     // 两重for循环，外层循环arr，内层循环res
 //     // arr的当前项，如果不在res中，则加入res
 //     //否则跳过
@@ -46,25 +46,25 @@ var array = [1,1,'1','1']
 // }
 
 
-// function uniq(arr){
-//     var res =  []
-//     //先排序
-//     var sortedArr = arr.concat().sort();
-//     var seen;//前一项
-//     for(var i = 0,len = arr.length;i< len;i++){
-//         // 第一个元素或者
-//         if(!i || seen !== sortedArr[i]){   
-//            res.push(sortedArr[i])
+function uniq(arr){
+    var res =  []
+    //先排序
+    var sortedArr = arr.concat().sort();
+    var seen;//前一项
+    for(var i = 0,len = arr.length;i< len;i++){
+        // 第一个元素或者
+        if(!i || seen !== sortedArr[i]){   
+           res.push(sortedArr[i])
 
-//         }
-//         seen = sortedArr[i]
-//     }
-//     return res;
-// }
+        }
+        seen = sortedArr[i]
+    }
+    return res;
+}
 
 
 
-// 适用于所有场景
+// // 适用于所有场景
 function uniq(arr,isSorted){
     var res =  []
     var seen
@@ -89,4 +89,4 @@ console.log(uniq(array,true));
 // module 模块，当前模块是一个uniq模块
 // export向外输出
 //输出
-module.exports = uniq
+ module.exports = uniq
