@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let btn=document.getElementById('btn')
+btn.addEventListener('click',()=>{
+    
+})
+//发一个http请求
+let xhr = new XMLHttpRequest()
+xhr.open('GET','http://192.168.31.26:3000/top/song?type=7')              //准备请求
+//监听
+xhr.onreadystatechange=()=>{
+    if(xhr.readyState===4 &&xhr.status===200){  //status：状态码
+    console.log(JSON.parse(xhr.responseText));
+    //
+    const result=JSON.parse(xhr.responseText).data
+    for(let key in result){
+    const li=document.createElement('li')
+    li.innerText=result[key].name
+    document.getElementById('ul').appendChild(li)
+    }
+} 
+}
+xhr.send()
+    </script>
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>

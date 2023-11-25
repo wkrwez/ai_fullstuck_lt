@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">获取新歌</button>
+    <ul id="ul">
+       
+    </ul>
+    <script>
+        let btn=document.getElementById('btn')
+      btn.addEventListener('click',()=>{
+    fetch('http://192.168.31.26:3000/top/song?type=7')
+    .then((data)=>{
+       return data.json()
+    })
+    .then((res)=>{
+       console.log(res);
+    })
+})
+
+    </script>
+</body>
+</html>

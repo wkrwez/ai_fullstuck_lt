@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易云音乐</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="login">
+        <div class="login__hd">网易云音乐</div>
+        <div class="logo"></div>
+
+        <div class="login__wrap">
+            账号 <input type="text" id="id" class="name" placeholder=" 输入手机号"><br>
+            密码 <input type="password" id="mima" class="password" placeholder=" 输入密码">
+            <button class="but" id="button">登陆</button>
+
+        </div>
+
+
+        <div class="tan" id="tanc">登陆成功</div>
+    </div>
+    <script>
+        var button = document.getElementById('button')
+        // var tan = document.getElementById('tanc')
+        // var headWaveTimer=setInterval(200)
+        var id = document.getElementById('id')
+        var mima = document.getElementById('mima')
+        button.addEventListener('click', () => {
+            fetch('http://192.168.31.26:3000/login?username=' + id.value +'&password=' + mima.value)
+            .then((data)=>{
+               return data.json()
+            })
+            .then((res)=>{
+               console.log(res);
+
+              
+                console.log(document.querySelector("#tanc"));
+                document.querySelector("#tanc").style.display = "block"
+                
+                const timerId = setTimeout(function() {
+                    document.querySelector("#tanc").style.display = "none"
+            //    console.log(document.querySelector("#tan"));
+            //    document.querySelector("#tanc").style.display = "block"
+              
+            },2000)
+            //  clearInterval(timerId)
+           
+        })
+    })
+    </script>
+</body>
+
+</html>

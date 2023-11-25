@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: red;
+}
+.login{
+    padding: 0 45px;
+    height: 100vh;
+}
+.login__hd{
+	color: rgba(255, 255, 255, 1);
+	font-size: 18px;
+    text-align: center;
+    position: relative;
+    top: 22px;
+    /* left: 144px; */
+	
+	
+    
+}
+.logo{
+    background-image: url('网易云音乐.png');
+    background-size: 139px;
+    background-repeat: no-repeat;
+   
+   height: 150px;
+   width: 150px; 
+   position: absolute;
+    top: 120px;
+    left: 120px;
+   
+}
+.login__wrap{
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 425px;
+    left: 56px;
+}
+.login__wrap .name{
+    width: 211px;
+    height: 42px;
+    margin: 10px;
+    color: white;
+     border: 1px solid; 
+    
+
+}
+.login__wrap .password{
+    width: 211px;
+    height: 42px;
+    margin: 10px;
+    color: white;
+    border: 1px solid;
+    
+}
+.login__wrap .but{
+    width: 271px;
+    height: 36px;
+   top: 20px;
+    position: relative;
+    border-radius: 27px;
+    background-color: white;
+    border: 1px solid;
+}
+input::placeholder{
+    color: white;
+}
+.tan{
+    background-color: #150505bd;
+    font-size: 35px;
+    color: white;
+    position: fixed;
+    top: 150px;
+    height: 150px;
+    width: 150px;
+    left: 120px;
+    background-image: url('dui\ \(1\).png');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position:  bottom;
+    text-align: center;
+    display: none;
+    border-radius: 27px;
+
+}
