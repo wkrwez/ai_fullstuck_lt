@@ -10,8 +10,8 @@ let a={
     age:18
 }
 let b=a
-// a.age=19   //19
-a={   //新的对象，所有地址不一样，原a的地址会指向新对象，b地址不变  1.jpg
+
+a={   //新的对象，所有地址不一样,前面a的地址会指向新对象，b地址不变  1.jpg
     age:20
 }
-console.log(b.age);  //18
+console.log(a.age);  //18

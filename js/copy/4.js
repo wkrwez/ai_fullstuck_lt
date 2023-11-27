@@ -14,16 +14,16 @@ let obj ={
     }
 
 }
-// obj.e=obj.f
-// obj.f.n=obj.e//循环引用
-// console.log(obj);
+
 
 
 // console.log(JSON.stringify(obj));//把对象转换成字符串，花括号也转换成字符串
 // let str = JSON.stringify(obj)
 
 // console.log(JSON.parse(str));
-
+// obj.e=obj.f
+// obj.f.n=obj.e//循环引用
+// console.log(obj);
 // let obj2 =JSON.parse(JSON.stringify(obj))  //深拷贝  但是需要注意
 // obj.age=20
 // obj.age.n=10
