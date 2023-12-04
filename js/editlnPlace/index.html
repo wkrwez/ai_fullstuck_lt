@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditInPlace</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./editor.js"></script>
+    <script>
+        //#app  挂载点  DOM   面向对象的
+        new EditInPlace(
+            'ep1',
+            document.getElementById('app'),//
+            'this is value'
+
+        )
+    </script>
+</body>
+</html>
