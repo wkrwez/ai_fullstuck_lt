@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script type="x-template" id="my-app">
+        <div class="app">
+            <h2>{{title}}</h2>
+            <h2>{{count}}</h2>
+            <button @click='add'>+1</button>
+            
+        </div>
+    </script>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const counter=10
+
+        
+        Vue.createApp({
+            template:'#my-app',
+            data(){      // 数据源 是响应式的
+                return {
+                    title:'你好世界',
+                    count:1,
+
+                }
+            },
+            methods:{  //所有函数都放到里面
+                add(){
+                    this.count++  //更新局部的DOM结构
+
+                },
+                
+            }
+        }).mount('#app')
+      
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   v-if和 v-else必须在同级 
+    <div id="app"></div>
+    <template id="my-app">
+        <h2 v-if="status">{{time}}</h2>  status为true页面就会显示 
+        <h2 v-else>{{time2}}</h2>
+        
+        <button @click="change">切换</button>
+    </template>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                 time:'2023-12-8',
+                 time2:'2023年12月8日',
+                 status:true
+                }
+            },
+            methods:{
+                change(){
+                    this.status=!this.status
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html> --> 
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--v-if和 v-else必须在同级 -->
+     <div id="app"></div>
+    <template id="my-app">
+      <!-- <h2 v-if="status===1">{{time}}</h2>  status为true页面就会显示 
+      <h2 v-else-if="status===2">{{time2}}</h2>
+      <h2 v-else="status===3">{{time3}}</h2>
+        
+        <button @click="change">切换</button> -->
+        <h2 @click="hide" v-show="show">{{time}}</h2>
+    </template>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                 time:'2023-12-8',
+                 time2:'2023年12月8日',
+                 time3:'2023/12/8',
+                 status:1,
+                 show:true
+                }
+            },
+            methods:{
+                 change(){
+                    if(this.status===3){
+                        this.status=0  //v-if是DOM直接消失
+                    }
+                    this.status++
+                }, 
+                hide(){
+                    this.show = false  //v-show是css层面的消失
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html> 
+
+
+ 
