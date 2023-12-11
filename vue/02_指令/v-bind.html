@@ -1,0 +1,39 @@
+<!-- v-on:监听事件  可以将v-on:替换成@ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+        <!--mouseenter鼠标滑入事件  -->
+       <!-- v-bind:可以替换为':' -->
+     <img v-bind:src="imgs" alt=""v-bind:title="msg">
+        
+    </template>
+</div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                    imgs:'qq.png',
+                    msg:'我的qq照片'
+                }
+            },
+            methods:{
+                foo(){
+
+                }
+
+            }
+        })
+        app.mount('#app')
+        
+    </script>
+</body>
+</html>

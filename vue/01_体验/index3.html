@@ -16,36 +16,28 @@
             <button @click='add'>+1</button>
             <button @click='minus'>-1</button>
         </div>
-    </script>
+        </template> 
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        const counter=10
-
-        
+        const counter=10        
         Vue.createApp({
             template:'#my-app',
             data(){      // 数据源 是响应式的
                 return {
                     title:'你好世界',
                     count:1,
-
                 }
             },
             methods:{  //所有函数都放到里面
                 add(){
                     this.count++  //更新局部的DOM结构
-
                 },
                 minus(){
                     this.count--
-                }
-                
+                }                
             }
-        }).mount('#app')
-      
+        }).mount('#app')      
     </script>
-
-
 </body>
 </html>

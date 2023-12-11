@@ -1,0 +1,38 @@
+<!-- v-on:监听事件  可以将v-on:替换成@ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+        <button v-on:mouseenter="count--">-</button> <!--mouseenter鼠标滑入事件  -->
+        <span>{{count}}</span>
+     <button v-on:mouseenter="count++">+</button>
+        
+    </template>
+</div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                    count:10
+                }
+            },
+            methods:{
+                foo(){
+
+                }
+
+            }
+        })
+        app.mount('#app')
+        
+    </script>
+</body>
+</html>

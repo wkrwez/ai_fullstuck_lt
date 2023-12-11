@@ -1,0 +1,48 @@
+<!-- v-on:监听事件  可以将v-on:替换成@ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+    <button v-show="index>0" @click="foo(-1)">上一页</button>
+     <img :src="arr[index]" alt=""v-bind:title="msg">
+    <button  v-show="index<arr.length-1" @click="foo(1)">下一页</button>
+    </template>
+</div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                    index:0,
+                   arr:[
+                    'qq.png',
+                    'qq2.jpg',
+                    'qq3.png'
+                   ]
+                }
+            },
+            methods:{
+                foo(index){
+                    
+                        this.index+=index
+                    
+                    
+
+                    
+                    
+                }
+
+            }
+        })
+        app.mount('#app')
+        
+    </script>
+</body>
+</html>
