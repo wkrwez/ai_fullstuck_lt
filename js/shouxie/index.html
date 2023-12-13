@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+    <script>
+        // 手写ajax 跟业务相关  异步同步
+        // - xhr对象
+        // - 流程 open send onreadystatechange
+        // - promise resolve reject 
+        const fetchJSONData = function(url){
+            // p 在开始的时候状态为pending
+            return new Promise((resolve,reject)=>{//执行器 立即运行
+                //耗时任务的容器
+                console.log('hehe');
+                //兼容性
+                const xhr = 
+                  XMLHttpRequest
+                  ? new XMLHttpRequest()
+                  :new ActiveXObject('Microsoft.XMLHTTP')
+
+                xhr.open('GET',url,false)
+                //宏任务
+                xhr.onreadystatechange=function(){
+                    if (xhr.readyState !== 4) return
+                        // 叼一下 表现时间  304 NOT MODIFIED
+                    if (xhr.status === 200 || xhr.status === 304){
+                        resolve(xhr.responseText);
+                    } else{
+                        reject(new Error(xhr.responseText))
+                    }
+
+                }
+                xhr.send()
+                // onreadyStateChange
+                // resolve('gigi')
+            })
+        };
+        // 刚开始时，状态为pending ->resolved
+        (async function(){
+            console.log('44444');
+            const p = fetchJSONData('https://api.github.com/users/wkrwez/repos')
+            console.log(p);
+            const res = await p 
+            console.log(p,res);
+        })()
+        //看返回的数据  json
+        // 装插件
+        // await fetchJSONData('')
+    </script>
+</body>
+</html>
