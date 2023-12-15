@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+       <h3>黑子书架</h3>
+       <ul>
+            <li  v-for="(item,index) in booklist">
+               <span>{{item.name}}</span> 
+               <span>{{item.author}}</span> 
+               <!-- 通过id来删除 -->
+               <button @click="foo(item.id)":key="item.id">删除</button> <!-- 取到数组的id -->  
+            </li>
+       
+        </ul>
+    </template>
+</div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                    booklist:[
+                        {id:1,name:'《红楼梦》',author:'曹雪芹'},
+                        {id:2,name:'《西游记》',author:'吴承恩'},
+                        {id:3,name:'《水浒传》',author:'施耐庵'},
+                        {id:4,name:'《三国演义》',author:'罗贯中'}
+                    ]
+                }
+            },
+            methods:{
+                foo(id){
+
+                    this.booklist=this.booklist.filter(item=>item.id!==id)
+                }
+
+            }
+        })
+        app.mount('#app')
+        
+    </script>
+</body>
+</html>

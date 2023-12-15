@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <template id="my-app">
+       <h2>当前温度：{{temp}}</h2>
+        <h3>建议穿：{{cloth}}</h3>
+        <button @click="minus">-5</button>
+        <button @click="add">+5</button>
+    </template>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.3.4/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            template:'#my-app',
+            data(){
+                return{
+                    temp:20,
+                    // cloth:'夹克'
+                    }
+                },
+            watch:{  //监视temp，能用computed实现的他也能使用，但是computed有缓存
+                // temp(newVal,oldVal){  //新的值和旧的值
+                //     // console.log(newVal,oldVal);
+                    
+                // }
+                temp:{
+                    handler:function(newVal,oldVal){
+
+                    },
+                    immediate:true  //立即执行
+                }
+            },
+            methods:{
+                minus(){
+                    this.temp-=5
+                },
+                add(){
+                    this.temp+=5
+                }
+            }
+            
+           
+        }).mount('#app')
+        
+    </script>
+</body>
+</html>

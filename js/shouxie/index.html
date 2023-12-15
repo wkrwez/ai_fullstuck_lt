@@ -35,13 +35,12 @@
 
                 }
                 xhr.send()
-                // onreadyStateChange
-                // resolve('gigi')
+               
             })
         };
         // 刚开始时，状态为pending ->resolved
         (async function(){
-            console.log('44444');
+           
             const p = fetchJSONData('https://api.github.com/users/wkrwez/repos')
             console.log(p);
             const res = await p 
