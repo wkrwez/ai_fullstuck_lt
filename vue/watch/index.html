@@ -21,17 +21,22 @@
             data(){
                 return{
                     temp:20,
-                    // cloth:'夹克'
+                     cloth:'夹克'
                     }
                 },
             watch:{  //监视temp，能用computed实现的他也能使用，但是computed有缓存
                 // temp(newVal,oldVal){  //新的值和旧的值
-                //     // console.log(newVal,oldVal);
-                    
+                //     // console.log(newVal,oldVal);  
                 // }
                 temp:{
                     handler:function(newVal,oldVal){
-
+                        if (newVal <= 10) {
+                            this.cloth = '棉袄'
+                        } else if (newVal <= 20) {
+                            this.cloth = '夹克'
+                        } else {
+                            this.cloth = '短袖'
+                        }
                     },
                     immediate:true  //立即执行
                 }
