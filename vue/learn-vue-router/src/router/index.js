@@ -36,6 +36,8 @@ const routes = [
 ]
 
 const router = createRouter({
+
+    
     routes,
     history: createWebHistory() //路由模式
 })
