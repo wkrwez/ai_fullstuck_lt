@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ItemContainer/>
+        <ItemContainer parentComponent="home"/>
     </div>
 </template>
 
