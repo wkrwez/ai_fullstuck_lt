@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+    </ul>
+
+    <script>
+    // 点哪一个li，就log出它的内容
+    let lis = document.getElementsByTagName('li')
+    lis.__proto__.forEach = Array.prototype.forEach
+    Array.from(lis).forEach(li => {
+      li.addEventListener('click', () => {
+        console.log(li.innerHTML);
+      })
+    });
+  </script>
+   <!--  <script>
+        let ul = document.getElementsByTagName('ul')[0]
+        ul.addEventListener('click', (event) => {
+            // 此时事件流从哪里来到了ul上
+            console.log(event.target.innerHTML);
+        })
+    </script> -->
+</body>
+
+</html>

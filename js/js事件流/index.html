@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #a {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(245, 56, 13);
+        }
+
+        #b {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(27, 140, 238);
+        }
+
+        #c {
+            width: 100px;
+            height: 100px;
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a">
+        <div id="b">
+            <div id="c"></div>
+        </div>
+    </div>
+
+    <script>
+        let a = document.getElementById('a')
+        let b = document.getElementById('b')
+        let c = document.getElementById('c')
+
+        a.addEventListener('click', () => {
+          console.log('a被点击');
+        },true)
+
+        b.addEventListener('click', (event) => {
+          console.log('b被点击');
+        //   event.stopPropagation()
+        //   event.stopImmediatePropagation()
+        },true )
+
+
+
+        c.addEventListener('click', (event) => {
+            console.log('c被点击2');
+            // event.stopImmediatePropagation()
+        },false)
+
+        // c.addEventListener('click', (event) => {
+        //     console.log('c被点击');
+        //     // 阻止冒泡行为
+        //     // event.stopPropagation()
+        //     event.stopImmediatePropagation()
+        //     // event.stopImmediatePropagation()
+        // }, )
+
+    </script>
+</body>
+
+</html>
