@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@babel/parser@^7.23.6":
+"@babel/parser@^7.23.5", "@babel/parser@^7.23.6":
   version "7.23.6"
   resolved "https://mirrors.huaweicloud.com/repository/npm/@babel/parser/-/parser-7.23.6.tgz"
   integrity sha512-Z2uID7YJ7oNvAI20O9X0bblw7Qqs8Q2hFy0R9tAfnfLkp5MW0UH9eUvnDSnFwKZ0AvgS1ucqR4KzvVHgnke1VQ==
@@ -34,7 +34,7 @@
 
 "@esbuild/darwin-x64@0.19.11":
   version "0.19.11"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/@esbuild/darwin-x64/-/darwin-x64-0.19.11.tgz#62f3819eff7e4ddc656b7c6815a31cf9a1e7d98e"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/@esbuild/darwin-x64/-/darwin-x64-0.19.11.tgz"
   integrity sha512-fkFUiS6IUK9WYUO/+22omwetaSNl5/A8giXvQlcinLIjVkxwTLSktbF5f/kJMftM2MJp9+fXqZ5ezS7+SALp4g==
 
 "@esbuild/freebsd-arm64@0.19.11":
@@ -144,7 +144,7 @@
 
 "@rollup/rollup-darwin-x64@4.9.2":
   version "4.9.2"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.9.2.tgz#1b06291ff1c41af94d2786cd167188c5bf7caec9"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.9.2.tgz"
   integrity sha512-otPHsN5LlvedOprd3SdfrRNhOahhVBwJpepVKUN58L0RnC29vOAej1vMEaVU6DadnpjivVsNTM5eNt0CcwTahw==
 
 "@rollup/rollup-linux-arm-gnueabihf@4.9.2":
@@ -226,6 +226,17 @@
     "@vue/compiler-core" "3.4.4"
     "@vue/shared" "3.4.4"
 
+"@vue/compiler-sfc@2.7.16":
+  version "2.7.16"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/@vue/compiler-sfc/-/compiler-sfc-2.7.16.tgz"
+  integrity sha512-KWhJ9k5nXuNtygPU7+t1rX6baZeqOYLEforUPjgNDBnLicfHCoi48H87Q8XyLZOrNNsmhuwKqtpDQWjEFe6Ekg==
+  dependencies:
+    "@babel/parser" "^7.23.5"
+    postcss "^8.4.14"
+    source-map "^0.6.1"
+  optionalDependencies:
+    prettier "^1.18.2 || ^2.0.0"
+
 "@vue/compiler-sfc@3.4.4":
   version "3.4.4"
   resolved "https://mirrors.huaweicloud.com/repository/npm/@vue/compiler-sfc/-/compiler-sfc-3.4.4.tgz"
@@ -249,7 +260,7 @@
     "@vue/compiler-dom" "3.4.4"
     "@vue/shared" "3.4.4"
 
-"@vue/devtools-api@^6.5.0":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.5.0":
   version "6.5.1"
   resolved "https://mirrors.huaweicloud.com/repository/npm/@vue/devtools-api/-/devtools-api-6.5.1.tgz"
   integrity sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==
@@ -305,6 +316,11 @@ axios@^1.6.4:
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
+charenc@0.0.2:
+  version "0.0.2"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
+  integrity sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==
+
 combined-stream@^1.0.8:
   version "1.0.8"
   resolved "https://mirrors.huaweicloud.com/repository/npm/combined-stream/-/combined-stream-1.0.8.tgz"
@@ -319,7 +335,17 @@ copy-anything@^2.0.1:
   dependencies:
     is-what "^3.14.1"
 
-csstype@^3.1.3:
+core-js@^2.6.5:
+  version "2.6.12"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/core-js/-/core-js-2.6.12.tgz"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
+
+crypt@0.0.2:
+  version "0.0.2"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
+  integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
+
+csstype@^3.1.0, csstype@^3.1.3:
   version "3.1.3"
   resolved "https://mirrors.huaweicloud.com/repository/npm/csstype/-/csstype-3.1.3.tgz"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
@@ -391,7 +417,7 @@ form-data@^4.0.0:
 
 fsevents@~2.3.2, fsevents@~2.3.3:
   version "2.3.3"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/fsevents/-/fsevents-2.3.3.tgz"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
 graceful-fs@^4.1.2:
@@ -410,6 +436,11 @@ image-size@~0.5.0:
   version "0.5.5"
   resolved "https://mirrors.huaweicloud.com/repository/npm/image-size/-/image-size-0.5.5.tgz"
   integrity sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==
+
+is-buffer@~1.1.6:
+  version "1.1.6"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
+  integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
 
 is-what@^3.14.1:
   version "3.14.1"
@@ -452,6 +483,15 @@ make-dir@^2.1.0:
   dependencies:
     pify "^4.0.1"
     semver "^5.6.0"
+
+md5@^2.3.0:
+  version "2.3.0"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/md5/-/md5-2.3.0.tgz#c3da9a6aae3a30b46b7b0c349b87b110dc3bda4f"
+  integrity sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==
+  dependencies:
+    charenc "0.0.2"
+    crypt "0.0.2"
+    is-buffer "~1.1.6"
 
 mime-db@1.52.0:
   version "1.52.0"
@@ -498,7 +538,7 @@ pify@^4.0.1:
   resolved "https://mirrors.huaweicloud.com/repository/npm/pify/-/pify-4.0.1.tgz"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-postcss@^8.4.32:
+postcss@^8.4.14, postcss@^8.4.32:
   version "8.4.32"
   resolved "https://mirrors.huaweicloud.com/repository/npm/postcss/-/postcss-8.4.32.tgz"
   integrity sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==
@@ -506,6 +546,11 @@ postcss@^8.4.32:
     nanoid "^3.3.7"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
+
+"prettier@^1.18.2 || ^2.0.0":
+  version "2.8.8"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/prettier/-/prettier-2.8.8.tgz"
+  integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
 proxy-from-env@^1.1.0:
   version "1.1.0"
@@ -557,7 +602,7 @@ source-map-js@^1.0.2:
   resolved "https://mirrors.huaweicloud.com/repository/npm/source-map-js/-/source-map-js-1.0.2.tgz"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
-source-map@~0.6.0:
+source-map@^0.6.1, source-map@~0.6.0:
   version "0.6.1"
   resolved "https://mirrors.huaweicloud.com/repository/npm/source-map/-/source-map-0.6.1.tgz"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
@@ -587,12 +632,34 @@ vite@^5.0.8:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vue-event-proxy@^1.0.5:
+  version "1.0.5"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/vue-event-proxy/-/vue-event-proxy-1.0.5.tgz"
+  integrity sha512-p6pcSIiuNeYe8b5KyUbS1FlIcdv+yxmXl1DVM+mfxZi+b1b4Hy+KxXcRdz/iy5oVFnCHdUwtR/x8ng75bdbhWg==
+
+vue-image-verify@^0.1.3:
+  version "0.1.3"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/vue-image-verify/-/vue-image-verify-0.1.3.tgz#04861889e12ad8333723a2dc050c48b8665de1a9"
+  integrity sha512-T66PVVCUx2y1d/ceqVV8+B8l3mfROeCcdSnIErWTIfCNtwAe128ps1M67OPCIGGAG8YLE4hIdqOY2jOtnD2xjg==
+  dependencies:
+    core-js "^2.6.5"
+    vue "^2.6.10"
+    vue-event-proxy "^1.0.5"
+
 vue-router@4:
   version "4.2.5"
   resolved "https://mirrors.huaweicloud.com/repository/npm/vue-router/-/vue-router-4.2.5.tgz"
   integrity sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
+
+vue@^2.6.10:
+  version "2.7.16"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/vue/-/vue-2.7.16.tgz"
+  integrity sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw==
+  dependencies:
+    "@vue/compiler-sfc" "2.7.16"
+    csstype "^3.1.0"
 
 vue@^3.3.11:
   version "3.4.4"
@@ -604,3 +671,10 @@ vue@^3.3.11:
     "@vue/runtime-dom" "3.4.4"
     "@vue/server-renderer" "3.4.4"
     "@vue/shared" "3.4.4"
+
+vuex@^4.0.2:
+  version "4.0.2"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/vuex/-/vuex-4.0.2.tgz#f896dbd5bf2a0e963f00c67e9b610de749ccacc9"
+  integrity sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
