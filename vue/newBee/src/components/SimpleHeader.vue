@@ -1,6 +1,6 @@
 <template>
   <div class="simple-header">
-    <van-icon name="arrow-left" v-if="true" @click="goBack"/>
+    <van-icon name="arrow-left" v-if="back" @click="goBack"/>
     <i v-else>&nbsp;</i>
     <div class="simple-header-name">{{title}}</div>
     <van-icon name="ellipsis" />
@@ -11,7 +11,13 @@
 <script setup>
 import { useRouter } from 'vue-router'
 defineProps({
-  title: String
+  title: String,
+  back: { // 传一个back给Cart子组件
+    type: Boolean,
+    default: true  //默认为true
+  
+  } 
+
 })
 
 const router = useRouter()

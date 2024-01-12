@@ -4,7 +4,7 @@ import {getCart} from "@/api/cart.js"
 const store = createStore({
     state(){    //全局公共的数据源 ===data的概念
         return{
-            cartCount :1
+            cartCount:1
         }
     },
     mutations:{ //修改state数据 ===methods

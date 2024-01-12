@@ -4,8 +4,10 @@ import router from './router'
 import 'lib-flexible/flexible'
 import './assets/style/reset.css'
 import store from './store'
+
+
 //引入你需要的组件
-import { Button, Swipe, SwipeItem, Skeleton, Tabbar, TabbarItem, Icon, Form, Field, CellGroup, ActionBar, ActionBarIcon, ActionBarButton } from 'vant';
+import {SubmitBar ,Stepper ,Checkbox, CheckboxGroup, Card,SwipeCell,Button, Swipe, SwipeItem, Skeleton, Tabbar, TabbarItem, Icon, Form, Field, CellGroup, ActionBar, ActionBarIcon, ActionBarButton } from 'vant';
 import 'vant/lib/index.css';
 
 const app = createApp(App)
@@ -22,6 +24,12 @@ app.use(ActionBar);
 app.use(ActionBarIcon);
 app.use(ActionBarButton);
 app.use(CellGroup);
+app.use(SwipeCell);
+app.use(Card);
+app.use(Checkbox);
+app.use(CheckboxGroup);
+app.use(Stepper);
+app.use(SubmitBar);
 
 app.use(router)
 app.use(store)
