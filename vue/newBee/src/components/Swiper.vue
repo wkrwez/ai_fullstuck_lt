@@ -7,6 +7,7 @@
 </template>
 
 <script setup>
+//接收父组件传递的数据，在js要定义props接收
 defineProps({
   list: Array
 })

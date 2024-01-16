@@ -11,9 +11,9 @@
         </van-swipe>
       </div>
       <div class="product-info">
-        <div class="product-title">{{ state.detail.goodsIntro }}</div>
+        <div class="product-title">{{state.detail.goodsName}}</div>
         <div class="product-desc">免邮费 顺丰快递</div>
-        <div class="product-price">{{state.detail.originalPrice}}</div>
+        <div class="product-price">￥{{state.detail.sellingPrice}}</div>
       </div>
       <div class="product-intro">
         <ul>
@@ -23,36 +23,33 @@
           <li>常见问题</li>
         </ul>
       </div>
-      <div class="product-content" v-html=" state.detail.goodsDetailContent"></div>
+      <div class="product-content" v-html="state.detail.goodsDetailContent"></div>
     </div>
 
-    <FooterBar :id="route.query.id"/>
+    <FooterBar :id="route.query.id" />
   </div>
 </template>
 
 <script setup>
 import SimpleHeader from '../components/SimpleHeader.vue';
-import { useRoute, useRouter } from 'vue-router';
-import { onMounted,reactive } from 'vue';
+import { useRoute, useRouter } from 'vue-router'
+import { onMounted, reactive } from 'vue';
 import { getDetail } from '@/api/goods.js'
-import FooterBar from '../components/FooterBar.vue';
-
+import FooterBar from '../components/FooterBar.vue'
 
 const route = useRoute()  // 当前页面url的详细描述
 const router = useRouter()  // 路由的实例对象
 const state = reactive({
-  detail:{}
+  detail: {}
 })
-// console.log(route);
 
 
 onMounted(async() => {
   // 从url上取到id值，将商品的id传给后端，获取该商品的详细信息
   const { query: { id } } = route
-  const {data} = await getDetail(id)
+  const { data } = await getDetail(id)
   console.log(data);
   state.detail = data
-
 })
 </script>
 

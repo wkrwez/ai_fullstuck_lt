@@ -106,8 +106,7 @@ onMounted(async () => {
     state.isLogin = true
   }
 
-  const { data } = await getHome()
-  // console.log(data);
+  const { data } = await getHome()//解构data
   state.swiperList = data.carousels
   state.newGoodsList = data.newGoodses
   state.hotGoodsList = data.hotGoodses

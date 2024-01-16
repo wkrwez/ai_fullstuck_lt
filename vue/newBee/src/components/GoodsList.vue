@@ -27,7 +27,7 @@ const props = defineProps({
 const router = useRouter()
 
 const loading = computed(() => {
-  return props.list.length > 0 ? false : true
+  return props.list && props.list.length > 0 ? false : true
 })
 
 

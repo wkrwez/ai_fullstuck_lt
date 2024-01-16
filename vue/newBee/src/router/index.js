@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home' //路由重定向
   },
   {
     path: '/login',
@@ -35,7 +35,22 @@ const routes = [
     path: '/product',
     name: 'product',
     component: () => import('@/views/ProductDetail.vue')
-  }
+  },
+  {
+    path: '/create-order',
+    name: 'create-order',
+    component: () => import('@/views/CreateOrder.vue')
+  },
+  {
+    path: '/address',
+    name: 'address',
+    component: () => import('@/views/Address.vue')
+  },
+  {
+    path: '/address-edit',
+    name: 'address-edit',
+    component: () => import('@/views/AddressEdit.vue')
+  },
 ]
 
 const router = createRouter({
