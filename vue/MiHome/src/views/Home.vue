@@ -24,25 +24,26 @@
 
 
     <div class="subject">
-        <div class="add-equipment">
-            <van-grid :border="true" :column-num="1">
-                
-                点击添加设备
-            </van-grid>
+        <div class="add-equipment" @click="goSort">
+           
+               <span> 点击添加设备</span>
         </div>
         <div class="product">
-            产品百科
+            <span class="product-name">产品</span>
+            <span class="encyc">百科</span>
         </div>
     </div>
+    <Navigation />
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import Navigation from '../components/Navigation.vue';
+
 const router = useRouter();
 
 // 跳转到分类页面
-
 const goSort = () => {
     router.push('/sort')
 }
@@ -51,6 +52,8 @@ const show = ref(false);
 const showPopup = () => {
     show.value = true;
 };
+
+
 </script>
 
 <style lang="less" scoped>
@@ -109,7 +112,43 @@ const showPopup = () => {
 }
 .subject{
     position: absolute;
-    top: 150px;
-    
+    top: 100px;
+    width: 100%;
+    height: 520px;
+    left: 0;
+    background-image: url(../photo/R-C.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    .add-equipment{
+        height: 70px;
+        font-size: 20px;
+        //文字水平垂直居中
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        background-color: #fff;
+        opacity: 0.5;//透明度
+        margin: 10px;
+        //边框圆角
+        border-radius: .8em;
+    }
+    .product{
+        height: 130px;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        background-image: url(../photo/1.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 10px;
+        border-radius: .8em;//边框圆角
+        .product-name{
+            margin: 20px;
+        }
+        .encyc{
+            margin: 20px;
+        }
+    }
 }
 </style>

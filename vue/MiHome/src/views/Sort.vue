@@ -1,4 +1,5 @@
 <template>
+    <NavBar/>
     <div>
         分类页面
     </div>
@@ -6,7 +7,7 @@
 
 <script setup>
 import {useRouter} from 'vue-router';
-
+import NavBar from '../components/NavBar.vue';
 
 </script>
 

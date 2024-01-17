@@ -15,7 +15,8 @@ const routes = [
         path:'/sort',
         name:'sort',
         component:()=>import('../views/Sort.vue')
-    }
+    },
+    
    ]
 
    const router = createRouter({
