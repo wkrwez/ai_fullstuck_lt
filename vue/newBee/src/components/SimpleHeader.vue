@@ -1,10 +1,12 @@
 <template>
   <div class="simple-header">
+    <!-- 如果箭头不出现用空格代替，这里自己用两个图标写的头部 -->
     <van-icon name="arrow-left" v-if="back" @click="goBack"/>
     <i v-else>&nbsp;</i>
     <div class="simple-header-name">{{title}}</div>
     <van-icon name="ellipsis" />
   </div>
+  <!-- 让头部标签占用文档流，否则头部会挡住内容 -->
   <div class="block">
   </div>
 </template>
