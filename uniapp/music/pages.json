@@ -1,0 +1,87 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path" : "pages/play/play",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/mine/mine",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/follow/follow",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		},
+		{
+			"path" : "pages/community/community",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#d81e06",
+		"backgroundColor": "#fff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "发现",
+				"iconPath": "/static/icon/wangyiyun1.png",
+				"selectedIconPath": "/static/icon/wangyiyun1-active.png"
+			},
+			{
+				"pagePath": "pages/play/play",
+				"text": "播客",
+				"iconPath": "/static/icon/boke.png",
+				"selectedIconPath": "/static/icon/boke-active.png"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"text": "我的",
+				"iconPath": "/static/icon/yinle1.png",
+				"selectedIconPath": "/static/icon/yinle1-active.png"
+			},
+			{
+				"pagePath": "pages/follow/follow",
+				"text": "关注",
+				"iconPath": "/static/icon/wodeguanzhu.png",
+				"selectedIconPath": "/static/icon/wodeguanzhu-active.png"
+			},
+			{
+				"pagePath": "pages/community/community",
+				"text": "社区",
+				"iconPath": "/static/icon/shequ.png",
+				"selectedIconPath": "/static/icon/shequ-active.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}
