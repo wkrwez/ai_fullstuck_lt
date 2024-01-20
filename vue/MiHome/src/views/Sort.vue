@@ -1,7 +1,7 @@
 <template>
     <NavBar/>
     <div>
-        分类页面
+        添加设备
         
     </div>
 </template>

@@ -42,6 +42,7 @@ import { ref } from 'vue';
 import Navigation from '../components/Navigation.vue';
 
 const router = useRouter();
+// console.log(get.Phone);
 
 // 跳转到分类页面
 const goSort = () => {
@@ -61,45 +62,37 @@ const showPopup = () => {
     display: flex;
     justify-content: space-between;
     position: absolute;
+    left: 0;
     top: 5px;
-    left: 20px;
-    width: 330px;
-    // padding: 10px;
-    box-sizing: border-box;
-    
+    width: 100%;
     .home {
-
-        text-align: left;
-        margin: 5px;
+        padding: 5px 0 0 20px;
         font-size: 15px;
-
         span {
            padding: 5px;
         }
     }
-
-    .wap {
-        
-        padding: 5px;
+    .wap { 
+        padding: 5px 20px 0 0;
     }
 }
 
 
 .fu {
-    width: 330px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     position: absolute;
     top: 50px;
-    left: 20px;
+    left: 0;
 
     .my-equipment {
-
-        margin: 5px;
+        padding: 5px 0 0 20px;
         font-size: 15px;
-        text-align: left;
+        align-items: center;
 
         span {
+            
             color: rgb(12, 242, 154);
             border-bottom: 1px solid rgb(9, 246, 84);
             padding-bottom: 8px;
@@ -107,7 +100,7 @@ const showPopup = () => {
     }
 
     .arrows {
-        margin: 5px;
+        padding: 0 20px 0 0 ;
     }
 }
 .subject{

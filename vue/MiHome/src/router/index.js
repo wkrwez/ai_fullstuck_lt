@@ -16,6 +16,11 @@ const routes = [
         name:'sort',
         component:()=>import('../views/Sort.vue')
     },
+    {
+        path:'/quality',
+        name:'quality',
+        component:()=>import('../views/Quality.vue')
+    },
     
    ]
 
