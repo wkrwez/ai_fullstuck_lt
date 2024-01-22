@@ -1,26 +1,26 @@
 <template>
 	<view class="recommend">
 		<view class="recommend-hd">
-			<view class="title">推荐歌单</view>
+			<view class="title">{{title}}</view>
 			<view class="more">
 				<uni-icons type="right" size="16"></uni-icons>
 			</view>
 		</view>
-		<view class="recommend-bd" v-for="item in list" :key="item.id">
-			<view class="recommend-bd__item">
+		<view class="recommend-bd">
+			<view class="recommend-bd__item" v-for="item in list" :key="item.id">
 				<view class="item-pic">
 					<image :src="item.picUrl" mode="aspectFill"></image>
 				</view>
 				<view class="title">{{item.name}}</view>
 			</view>
-			
 		</view>
 	</view>
 </template>
 
 <script setup>
 defineProps({
-	list:Array
+	list: Array,
+	title:String
 })
 </script>
 
@@ -43,16 +43,15 @@ defineProps({
 			}
 			.item-pic{
 				width: 240rpx;
-				
 				image{
 					width: 100%;
 					height: 240rpx;
+					border-radius: 10px;
 				}
 			}
 			.title{
 				font-size: 24rpx;
 				display: -webkit-box;
-				//显示两行，超出打点隐藏
 				-webkit-line-clamp: 2;
 				-webkit-box-orient: vertical;
 				text-overflow: ellipsis;
@@ -62,4 +61,5 @@ defineProps({
 		}
 	}
 }
+
 </style>

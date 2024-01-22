@@ -30,6 +30,7 @@
 
 <style lang="scss" scoped>
 .header{
+	background-color: #fff;
 	height: 100rpx;
 	display: flex;
 	justify-content: space-between;
