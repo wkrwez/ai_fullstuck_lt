@@ -34,21 +34,38 @@ import { useRequest } from 'vue-request'
 
 
 # 获取DOM结构
-<template>
-    <NavBar/>
-    <div>
-        分类页面
-        <span ref="span">123</span>//在DOM里面声明ref
-    </div>
-</template>
-<script setup>
-import {ref} from 'vue';
-const span = ref()  获取ref的值
-console.log(span);
+    <template>
+        <div>
+            <span ref="span">123</span>  //在DOM里面声明ref
+        </div>
+    </template>
 
-</script>
+    <script setup>
+        import {ref} from 'vue';
+        const span = ref()  获取ref的值
+        console.log(span);
+    </script>
  - 使用ref的值需要使用span.value 
 
 
+# 调用仓库store
+- 先创建一个仓库store文件
+    1. import {createStore} from 'vuex';
+    2. export default createStore({
+        state: {    //用于存储应用程序的状态数据
+            loginState: false, 
+        },
+        mutations: {  //用于修改状态数据state
+            changeLoginState(state, val) {
+			state.loginState = val  //val为要修改的值
+		    }
+        }
+    })
+- 在vue文件中引入仓库store
+    import { useStore } from 'vuex'
+    const store = useStore()
+    引入后就可以直接调用,调用state：store.state.loginState
 
+- 调用mutations的方法
+    store.commit('changeLoginState', true)  //commit用于触发 mutation 的执行
 

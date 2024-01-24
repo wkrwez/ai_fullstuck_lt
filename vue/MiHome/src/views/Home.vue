@@ -65,9 +65,10 @@ const showPopup = () => {
     left: 0;
     top: 5px;
     width: 100%;
+    align-items: center;
+    font-size: 15px;
     .home {
         padding: 5px 0 0 20px;
-        font-size: 15px;
         span {
            padding: 5px;
         }
@@ -112,6 +113,7 @@ const showPopup = () => {
     background-image: url(../photo/R-C.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    
     .add-equipment{
         height: 70px;
         font-size: 20px;

@@ -1,6 +1,7 @@
 <template>
     <div>
         有品
+        <q></q>
     </div>
 </template>
 

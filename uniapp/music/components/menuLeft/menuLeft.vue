@@ -4,7 +4,7 @@
 		<view class="menu-hd">
 			<view class="user-info">
 				<view class="avatar">
-					<image class="pic" src="../../static/logo.png" mode="aspectFill"></image>
+					<image class="pic" src="@/static/icon/wangyiyun1.png" mode="aspectFill"></image>
 				</view>
 				<view class="username">
 					<text>蜗牛</text>
@@ -43,7 +43,7 @@ const hideMenu = () => {
 <style lang="scss" scoped>
 .menu-left {
 	position: fixed;
-	top: 0;
+	top: 80rpx;
 	z-index: 9999;
 	width: 620rpx;
 	height: 100%;

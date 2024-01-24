@@ -1,6 +1,6 @@
 <template>
 	<view class="index">
-		<wyheader>
+		<wyheader :needBox="true">
 			<!-- 将内容填充到名为content的插槽中 -->
 			<template v-slot:content>
 				<view class="search">

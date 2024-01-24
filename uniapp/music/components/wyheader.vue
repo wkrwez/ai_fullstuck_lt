@@ -1,5 +1,6 @@
 <template>
-	<view class="header">
+	<view class="head" v-if="needBox"></view>
+	<view class="header" :style="{backgroundColor: bgColor}">
 		<uni-icons type="bars" size="22" @click="showMenu"></uni-icons>
 		
 		<view class="content">
@@ -9,7 +10,7 @@
 		
 		<uni-icons :type="icon" size="22"></uni-icons>
 	</view>
-	<view class="box"></view>
+	<view class="box" v-if="needBox"></view>
 </template>
 
 <script setup>
@@ -20,7 +21,16 @@
 		icon: {
 			type: String,
 			default: 'mic'
-		}
+		},
+		bgColor: {
+			type: String,
+			default: '#fff'
+		},
+		needBox: {
+			type: Boolean,
+			default: true
+		},
+		fontColor: String
 	})
 	
 	const showMenu = () => {
@@ -29,21 +39,34 @@
 </script>
 
 <style lang="scss" scoped>
-.header{
+.head{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80rpx;
 	background-color: #fff;
+	z-index: 9999;
+}
+.header{
+	// background-color: #fff;
 	height: 100rpx;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 15rpx;
 	position: fixed;
-	top: 0;
+	top: 80rpx;
 	left: 0;
 	width: 100%;
 	box-sizing: border-box;
 	z-index: 999;
+	color: v-bind(fontColor);
+	:deep(.uni-icons){
+		color: v-bind(fontColor) !important;
+	}
 }
 .box{
-	height: 100rpx;
+	height: 180rpx;
 }
 </style>
