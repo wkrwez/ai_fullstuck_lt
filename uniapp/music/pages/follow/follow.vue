@@ -10,8 +10,14 @@
 	</view>
 </template>
 
-<script setup>
-import wyheader from '../../components/wyheader.vue'
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
 </script>
 
 <style lang="scss">

@@ -4,7 +4,7 @@
 		<view class="menu-hd">
 			<view class="user-info">
 				<view class="avatar">
-					<image class="pic" src="@/static/icon/wangyiyun1.png" mode="aspectFill"></image>
+					<image class="pic" src="../../static/logo.png" mode="aspectFill"></image>
 				</view>
 				<view class="username">
 					<text>蜗牛</text>
@@ -29,7 +29,6 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 // console.log(store);
-//抛出仓库数据
 const isShow = computed(() => {
 	return store.state.isShowMenu
 })

@@ -46,7 +46,7 @@ onUpdated(() => {
 		}
 		arr.push(item)
 	})
-	console.log(swiperList.value, '------');
+	// console.log(swiperList.value, '------');
 })
 </script>
 
@@ -90,7 +90,7 @@ onUpdated(() => {
 						color: #666;
 						.reason{
 							font-size: 20rpx;
-							// color: $uni-primary-color;
+							color: $uni-primary-color;
 							background-color: #f5e7e9;
 							padding: 0 4rpx;
 							border: 1rpx solid #f5e7e9;

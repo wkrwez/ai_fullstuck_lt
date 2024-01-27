@@ -20,7 +20,7 @@
 <script setup>
 defineProps({
 	list: Array,
-	title:String
+	title: String
 })
 </script>
 
@@ -30,6 +30,7 @@ defineProps({
 		display: flex;
 		justify-content: space-between;
 		font-size: 30rpx;
+		font-weight: bold;
 	}
 	.recommend-bd {
 		display: flex;
@@ -61,5 +62,4 @@ defineProps({
 		}
 	}
 }
-
 </style>

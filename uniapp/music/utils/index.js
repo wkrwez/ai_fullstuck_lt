@@ -1,4 +1,4 @@
-export  const formateTime = (date, type) => {
+export const formateTime = (date, type) => {
 	let time = new Date(date)
 	let year = time.getFullYear()
 	let month = time.getMonth() + 1
