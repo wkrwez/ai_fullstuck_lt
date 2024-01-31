@@ -12,7 +12,7 @@
             </template>
         </van-nav-bar>
     </div>
-    
+    <div class="block"></div>
 </template>
 
 <script setup>
@@ -24,7 +24,12 @@ const goBack = () => {
 </script>
 
 <style lang="less" scoped>
-
+.block{
+    height: 46px;
+}
+.van-search{
+    height: 46px;
+}
     
 
 
