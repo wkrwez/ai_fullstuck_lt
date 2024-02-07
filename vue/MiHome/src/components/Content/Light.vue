@@ -1,19 +1,11 @@
 <template>
     <div class="all">
     <div class="content">
-            <div class="header">摄影机</div>
-            <div class="wiring">
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
+            <div class="header">照明</div>
+            <div class="wiring" >
+                <div class="equip" v-for="item in state.LightList.equipmentList">
+                    <img :src="state.LightList.equipmentList && item.img  " alt="">
+                    <div class="desc">{{ item.describe }}</div>
                 </div>
             </div>
 
@@ -22,7 +14,23 @@
 </template>
 
 <script setup>
+import { ref ,onMounted,reactive} from 'vue';
+import {apiGetLightList} from '../../api/index.js'
+const state = reactive({
+    LightList:[]
+})
 
+onMounted(()=>{
+    getLightList();
+})
+
+const getLightList = async()=>{
+    const res =  await apiGetLightList()
+        // console.log(res);
+        state.LightList = res.data;
+        // console.log(state.LightList);
+   
+}
 </script>
 
 <style lang="less" scoped>

@@ -163,7 +163,6 @@ const nav = ref(10 + 'px')
 
 //列表切换颜色
 const activeIndex = ref(0);
-
 const handleClick = (index)=>{
     nav.value = (60 *index  + 10 * index + 11) + 'px';
     activeIndex.value = index;

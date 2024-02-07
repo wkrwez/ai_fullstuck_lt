@@ -1,6 +1,6 @@
 import { createRouter,createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import PhotoGraphy from '../components/Content/PhotoGraphy.vue'
+
 
 const routes = [
     {
@@ -14,12 +14,13 @@ const routes = [
     },
     {
         path:'/sort',
+        redirect:'/sort/photoGraphy',
         name:'sort',
         component:()=>import('../views/Sort.vue'),
         children:[
             {
                 path:'photoGraphy',
-                component:PhotoGraphy,
+                component:()=>import( '../components/Content/PhotoGraphy.vue')
             },
             {
                 path:'switc',

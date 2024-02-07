@@ -2,16 +2,14 @@
     <NavBar />
     <div class="all">
         <div class="page">
-        
-            <router-link :to="'/sort/'+ item.id " class="ootd" @click="change(index)" :class="{'active':activeNum ===index}" 
-            v-for="(item, index) in list" :key="index" > {{ item.name }}</router-link>
+            <router-link class="ootd" @click="change(index)" :class="{'active':activeNum ===index}" 
+            v-for="(item, index) in list" :key="index" :to="'/sort/'+ item.id "  > {{ item.name }}</router-link>
         </div>
         <router-view></router-view>
     </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import NavBar from '../components/NavBar.vue';
 
@@ -28,16 +26,22 @@ const list = ref([
     {name:'生活电器',id: 'life'},
     {name:'出行车载',id: 'trip'},
     {name:'运动健康',id: 'sport'},
-    {name:'其他',id: 'other'},
+    {name:'其他',id: 'other'}, 
+    
     
    
 ]);
+
+
 //选中的列表项
 const activeNum = ref(0);
 const change = (index) => {
     activeNum.value= index;
-    console.log(index);
+    
 }
+
+
+
 </script>
 
 <style lang="less" scoped>

@@ -2,18 +2,10 @@
     <div class="all">
     <div class="content">
             <div class="header">摄影机</div>
-            <div class="wiring">
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
+            <div class="wiring" >
+                <div class="equip" v-for="item in state.equipList.equipmentList" :key="item.id"  >
+                    <img :src="state.equipList.equipmentList && item.img " alt="">
+                    <div class="desc">{{ item.describe }}</div>
                 </div>
             </div>
 
@@ -22,7 +14,23 @@
 </template>
 
 <script setup>
+import { ref ,onMounted,reactive} from 'vue';
+import {apiGetPhotoList} from '../../api/index.js'
+const state = reactive({
+    equipList:[]
+})
 
+onMounted(()=>{
+    getPhotoList();
+})
+
+const getPhotoList = async()=>{
+    const res =  await apiGetPhotoList()
+        // console.log(res);
+        state.equipList = res.data;
+        // console.log(state.equipList);
+   
+}
 </script>
 
 <style lang="less" scoped>

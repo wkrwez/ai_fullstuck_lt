@@ -1,19 +1,11 @@
 <template>
     <div class="all">
     <div class="content">
-            <div class="header">摄影机</div>
+            <div class="header">插座/插排</div>
             <div class="wiring">
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
-                </div>
-                <div class="equip">
-                    <img src="../../photo/1.jpg" alt="">
-                    <div class="desc">小米智能摄像机米智能摄像机小米智能摄像机小米智能摄像机</div>
+                <div class="equip" v-for="item in state.switchList.equipmentList">
+                    <img :src="state.switchList.equipmentList && item.img" alt="">
+                    <div class="desc">{{ item.describe }}</div>
                 </div>
             </div>
 
@@ -22,6 +14,23 @@
 </template>
 
 <script setup>
+
+import { apiGetSwitchList } from '../../api/index';
+import { reactive,onMounted } from 'vue';
+
+const state = reactive({
+    switchList:[]
+})
+
+onMounted(() => {
+    getSwitchList();
+})
+
+const getSwitchList =async()=>{
+    const res = await apiGetSwitchList()
+    state.switchList = res.data;
+    console.log(state.switchList);
+}
 
 </script>
 
