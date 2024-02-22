@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import {ref} from './ref.js'
+        import {effect} from '../effect.js'
+        const age = ref(2)
+
+        // age.value = 20
+
+        effect(()=>{
+            console.log(age.value)
+            // console.log(age.value.x)
+        })
+
+        setInterval(()=>{
+            age.value++
+            // age.value.x++
+        },3000)
+
+        // console.log(age.value);
+    </script>
+</body>
+</html>
