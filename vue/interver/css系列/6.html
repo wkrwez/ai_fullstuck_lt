@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+      /* display: none; */
+      /* visibility: hidden; */
+      /* opacity: 0; */
+      /* animation: hide 2s ease;  animation会触发GPU加速，便不会产生重绘 */
+
+      /* position: absolute;
+      left: -9999px;
+      top: -9999px; */
+
+      clip-path: circle(10%)
+    }
+
+    /* @keyframes hide {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    } */
+
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <h2>hello</h2>
+
+  <script>
+    let box = document.querySelector('.box')
+
+    
+  </script>
+</body>
+</html>

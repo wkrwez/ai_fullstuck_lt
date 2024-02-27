@@ -7,17 +7,25 @@
     <style>
         .warp{
             display: flex;
+            
+            
         }
         .left{
             width: 200px;
             height: 200px;
             background-color: red;
         }
-        .right{
+        .content{
+            flex: 1;
             width: 200px;
             height: 200px;
+            background-color: green;
+        }
+        .right{
+            width: 200PX;
+            height: 200px;
             background-color: blue;
-            flex:1
+            
         }
     </style>
 
@@ -26,6 +34,7 @@
     
     <div class="warp">
         <div class="left">left</div>
+        <div class="content">content</div>
         <div class="right">right</div>
     </div>
 </body>

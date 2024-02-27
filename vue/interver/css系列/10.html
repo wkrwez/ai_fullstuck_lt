@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 50px;
+      background-color: blueviolet;
+      transition: width 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .box:hover{
+      width: 500px;
+    }
+
+    .wrap{
+      margin-top: 30px;
+      width: 200px;
+      height: 50px;
+      background-color: red;
+      transition: all 2s;
+    }
+    .wrap:hover{
+      transform: translateX(100px) rotateZ(90deg);
+    }
+
+
+    .container{
+      margin-top: 30px;
+      width: 200px;
+      height: 50px;
+      background-color: rgb(28, 223, 57);
+      animation: move 2s linear infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotateZ(0deg);
+      }
+      100% {
+        transform: rotateZ(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+
+  <div class="wrap"></div>
+
+  <div class="container"></div>
+</body>
+</html>

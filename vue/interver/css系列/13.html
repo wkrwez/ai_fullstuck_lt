@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;padding: 0;
+    }
+    body{
+      /* display: flex; */
+      justify-content: center;
+    } 
+     ul{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    li{
+      list-style: none;
+      width: 200px;
+      height: 100px;
+      text-align: center;
+    }
+    li:nth-child(1){
+      background-color: antiquewhite;
+    }
+    li:nth-child(2){
+      background-color: rgb(232, 93, 38);
+    }
+    li:nth-child(3){
+      background-color: rgb(64, 248, 40);
+    }
+    li:nth-child(4){
+      background-color: rgb(14, 225, 207);
+    }
+    li:nth-child(5){
+      background-color: rgb(43, 43, 228);
+    }
+    li:nth-child(6){
+      background-color: rgb(232, 25, 197);
+    }
+  </style>
+
+  <style>
+    
+    li{
+      width: 10rem;
+    }
+    @media screen and (min-width: 1000px){  
+      html{
+        font-size: 30px;
+      }
+    }
+    @media screen and (min-width: 800px) and (max-width: 1000px){
+      html{
+        font-size: 20px;
+      }
+    }
+    @media screen and (max-width: 500px){  
+      html{
+        font-size: 14px;
+      }
+    }
+  </style>
+
+  <!-- <style>
+    @media screen and (min-width: 1000px){
+      li{
+        width: 300px;
+      }
+    }
+    @media screen and (min-width: 800px) and (max-width: 1000px) {
+      li{
+        width: 200px;
+      }
+    }
+    @media screen and (max-width: 500px){
+      li{
+        width: 100px;
+      }
+    }
+  </style> -->
+
+  <style>
+    /* li{
+      width: 20vw;
+    } */
+  </style>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+  </ul>
+</body>
+</html>
