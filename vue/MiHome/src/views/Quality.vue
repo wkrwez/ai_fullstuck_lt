@@ -1,5 +1,5 @@
 <template>
-    <Navigation />
+    
     <div class="head">
         <div class="search">
             <img src="../photo/lock.jpg" class="imgUrl">
@@ -147,7 +147,8 @@
             </div>
         </div>
     </div>
-    <div class="box-block"></div>
+    
+    <Navigation />
 </template>
 
 <script setup>
@@ -192,7 +193,7 @@ const handleClick = (index)=>{
         margin-top: 10px;
         overflow: auto;
         clip-path: inset(0 0 12% 0); //剪切滚动条部分
-        // position: relative;
+        
         
 
         .icon-down {
@@ -506,9 +507,7 @@ const handleClick = (index)=>{
 
 }
 
-.box-block {
-    height: 50px;
-}
+
 </style>
 <style>
 .van-search__content {
