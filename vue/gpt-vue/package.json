@@ -1,0 +1,32 @@
+{
+  "name": "gpt-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.3.11",
+    "vue-router": "^4.1.6",
+    "markdown-it":"13.0.1",
+    "crypto-js":"4.1.1",
+    "@icon-park/vue-next":"1.4.2",
+    "@tailwindcss/typography": "^0.5.9",
+    "highlight.js":"^11.7.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/markdown-it": "^12.2.3",
+    "@types/node":"^18.15.13",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vue-tsc": "^1.8.25"
+  }
+}
