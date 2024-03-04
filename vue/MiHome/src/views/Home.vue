@@ -1,36 +1,34 @@
 <template>
-    <div class="home-fu">
-        <div class="home">
-            <van-icon name="wap-home-o" size="20" />
-            <span>刘涛的家</span>
+    <div class="all">
+        <div class="head">
+            <div class="home-fu">
+                <div class="home">
+                    <van-icon name="wap-home-o" size="30" />
+                    <span>刘涛的家</span>
 
+                </div>
+                <div class="wap">
+                    <van-icon name="plus" size="30" @click="goSort" />
+                </div>
+            </div>
+            <div class="fu">
+                <div class="my-equipment">
+                    <span>我的设备</span>
+                </div>
+                <div class="arrows">
+                    <van-icon name="arrow-down" size="30" @click="showPopup" />
+                    <van-popup v-model:show="show" position="top" :style="{ height: '30%' }">我的导航</van-popup>
+                </div>
+            </div>
         </div>
-        <div class="wap">
-            <van-icon  name="plus" size="20" @click="goSort" />
-        </div>
-    </div>
-
-
-
-    <div class="fu">
-        <div class="my-equipment">
-            <span>我的设备</span>
-        </div>
-        <div class="arrows">
-            <van-icon name="arrow-down" size="20" @click="showPopup" />
-            <van-popup v-model:show="show" position="top" :style="{ height: '30%' }">我的导航</van-popup>
-        </div>
-    </div>
-
-
-    <div class="subject">
-        <div class="add-equipment" @click="goSort">
-           
-               <span> 点击添加设备</span>
-        </div>
-        <div class="product">
-            <span class="product-name">产品</span>
-            <span class="encyc">百科</span>
+        <!-- 添加设备 -->
+        <div class="subject">
+            <div class="add-equipment" @click="goSort">
+                <span> 点击添加设备</span>
+            </div>
+            <div class="product">
+                <span class="product-name">产品 百科</span>
+            </div>
         </div>
     </div>
     <Navigation />
@@ -58,92 +56,107 @@ const showPopup = () => {
 </script>
 
 <style lang="less" scoped>
-.home-fu {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    left: 0;
-    top: 5px;
+.all {
     width: 100%;
-    align-items: center;
-    font-size: 15px;
-    .home {
-        padding: 5px 0 0 20px;
-        span {
-           padding: 5px;
-        }
-    }
-    .wap { 
-        padding: 5px 20px 0 0;
-    }
-}
-
-
-.fu {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 50px;
-    left: 0;
-
-    .my-equipment {
-        padding: 5px 0 0 20px;
-        font-size: 15px;
-        align-items: center;
-
-        span {
-            
-            color: rgb(12, 242, 154);
-            border-bottom: 1px solid rgb(9, 246, 84);
-            padding-bottom: 8px;
-        }
-    }
-
-    .arrows {
-        padding: 0 20px 0 0 ;
-    }
-}
-.subject{
-    position: absolute;
-    top: 100px;
-    width: 100%;
-    height: 520px;
-    left: 0;
-    background-image: url(../photo/R-C.jpg);
+    height: 93%;
+    background-image: url(../photo/shouye/shouye.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
-    
-    .add-equipment{
-        height: 70px;
-        font-size: 20px;
-        //文字水平垂直居中
-        display: flex;
-        justify-content: center;
-        align-items: center;  
+    position: fixed;
+
+    .head {
+        width: 100%;
         background-color: #fff;
-        opacity: 0.5;//透明度
-        margin: 10px;
-        //边框圆角
-        border-radius: .8em;
-    }
-    .product{
-        height: 130px;
-        font-size: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;  
-        background-image: url(../photo/1.jpg);
-        background-size: cover;
-        background-repeat: no-repeat;
-        margin: 10px;
-        border-radius: .8em;//边框圆角
-        .product-name{
-            margin: 20px;
+        margin-bottom: 0.1rem;
+        .home-fu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 0.6rem;
+            .home {
+                margin: 0.5rem 0 0 0.5rem;
+
+                span {
+                    padding: 0.2rem;
+                }
+            }
+
+            .wap {
+                margin: 0.5rem 0.5rem 0 0;
+            }
         }
-        .encyc{
-            margin: 20px;
+
+
+        .fu {
+            padding-bottom: 0.3rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.8rem;
+            .my-equipment {
+                margin: 0 0 0 0.5rem;
+                font-size: 0.6rem;
+                align-items: center;
+
+                span {
+
+                    color: rgb(12, 242, 154);
+                    border-bottom: 0.02rem solid rgb(9, 246, 84);
+                    padding-bottom: 0.1rem;
+                }
+            }
+
+            .arrows {
+                margin: 0 0.5rem 0 0;
+            }
         }
     }
+
+
+
+    .subject {
+        width: 100%;
+        height: 80%;
+        margin-top: 0.3rem;
+
+
+        .add-equipment {
+            height: 15%;
+            font-size: 0.5rem;
+            //文字水平垂直居中
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            opacity: 0.5; //透明度
+            margin: 0.2rem 0.2rem 0.5rem 0.2rem;
+            //边框圆角
+            border-radius: 0.3rem;
+        }
+
+        .product {
+            height: 30%;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(../photo/shouye/baike.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0.2rem 0.2rem 0.5rem 0.2rem;
+            border-radius: 0.3rem; //边框圆角
+            word-spacing:  1rem;
+            color: #fff;
+            
+            
+        }
+    }
+}
+</style>
+
+<style>
+#app {
+    height: 100%;
 }
 </style>

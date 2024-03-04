@@ -20,15 +20,15 @@ const routes = [
         children:[
             {
                 path:'photoGraphy',
-                component:()=>import( '../components/Content/PhotoGraphy.vue')
+                component:()=>import( '../views/Content/PhotoGraphy.vue')
             },
             {
                 path:'switc',
-                component:()=>import('../components/Content/Switc.vue'),
+                component:()=>import('../views/Content/Switc.vue'),
             },
             {
                 path:'light',
-                component:()=>import('../components/Content/Light.vue'),
+                component:()=>import('../views/Content/Light.vue'),
             }
         ]
     },
@@ -40,7 +40,24 @@ const routes = [
     {
         path:'/invalid',
         name:'invalid',
-        component:()=>import('../views/Invalid.vue')
+        redirect:'/invalid/recommend',
+        component:()=>import('../views/Invalid.vue'),
+        children:[
+            {
+                path:'recommend',
+                component:()=>import('../views/Content/Recommend.vue')
+            },
+            {
+                path:'mined',
+                component:()=>import('../views/Content/Mined.vue')
+            },
+            {
+                path:'log',
+                component:()=>import('../views/Content/Log.vue')
+            
+            }
+        ]
+
     },{
         path:'/mine',
         name:'mine',

@@ -1,11 +1,13 @@
 <template>
     <NavBar />
     <div class="all">
+       
         <div class="page">
             <router-link class="ootd" @click="change(index)" :class="{'active':activeNum ===index}" 
             v-for="(item, index) in list" :key="index" :to="'/sort/'+ item.id "  > {{ item.name }}</router-link>
-        </div>
-        <router-view></router-view>
+        </div>   <router-view />     
+    
+
     </div>
 </template>
 
@@ -47,11 +49,14 @@ const change = (index) => {
 <style lang="less" scoped>
 .all {
     width: 100%;
+    height: 100%;
     display: flex;
     .page{
+        width: 3rem;
+        height: 100%;
         .ootd {
-            width: 100px;
-            height: 60px;
+            width: 100%;
+            height: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,10 +68,5 @@ const change = (index) => {
             color: rgb(87,212,236);
         }
     }
-    
-
-    
-
-
 }
 </style>

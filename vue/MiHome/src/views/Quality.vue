@@ -4,15 +4,15 @@
         <div class="search">
             <img src="../photo/lock.jpg" class="imgUrl">
             <van-search v-model="value" placeholder="纯米超级品牌日" />
-            <van-icon name="shopping-cart-o" size="20" dot />
-            <van-icon name="ellipsis" size="20" />
+            <van-icon name="shopping-cart-o" size="30" dot />
+            <van-icon name="ellipsis" size="30" />
         </div>
         <div class="from">
-            <van-icon class="icon-down" size="15" name="arrow-down" />
+            <van-icon class="icon-down" size="15" name="arrow-down" @click="openLiList()" />
             <ul class="from-list">
-                <li class="from-list-item" @click="handleClick(index)" 
-                :class="{ 'active': activeIndex === index }" 
-                v-for="(item, index) in liList" :key="index">{{ item }}</li>
+                <li class="from-list-item" @click="handleClick(item.id)" 
+                :class="{ 'active': activeIndex === item.id }" 
+                v-for="(item, index) in liList" :key="item.id">{{ item.name }}</li>
             </ul>
 
         </div>
@@ -36,35 +36,27 @@
             <img src="../photo/1.jpg" alt="">
             <text>每日新品</text>
         </div>
-        <div class="crowd">
+        <div class="new">
             <img src="../photo/1.jpg" alt="">
             <text>小米众筹</text>
         </div>
-        <div class="limit">
+        <div class="new">
             <img src="../photo/1.jpg" alt="">
             <text>限时抢购</text>
         </div>
-        <div class="star">
+        <div class="new">
             <img src="../photo/1.jpg" alt="">
             <text>星品驾到</text>
         </div>
-        <div class="recommend">
+        <div class="new">
             <img src="../photo/1.jpg" alt="">
             <text>王牌推荐</text>
         </div>
     </div>
     <!-- 超级品牌日 -->
     <div class="super">
-        <div class="box">
-            <div class="tv"></div>
-            <div class="super-mi">
-                纯米超级品牌日
-                <div class="samll">
-                    厨房家电 营养粥羹 42元起
-                </div>
-            </div>
-            <div class="look">去看看</div>
-        </div>
+        <img src="../photo/quality/supermi.png" alt="">
+       
     </div>
     <!-- 更多推荐 -->
     <div class="title-total">
@@ -155,18 +147,35 @@
 import { ref } from 'vue';
 import Navigation from '../components/Navigation.vue';
 
+const typeface = ref(0.4 + 'rem')
 const liList = ref([
-    '推荐', '手机', '居家', '家电', '智能', '影音', '服饰', '餐厨'
-    , '健康', '笔记本', '鞋包', '饮食', '杂志',
+    {name:'推荐',id:1},
+    {name:'手机',id:2},
+    {name:'居家',id:3},
+    {name:'家电',id:4},
+    {name:'智能',id:5},
+    {name:'影音',id:6},
+    {name:'服饰',id:7},
+    {name:'餐厨',id:8},
+    {name:'健康',id:9},
+    {name:'笔记本',id:10}, 
+    {name:'鞋包',id:11},
+    {name:'饮食',id:12},
+    {name:'杂志',id:13},
+    {name:' ',id:14}
 ])
-
-const nav = ref(10 + 'px')
-
 //列表切换颜色
+const nav = ref(0.5 + 'rem')
+
 const activeIndex = ref(0);
+
 const handleClick = (index)=>{
-    nav.value = (60 *index  + 10 * index + 11) + 'px';
+    nav.value = (0.5 + (index-1)*1.6 ) + 'rem';
     activeIndex.value = index;
+}
+
+const openLiList = ()=>{
+
 }
 </script>
 
@@ -181,54 +190,58 @@ const handleClick = (index)=>{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-left: 10px;
-        margin-right: 10px;
-
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        height: 1.8rem;
     }
 
     .from {
-        display: flex;
-        height: 30px;
+        height: 0.8rem;
         width: 100%;
-        margin-top: 10px;
-        overflow: auto;
-        clip-path: inset(0 0 12% 0); //剪切滚动条部分
+        margin-top: 0.3rem;
+        overflow-x: scroll;
+        white-space: nowrap;
         
-        
-
+        &::-webkit-scrollbar{
+            display: none;
+        }
         .icon-down {
             position: fixed;
             right: 0;
             background-color: #fff;
-            width: 30px;
+            width: 1rem;
+            height: 0.8rem;
             text-align: center;
-            z-index: 99;
+            z-index: 999;
         }
 
         .from-list {
-            display: flex;
             position: relative;
+            
             .from-list-item {
-                font-size: 14px;
-                text-align: center;
-                width: 50px;
-                margin-right: 20px;
                 
+                font-size: 0.4rem;
+                text-align: center;
+                width: 1.3rem;
+                margin-left: 0.3rem;
+                display: inline-block;
+                // margin-left: 0.3rem;
+
                 
             }
-            .active{
-                
+            .active{ 
                 color: rgb(129,93,55);
+                font-size: 0.45rem;
                 
             }
             &::after{
                     content: "";
                     display: block; 
-                    width: 30px;
-                    height: 5px;
+                    width: 0.8rem;
+                    height: 0.1rem;
                     background-color: rgb(129,93,55);
                     position: absolute;
-                    top: 24px;
+                    top: 0.65rem;
                     left: v-bind(nav); 
                     transition: left 0.5s ease;
                 }
@@ -240,15 +253,15 @@ const handleClick = (index)=>{
 }
 
 .head-block {
-    height: 94px;
+    height: 2.9rem;
 }
 
 .swiper {
-    height: 200px;
+    height: 6rem;
     width: 100%;
 
     .my-swipe {
-        height: 210px;
+        height: 6rem;
 
         img {
             width: 100%;
@@ -260,92 +273,42 @@ const handleClick = (index)=>{
 
 .store {
     width: 100%;
-    height: 100px;
+    height: 3rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    text-align: center;
-    margin-top: 10px;
-
-    .new {}
-
+    grid-template-columns: auto auto auto auto auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.2rem;
     img {
-        margin: 10px;
-        width: 50px;
-        height: 60px;
+        margin: 0.3rem;
+        width: 1.3rem;
+        height: 1.5rem;
+        object-fit: cover;
 
+    }
+    .new{
+        text-align: center;
     }
 }
 
 .super {
-    height: 100px;
+    height: 3rem;
     width: 100%;
-    padding-top: 10px;
+    margin: 0.2rem 0;
     background-color: rgb(246, 246, 246);
     display: flex;
     align-items: center;
-
-    .box {
-        height: 70px;
-        width: 90%;
-        background-color: rgb(244, 204, 149);
-        margin: 0 auto;
-        text-align: center;
-        border-radius: 50px;
-        display: flex;
-
-        .tv {
-            width: 120px;
-            height: 70px;
-
-        }
-
-        .super-mi {
-
-            font-size: 22px;
-            margin-top: 15px;
-            color: #fff;
-
-            .samll {
-                height: 15px;
-                width: 150px;
-                font-size: 11px;
-                background-color: rgb(250, 219, 142);
-                display: flex;
-                justify-content: center;
-                word-spacing: 5px;
-                align-items: center;
-                align-items: center;
-                margin-top: 5px;
-                padding: 0 8px;
-                border-radius: 50px;
-                color: black;
-                font-family: SimHea;
-            }
-        }
-
-        .look {
-            width: 47px;
-            height: 47px;
-            margin: 0 5px 0 10px;
-            background-color: rgb(245, 233, 206);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-            border: 2px solid rgb(224, 164, 78);
-
-        }
-
-
+    img{
+        width: 100%;
+        height: 2.5rem;
+        object-fit: cover;
     }
+
 }
 
 .title {
-    height: 300px;
+    height: 7rem;
     width: 100%;
-    margin-bottom: 10px;
-
     //有品推荐
     .header {
         width: 100%;
@@ -354,59 +317,60 @@ const handleClick = (index)=>{
         align-items: center;
 
         .title-text {
-            padding: 15px;
+            padding: 0.3rem;
         }
 
         .title-more {
-            padding: 15px 15px 15px 0;
+            padding: 0.3rem 0.3rem 0.3rem 0;
         }
     }
 
     .big-box {
-        height: 130px;
+        height: 2.7rem;
         width: 90%;
         background-color: rgb(247, 239, 247);
         margin: 0 auto;
-        padding-left: 5px;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
+       
+        padding-left: 0.1rem;
+        border-top-right-radius: 0.2rem;
+        border-top-left-radius: 0.2rem;
 
         // 有品推荐
         .box-text {
-            font-size: 9px;
-            padding-top: 10px;
+            font-size: 0.3rem;
+            padding-top: 0.2rem;
         }
 
         .box-info {
-            font-size: 8px;
-            margin-top: 10px;
+            font-size: 0.2rem;
+            margin-top: 0.2rem;
             color: rgb(160, 159, 160);
         }
 
         .money {
             color: rgb(183, 7, 7);
-            margin-top: 10px;
-            font-size: 8px;
+            margin-top: 0.2rem;
+            font-size: 0.2rem;
         }
 
         //小米众筹
         .big-text {
-            font-size: 16px;
-            word-spacing: 3px;
-            padding: 20px 0 7px 16px;
+            font-size: 0.3rem;
+            word-spacing: 0.1rem;
+            padding: 0.4rem 0 0.22rem 0.3rem;
         }
 
         .big-info {
-            padding-left: 16px;
-            padding-bottom: 15px;
-            font-size: 13px;
+            padding-left: 0.3rem;
+            padding-bottom: 0.3rem;
+            font-size: 0.3rem;
             font-family: "黑体";
             color: rgb(133, 146, 154);
         }
 
         .money-text {
-            font-size: 20px;
-            padding-left: 16px;
+            font-size: 0.4rem;
+            padding-left: 0.3rem;
             color: red;
             font-family: system-ui;
         }
@@ -423,38 +387,39 @@ const handleClick = (index)=>{
             align-items: center;
 
             .new {
-                padding: 2px 5px 2px 5px;
-                margin-left: 16px;
+                padding: 0.05rem 0.1rem 0.01rem 0.1rem;
+                margin-left: 0.3rem;
                 background-color: #10c310;
                 color: #fff;
             }
 
             .money-text-new {
                 color: red;
-                font-size: 25px;
-                padding-left: 5px;
+                font-size: 0.5rem;
+                padding-left: 0.1rem;
 
             }
 
             .new-text {
-                padding-top: 3px;
+                padding-top: 0.15rem;
             }
         }
 
     }
 
     .small-box {
-        height: 130px;
-        width: 100%;
+        height: 3rem;
+        width: 90%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0 auto;
 
         .small-item {
-            height: 120px;
-            width: 45%;
+            height: 2.7rem;
+            width: 48%;
             background-color: rgb(237, 247, 236);
-            margin-left: 15px;
+            
             word-spacing: 3px;
             font-size: 13px;
             border-bottom-left-radius: 10px;
@@ -462,45 +427,44 @@ const handleClick = (index)=>{
         }
 
         .small-index {
-            height: 120px;
-            width: 45%;
+            height: 2.7rem;
+            width: 48%;
             background-color: rgb(249, 239, 237);
-            margin-right: 15px;
             word-spacing: 3px;
-            border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 0.2rem;
         }
 
         .small-text {
-            font-size: 12px;
-            margin: 10px 0 5px 10px;
+            font-size: 0.3rem;
+            margin: 0.2rem 0 0.1rem 0.2rem;
 
         }
 
         .small-info {
-            font-size: 8px;
+            font-size: 0.2rem;
             color: rgb(160, 159, 160);
-            margin-left: 10px;
+            margin-left: 0.2rem;
         }
 
         //小米众筹
         .small-item-text {
             text-align: center;
-            font-size: 8px;
+            font-size: 0.2rem;
             font-weight: 400;
-            padding-top: 15px;
+            padding-top: 0.3rem;
         }
 
         .small-item-info {
             text-align: center;
-            font-size: 5px;
-            padding-top: 10px;
-            word-spacing: 2px;
+            font-size: 0.1rem;
+            padding-top: 0.2rem;
+            word-spacing: 0.05rem;
             color: rgb(160, 159, 160);
         }
     }
 
     .block-box {
-        height: 10px;
+        height: 0.2rem;
         background-color: rgb(237, 237, 237);
     }
 

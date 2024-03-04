@@ -38,31 +38,32 @@ const getLightList = async()=>{
     width: 100%;
     display: flex;
 
-.content {
-        width: 252px;
-        margin-left: 10px;
+.content{
+        width: 100%;
+        margin: 0 0.5rem 0 0.5rem;
         .header{
             width: 100%;
-            height: 90px;
+            height: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.3rem;
         }
         .wiring {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            grid-column-gap: 5px;
+            grid-column-gap: 0.2rem;
 
             .equip {
-                width: 80px;
-                height: 100px;
+                width: 2rem;
+                height: 3rem;
                 text-align: center;
-                margin-bottom: 10px;
+                margin-bottom: 0.2rem;
 
                 img {
-                    width: 60px;
-                    height: 70px;
-                    margin-bottom: 5px;
+                    width: 1.6rem;
+                    height: 2rem;
+                    margin-bottom: 0.2rem;
                 }
 
                 .desc {
@@ -70,7 +71,8 @@ const getLightList = async()=>{
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
-                    width: 80px;
+                    width: 2rem;
+                    font-size: 0.3rem;
 
                 }
             }
