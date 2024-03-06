@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #topbar{
+            text-align: center;
+            transform: translateY(-100%);
+            
+        }
+        #ul{
+            padding: 0 10px;
+            
+        }
+        li{
+            list-style: none;
+            background-color: #e20a0a;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="topbar">释放刷新</div>
+        <ul id="ul">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+
+    <script>
+        let stratY = 0    //手指触摸的位置
+        let moveY = 0
+        let rule = 100
+        let ul = document.getElementById('ul');
+        ul.addEventListener('touchstart',(e)=>{
+            console.log('touchstart',e.touches[0].screenY);
+            stratY = e.touches[0].screenY;
+        })
+
+        ul.addEventListener('touchmove',(e)=>{
+            console.log('touchmove',e.touches[0].screenY);
+            moveY = e.touches[0].screenY - stratY;
+            if(moveY > rule){
+                ul.style.transform = `translateY(${moveY}px)`   
+                topbar.style.transform = `translateY(${moveY*2.5 - 100}%)`
+            }
+
+        })
+
+        ul.addEventListener('touchend',(e)=>{
+            topbar.innerHTML = '加载中...'
+            timer = setTimeout(() => {
+                //收回去
+                goBack(ul)
+                goBack(topbar)
+                ul.style.transform = `translateY(0px))`   
+                topbar.style.transform = `translateY(${-100}%)`
+            }, 2000);
+        })
+
+        function goBack(box){
+            box.style.transition = 'all 0.5s';
+        }
+    </script>
+</body>
+</html>

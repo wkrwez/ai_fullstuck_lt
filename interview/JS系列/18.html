@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+    let btn = document.querySelector('btn')
+    btn.addEventListener('click',debounce(handle,1000))
+
+
+    function handle(){
+        console.log('提交了')
+    }
+    function debounce(fn,wait){
+        let timer = null
+        return function(...args){
+
+            clearTimeout(timer)
+            timer = setTimeout(()=>{
+                fn().call(this,...args)
+            },wait)
+           
+        }
+        
+    }
+
+    function throttle(fn,wait){
+        let timer = null
+        return function(...args){
+            if(timer){
+                return
+            }
+            timer = setTimeout(()=>{
+                fn.call(this,...args)
+                timer = null
+            },wait)
+        }
+    }
+</script>
+
+</body>
+</html>

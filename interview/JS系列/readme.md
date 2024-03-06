@@ -138,4 +138,47 @@ js中有原始类型和引用类型：
 - 构造函数有返回值，且为引用类型时会覆盖new当中的返回值
 
 
-# 13. 
+# 13. call,apply,bind 原理
+
+
+# 14.说说js中的事件模型
+- 是什么
+    捕获，目标，冒泡三个阶段
+- 分类
+1. DOM0级：onclick（无法控制事件在捕获冒泡哪个阶段执行）
+2. DOM1级：addeventListen（可以控制事件执行在哪个阶段）
+3. IE模型：attachEvent（无法控制事件在捕获冒泡哪个阶段执行）
+
+
+# 15.说说typeof 和 instanceof的区别？
+- typeof
+    能判断除了null之外的所有原始类型
+
+- instanceof
+
+- Object.prototype.toString.call(x)
+    1. [].toString() 数组版本的toString
+    2. Object.prototype.toString.call([])
+    3. [].toString()    对象版本的toString
+
+    该方法会让变量 x 调用对象上的toString函数，而toString返回值为[object Object]类型
+
+- Array.isArray()
+
+# 16. 说说Ajax的原理
+- 是什么
+    Ajax
+
+- 实现过程
+    1. 创建一个XHR实例对象
+    2. 调用实例对象中的open方法与服务器建立连接
+    3. 调用实例对象的send方法发送请求
+    4. 监听onreadystatechange事件，通过判断readyState的值来获取到最终数据
+    5. 将数据更新到页面
+
+# 17. 怎么实现上拉加载下拉刷新？
+1. 监听 touchstart  touchmove   touchend  事件，记录手指移动的距离，大于临界值时实现刷新操作，其中使用了transform：translateY 来添加各处动画
+2. 根据手指滑动的方向和容器顶部或底部到屏幕的距离来确定此时该执行上拉加载更多 还是
+
+# 18.防抖节流
+

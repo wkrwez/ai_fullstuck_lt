@@ -1,54 +1,25 @@
-let obj = { 
-    a:1,
-    b:{
-        n:1
-    },
-    undefined,
-    Symbol,
-    function(){},
-    
+Object.prototype.abc = 123
+let obj = {
+  a: 1,
+  b: {
+    n: 2
+  }
 }
-let newObj = structuredClone(obj)
-console.log(newObj);
 
-// let arr = [1,2,3,{n:1}]
-
-// let newObj = [...arr]
-// arr[3].n = 2
-// console.log(newObj)
+let obj2 = shallowCopy(obj)
 
 
-// function shallowCopy(obj) {
-//     let newObj = {}
-//     for(let key in obj){
-//         if(obj.hasOwnProperty(key)){  //显示原型上面的属性不拷贝
-//             newObj[key] = obj[key]
-//         }
-        
-//     }
-//     return newObj
-// }
+function shallowCopy(obj) {
+  let newObj = {}
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      newObj[key] = obj[key]
+    }
+    
+  }
+  return newObj
+}
 
+// obj.b.n = 3
 
-
-
-// function deepCopy(obj){
-//     let newObj = {}
-//     for(let key in obj){
-//         if(obj.hasOwnProperty(key)){
-//             if(typeof obj[key] !== 'object' || obj[key] === null){
-//                 newObj[key] = obj[key]
-//             }else{
-//                 newObj[key] = deepCopy(obj[key])
-//             }    
-//         }
-//     }
-//     return newObj
-// }
-
-// let obj2 = deepCopy(obj)
-
-// obj.b[2][0]=6
-
-// console.log(obj2);
-// console.log(shallowCopy(obj));
+console.log(obj2);

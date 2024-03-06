@@ -3,47 +3,49 @@
 //   name: 'John'
 // }
 
-// function foo() {
-//   console.log(this.name);
-// }
-
-// function bar() {
-//   var name = 'Jerry'
-//   foo()
-// }
-
 // function baz() {
-//   bar()
+//   function foo() {
+//     console.log(this.name);
+//   }
+//   foo()
 // }
 
 // baz.call(obj)
 
 
-// var name = 'Tom'
 // var obj = {
 //   name: 'John',
 //   foo: foo
 // }
+// var obj2 = {
+//   name: 'Tom',
+//   obj: obj
+// }
+
 // function foo() {
 //   console.log(this.name);
 // }
-// obj.foo()
+// obj2.obj.foo()
 
 
 
+// var obj = {
+//   name: 'John'
+// }
 
+// function foo() {
+//   console.log(this.name);
+// }
+
+// let bar = foo.bind(obj)
+// bar()
 
 var name = 'Tom'
-function bar() {
-  var name = 'Jerry'
-  function foo() {
+function foo() {
+  var name = 'John'
+  const bar = () => {
     console.log(this.name);
   }
-  foo()
+  bar()
 }
-bar()
-
-
-// function baz() {
-//   bar()
-// }
+foo()
