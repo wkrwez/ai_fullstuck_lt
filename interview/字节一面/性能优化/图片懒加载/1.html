@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lazy Loading Example</title>
+  <style>
+    .image img {
+      width: 300px;
+      height: 300px;
+      background-color: gray;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lazy Loading Example</h1>
+  
+  <div class="image"><img src="https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280" alt=""></div>
+  <div class="image"><img src="https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280" alt=""></div>
+  <div class="image"><img src="https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280" alt=""></div>
+  <div class="image"><img src="https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280" alt=""></div>
+  <div class="image"><img src="https://copyright.bdstatic.com/vcg/creative/cc9c744cf9f7c864889c563cbdeddce6.jpg@h_1280" alt=""></div>
+
+  <script>
+    // 获取所有需要懒加载的图片元素
+    const lazyImages = document.querySelectorAll('.image');
+
+    // 创建 Intersection Observer 实例
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 当图片进入可视区域时加载图片
+          const lazyImage = entry.target;
+          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.src})`;
+
+          // 停止观察已经进入可视区域的图片
+          observer.unobserve(lazyImage);
+        }
+      });
+    });
+
+    // 遍历每个懒加载图片元素并开始观察
+    lazyImages.forEach(image => {
+      observer.observe(image);
+    });
+  </script>
+
+
+
+</body>
+</html>

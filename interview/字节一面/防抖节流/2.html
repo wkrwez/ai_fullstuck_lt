@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debounced Input Example</title>
+</head>
+<body>
+
+<input type="text" id="input" placeholder="Type here">
+
+<script>
+function debounce(func, delay) {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, arguments);
+    }, delay);
+  };
+}
+
+// 获取输入框元素
+const inputElement = document.getElementById('input');
+
+// 创建一个处理输入事件的函数
+function handleInput() {
+  console.log('Input value:', inputElement.value);
+  // 在这里可以添加需要处理的逻辑
+}
+
+// 使用防抖函数包装输入事件处理函数，并设置延迟时间为 300 毫秒
+const debouncedInputHandler = debounce(handleInput, 2000);
+
+// 监听输入事件，并应用防抖处理
+inputElement.addEventListener('input', debouncedInputHandler);
+</script>
+
+</body>
+</html>

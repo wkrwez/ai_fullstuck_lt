@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <!-- 更多的 <li> 元素 -->
+      </ul>
+      
+      <script>
+      // 获取父级元素
+      const list = document.getElementById('myList');
+      
+      // 绑定点击事件到父级元素
+      list.addEventListener('click', function(event) {
+        console.log(event);
+        // 检查点击的目标元素是否是 <li> 元素
+        if (event.target.tagName === 'LI') {
+          // 在控制台输出被点击的文本内容
+          console.log(event.target.textContent);
+          
+          // 执行其他的点击事件处理逻辑
+          // ...
+        }
+      });
+      
+      </script>
+      
+</body>
+</html>
