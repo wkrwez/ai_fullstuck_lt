@@ -1,22 +1,32 @@
-function a(){
-
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            console.log('a');
-            resolve();
-        },2000);
-    });
-       
-}
-
-function b(){
-    return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
+function a() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('a');
+        // reject('no')
+        resolve('ok')
+        
+      }, 1000)
+    })
+    
+  }
+  
+  function b() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
         console.log('b');
-        reject('错误');
-    },2000);
-})
-}
+        resolve('yes')
+      }, 500)
+    });
+  }
+  
+  Promise.race([a(), b()]).then((res) => {
+    console.log(res);
+  })
+  
+  
+  // b()
+  
+  
 
 function c(){
     console.log('c');
