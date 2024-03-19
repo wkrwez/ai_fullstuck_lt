@@ -14,6 +14,7 @@
     "@koa/router": "^12.0.1",
     "koa": "^2.15.1",
     "koa-bodyparser": "^4.4.1",
-    "koa2-cors": "^2.0.6"
+    "koa2-cors": "^2.0.6",
+    "mysql2": "^3.9.2"
   }
 }

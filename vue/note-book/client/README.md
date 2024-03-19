@@ -1,7 +1,30 @@
-# Vue 3 + Vite
+# client
+1. 封装axios
+2. 路由懒加载
+3. 登陆功能校验账号密码
+3. 使用vant组件库
+5. 如果账号密码等为空就有响应拦截，生成提示。
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
+# server
+1. 使用koa做后台管理，koa-cors解决跨域,使用koa的路由实现封装登陆接口请求
+2. 封装MySQL函数，创建一个线程执行数据库请求，
+3. 使用mysql语句实现数据库查询，使用promise包装连接数据库命令（异步）并使用connection.query()连接数据库
+4. koa无法直接解析post请求参数，所以安装koa-bodyparser解析请求参数.
+5. 封装文件管理数据库数据。
+6. network的Paylod有前端传递的参数
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+# koa
+- 是什么
+    Koa是一个基于Node.js的Web框架，非常适合构建高度定制化的Web应用程序。Koa使用了ES6的特性，利用async/await来简化异步代码的编写，同时它也提供了一套优雅的中间件机制，使得开发者可以更加灵活地组织和管理代码。
+
+- 作用
+    通过Koa，你可以快速构建一个轻量级、高效的Web服务器，处理HTTP请求和响应，实现路由控制、中间件扩展等功能。另外，Koa还支持各种插件和中间件，可以方便地扩展其功能，比如处理日志、认证、错误处理等。
+
+- 中间件
+    中间件（Middleware）是指在处理HTTP请求过程中，位于客户端和服务器之间的一系列处理函数。用于处理请求、响应以及控制流程。
+
+    在Web开发中，中间件可以被串联在一起，形成一个处理请求的管道。每个中间件函数都可以对请求和响应对象进行处理，然后决定是否继续将请求传递给下一个中间件。通过这种机制，可以实现很多功能，比如日志记录、身份验证、错误处理、路由控制等。
+
+    在Koa框架中，中间件是基于洋葱模型的，即请求会按照先进后出的顺序依次经过中间件，然后再返回。每个中间件都可以访问请求对象（ctx）和响应对象（ctx.response），并且可以对它们进行修改或者执行一些操作。通过使用中间件，开发者可以将复杂的业务逻辑拆分成独立的模块，提高代码的可读性和可维护性。

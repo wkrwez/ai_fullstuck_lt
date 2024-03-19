@@ -1,6 +1,6 @@
 const Koa = require('koa') //koa接收不了post的参数
 const bodyParser = require('koa-bodyparser')//解析post参数
-const cors = require('koa2-cors')
+const cors = require('koa2-cors')//解决跨域
 const app = new Koa()
 const user = require('./routes/user.js') //后端路由
 
