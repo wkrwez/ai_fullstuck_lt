@@ -3,6 +3,7 @@ const bodyParser = require('koa-bodyparser')//解析post参数
 const cors = require('koa2-cors')//解决跨域
 const app = new Koa()
 const user = require('./routes/user.js') //后端路由
+const note = require('./routes/note.js')
 
 
 app.use(bodyParser())
@@ -17,6 +18,7 @@ app.use(cors())
 
 // 让user.js的都生效
 app.use(user.routes(),user.allowedMethods())
+app.use(note.routes(),note.allowedMethods())
 
 
 //任何代码都不能放在它后面

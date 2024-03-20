@@ -55,8 +55,20 @@ const userPut = (username,password,nickname)=>{
     return allServer.query(_sql)
 }
 
+//根据type查找日记列表
+const findNoteListByType = (type) => {
+    let _sql = `select * from note where note_type='${type}';`
+    return allServer.query(_sql)
+}
+
+const findNoteDetailById = (id)=>{
+    let _sql = `select * from note where id='${id}';`
+    return allServer.query(_sql)
+}
 module.exports = {
     userLogin,
     userFind,
-    userPut
+    userPut,
+    findNoteListByType,
+    findNoteDetailById
 }
