@@ -1,7 +1,14 @@
 <template>
+  
     <div class="note-list">
-      <ul v-if="state.noteList.length">
-        <li v-for="item in state.noteList" :key="item.id" @click="goNoteDetail(item.id)">
+      <Back/>
+      <ul id="ullist" v-if="state.noteList.length" 
+      >
+        <li v-for="item in state.noteList" :key="item.id" 
+        @click="goNoteDetail(item.id)"
+        @touchstart="strat(item.id)"
+        @touchend="handleMouseUp"
+        >
           <div class="img">
             <img :src="item.head_img" alt="">
           </div>
@@ -15,8 +22,10 @@
 
 <script setup>
 import {useRoute ,useRouter} from 'vue-router' //路由信息
-import {reactive,onMounted} from 'vue'
+import {reactive,onMounted, ref} from 'vue'
 import axios from '@/api'
+import Back from '@/components/Back.vue';
+
 const state = reactive({
     noteList:[]
 })
@@ -24,34 +33,64 @@ const state = reactive({
 const route = useRoute()
 const router = useRouter()
 
+// 通过美食拿到美食类的笔记
 onMounted(()=>{
     axios.post('./findNoteListByType',{
         note_type:route.query.title
     }).then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         state.noteList = res.data
     })
+    strat()
 })
 
 //跳去详情页
 const goNoteDetail = (id)=>{
+
     router.push({path:'/noteDetail',query:{id:id}})
+    
 }
+//长按删除
+const strat = (id)=>{
+ setTimeout(()=>{
+  
+    showConfirmDialog({
+    message:
+    '是否要删除',
+    })
+    .then(() => {
+      axios.post('/deleteNote',{
+        id:id
+      })
+    })
+    .catch(() => {
+      // on cancel
+    }); 
+  },2000)
+  
+
+}
+
+
+
 
 
 
 </script>
 
+
 <style lang="less" scoped>
 .note-list{
   width: 100%;
-  padding: 1rem 0.667rem 0;
+  
   box-sizing: border-box;
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 50px;
     grid-row-gap: 30px;
+    margin-top: 0.7rem;
+    padding: 0 0.667rem 0;
     li{
       img{
         width: 100%;

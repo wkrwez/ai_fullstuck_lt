@@ -55,20 +55,43 @@ const userPut = (username,password,nickname)=>{
     return allServer.query(_sql)
 }
 
-//根据type查找日记列表
+//根据type（美食）查找每一类的笔记列表
 const findNoteListByType = (type) => {
     let _sql = `select * from note where note_type='${type}';`
     return allServer.query(_sql)
 }
 
+//通过id拿到需要展示的笔记详情
 const findNoteDetailById = (id)=>{
     let _sql = `select * from note where id='${id}';`
     return allServer.query(_sql)
 }
+
+
+// 发布或者更新
+const notePublish = (values,id) => {
+    let _sql = ''
+    if(id){
+        _sql = `update note set userId=?,title=?,note_type=?,note_content=?,c_time=?,m_time=?,head_img=?,nickname=? where id=${id};`
+    }else{
+         _sql = `insert into note set userId=?,title=?,note_type=?,note_content=?,c_time=?,m_time=?,head_img=?,nickname=?;`
+ 
+    }
+       return allServer.query(_sql, values)
+}
+
+//删除笔记
+const deleteNote = (id)=>{
+    let _sql = `DELETE FROM note WHERE id=${id};`
+    return allServer.query(_sql)
+}
+
 module.exports = {
     userLogin,
     userFind,
     userPut,
     findNoteListByType,
-    findNoteDetailById
+    findNoteDetailById,
+    notePublish,
+    deleteNote
 }
