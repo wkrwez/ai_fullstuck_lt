@@ -9,6 +9,7 @@ function Child() {
 }
 
 let c = new Child()
-
-console.log(c.say);
+let p = new Parent()
+// console.log(p.name);
+console.log(c.name);
 

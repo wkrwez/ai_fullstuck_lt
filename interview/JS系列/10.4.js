@@ -10,5 +10,7 @@ let child = Object.create(parent)
 let child2= Object.create(parent)
 
 child.firends.push('xyz')
-
-console.log(child2.firends);
+child.add = '增加'
+console.log(child);
+// console.log(child2.add);
+// console.log(child2);

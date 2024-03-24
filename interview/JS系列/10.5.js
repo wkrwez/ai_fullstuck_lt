@@ -15,4 +15,5 @@ function clone(origin) {
 }
 
 let child = clone(parent)
+console.log(child);
 

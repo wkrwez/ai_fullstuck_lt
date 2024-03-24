@@ -182,3 +182,23 @@ js中有原始类型和引用类型：
 
 # 18.防抖节流
 
+# 19. 事件代理
+- 事件委托  （多个子容器需要绑定相同的事件）
+
+# 20. 说说js当中的事件循环
+- 是什么：
+    JS引擎在执行js过程中会区分同步和异步代码，先执行同步再执行异步，异步中同样先执行同步，再执行异步，以此往复的循环。
+
+- 异步
+    1. 宏任务：script、setTimeout、setInterval、setImmediate、I/O、UI-rendering、
+    postMassage()、 MessageChannel
+    2. 微任务：.then()  nextTick(node)  MutationObserver回调
+
+- Event Loop：
+1. 执行同步代码 （也叫宏任务）
+2. 执行微任务（完毕）
+3. 有需要的话就渲染页面
+4. 执行宏任务（下一次事件循环的开始）
+
+
+
