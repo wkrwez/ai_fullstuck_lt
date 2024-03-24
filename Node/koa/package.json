@@ -1,0 +1,15 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "1. 启动一个程序\r 2. 能接收前端传递的参数\r 3. 能连接数据库\r 4. 能向前端返回数据",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.15.1"
+  }
+}
