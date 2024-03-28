@@ -2,7 +2,7 @@
 1.增：push   unshift  splice concat
 2.删：pop shift   splice slice
 3.改：reverse sort
-4.查：indexOf lastIndexOf filter find   includes    find
+4.查：indexOf lastIndexOf filter find   includes    
 5.转换：join 
 6.迭代：forEach    map   reduce  filter set
 7.Array.from()
@@ -199,6 +199,9 @@ js中有原始类型和引用类型：
 2. 执行微任务（完毕）
 3. 有需要的话就渲染页面
 4. 执行宏任务（下一次事件循环的开始）
+
+
+
 
 
 
