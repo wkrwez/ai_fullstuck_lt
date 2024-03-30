@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="file" @change="handleChange">
+        <button @click="handleUpload">上传</button>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const uploadfile = ref(null)
+                const uploadChunkList = ref([])
+
+                const message = ref('Hello vue!')
+                //   选择文件
+                const handleChange = (e) => {
+                    if (!e.target.files[0]) return
+
+                    uploadfile.value = e.target.files[0]
+                    // console.log(uploadfile.value);
+                }
+
+                //点击文件上传
+                const handleUpload = () => {
+                    if (!uploadfile.value) return
+
+                    const chunkList = createChunk(uploadfile.value)
+                    // console.log(chunkList);
+
+                    // 对发送到后端的数据进行包装
+                    uploadChunkList.value = chunkList.map(({ file }, index) => {
+                        return {
+                            file,
+                            size: file.size,
+                            percent: 0,
+                            chunkName: `${uploadfile.value.name}-${index}`,
+                            fileName: uploadfile.value.name,
+                            index
+                        }
+                    })
+
+                    // console.log(uploadChunkList.value);
+                    // 把切片一个一个给后端
+                    uploadChunks()
+
+                }
+
+                //封装请求 axios天生支持在请求中传入onUploadProgress回调函数
+                const requestUpload = (url, method = 'post', data, header = {}, onUploadProgress = (e) => e) => {
+                    return new Promise((resolve, reject) => {
+                        axios[method](url, data, { headers, onUploadProgress })
+                            .then(res => {
+                                resolve(res)
+                            })
+                            .catch(err => {
+                                reject(err)
+                            })
+                    })
+                }
+
+                //上传切片
+                const uploadChunks = () => {
+                    const formateList = uploadChunkList.value.map(({ file, fileName, index, chunkName }) => {
+                        // 把切片转换成form表单数据流   二进制看不到
+                        const formData = new FormData() //创建表单格式的数据流  
+                        formData.append('file', file)
+                        formData.append('fileName', fileName)
+                        formData.append('chunkName', chunkName)
+                        return { formData, index }
+                    })
+
+                    console.log(formateList);
+                    // 发接口请求
+                    formateList.map(({ formData, index }) => {
+                        requestUpload({
+                            url: 'http://localhost:3000/upload',
+                            data: formData,
+                            onUploadProgress: createProgress(uploadChunkList.value[index])
+                        })
+                    })
+                }
+
+                // 上传的进度
+                const createProgress = (item) => {
+                    return (e) => { //axios的onUploadProgress参数
+                        item.percent = parseInt(String(e.loaded / e.total) * 100)
+                    }
+                }
+
+
+                //   文件切成3M,ES6新增，可添加默认参数
+                const createChunk = (file, size = 3 * 1024 * 1024) => {
+                    const chunkList = []
+                    let cur = 0
+                    while (cur < file.size) {
+                        //    切完后还是Blob对象 
+                        chunkList.push({ file: file.slice(cur, cur + size) }) //Blob类型上的slice
+                        cur += size
+                    }
+                    return chunkList
+                }
+
+                return {
+                    handleChange,
+                    handleUpload,
+
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
