@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "multiparty": "^4.2.3"
+  }
+}
