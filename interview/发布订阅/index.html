@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #model{
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+    }
+  </style>
+</head>
+<body>
+  <button id="open">open</button>
+  <button id="close">close</button>
+
+  <script>
+    const Model = (function() {
+      let model = null
+      return function () {
+        if (!model) {
+          model = document.createElement('div')
+          model.id = 'model'
+          document.body.appendChild(model)
+          model.style.display = 'none'
+        }
+        return model
+      }
+    })()
+
+
+    // function createModel() {
+    //   const model = document.createElement('div')
+    //   model.id = 'model'
+    //   document.body.appendChild(model)
+    //   model.style.display = 'none'
+    // }
+    
+    document.getElementById('open').addEventListener('click', () => {
+      const model = new Model()
+      // createModel()
+      model.style.display = 'block'
+    })
+    document.getElementById('close').addEventListener('click', () => {
+      const model = new Model()
+      // createModel()
+      model.style.display = 'none'
+    })
+  </script>
+</body>
+</html>
