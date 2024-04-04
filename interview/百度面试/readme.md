@@ -28,6 +28,8 @@ a.pop()
 - 优点：可读性好，搜索引擎优化SEO，更好的支持各种终端
 
 # 5.斐波那契
+
+# 6. 用过什么AI工具
 - chatgbt   练习prompt技巧，生成简单的前端网页，学习
 - Copilot   提升开发效率
 - 最近在学习transform，openai技能，对大模型感兴趣，也在学习langchain，LLM
@@ -58,5 +60,18 @@ a.pop()
 - 同源策略的目的是保证数据安全
 
 ## 解决跨域（开发阶段好测试）、
-1. JSONP
-   - ajax请求受同源策略的影响，但是script标签上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求，
+1. JSONP --- 借助script标签上的src属性不受同源策略的影响这一机制，来实现跨域
+
+   1). ajax请求收同源策略的影响，但是 <script> 上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求 // 1. 借助script的src属性给后端发送一个请求，且携带一个参数（'callback'） // 2. 前端在widnow对象上添加了一个 callback 函数 // 3. 后端接收到这个参数 'callback' 后，将要返回给前端的数据data和这个参数 'callback' 进行拼接，成 'callback(data)',并返回 // 4. 因为window上已经有一个callback 函数，后端又返回了一个形如'callback(data)'，浏览器会将该字符串执行成callback的调用
+
+   2). 缺点： 1.必须要后端配合 2.只能用于get请求
+
+2. Cors （Cross-Origin Resource Sharing） --- 后端通过设置响应头来告诉浏览器不要拒绝接受后端的响应
+
+3. node代理 （vite 开发环境下生效）
+
+4. nginx代理 （类似Cors，配置白名单）（生产环境下常用）
+
+5. domain (在iframe中，当父级页面和子级页面的 子域 不同时，通过设置 document.domain='xx' 来将xx定为基础域，从而实现跨域)
+
+6. postMesage (在iframe中，)

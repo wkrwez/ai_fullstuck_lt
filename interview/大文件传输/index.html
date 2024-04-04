@@ -21,10 +21,12 @@
 
         createApp({
             setup() {
+                // 存储文件总信息
                 const uploadfile = ref(null)
+
+                // 存储封装后的切片文件信息
                 const uploadChunkList = ref([])
 
-                const message = ref('Hello vue!')
                 //   选择文件
                 const handleChange = (e) => {
                     if (!e.target.files[0]) return
@@ -59,7 +61,7 @@
                 }
 
                 //封装请求 axios天生支持在请求中传入onUploadProgress回调函数
-                const requestUpload = (url, method = 'post', data, header = {}, onUploadProgress = (e) => e) => {
+                const requestUpload = ({url, method = 'post', data, headers = {}, onUploadProgress = (e) => e}) => {
                     return new Promise((resolve, reject) => {
                         axios[method](url, data, { headers, onUploadProgress })
                             .then(res => {
@@ -84,15 +86,30 @@
 
                     console.log(formateList);
                     // 发接口请求
-                    formateList.map(({ formData, index }) => {
+                    const requestList = formateList.map(({ formData, index }) => {
                         requestUpload({
                             url: 'http://localhost:3000/upload',
                             data: formData,
                             onUploadProgress: createProgress(uploadChunkList.value[index])
                         })
                     })
+
+
+                    // 发送合并切片请求 全部发送成功
+                    Promise.all(requestList).then(mergeChunks)
+                    
                 }
 
+                //合并切片请求
+                const mergeChunks = ()=>{
+                    requestUpload({
+                        url:'http://localhost:3000/merge',
+                        data:JSON.stringify({
+                            fileName:uploadfile.value.name,
+                            size: 3 * 1024 * 1024
+                        })
+                    })
+                }
                 // 上传的进度
                 const createProgress = (item) => {
                     return (e) => { //axios的onUploadProgress参数

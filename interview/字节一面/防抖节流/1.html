@@ -1,0 +1,29 @@
+<body>
+
+    <ul>
+        <li id="li">点击</li>
+    </ul>
+    <script>
+function throttle(func, delay) {
+  let timer;
+  return function(...args) {
+    if (!timer) {
+      func.apply(this, ...args);
+      timer = setTimeout(() => {
+        timer = null;
+      }, delay);
+    }
+  };
+}
+
+// 使用节流函数包装需要节流处理的函数，并设置时间间隔为 500 毫秒
+const throttledClickHandler = throttle(handleClick, 3000);
+
+// 在实际使用中，例如监听点击事件时使用节流函数
+ document.getElementById('li').addEventListener('click', throttledClickHandler);
+
+function handleClick(){
+    console.log('click');
+}
+    </script>
+</body>
