@@ -68,46 +68,68 @@ function listTree(data) {
     return res
 }
 
-console.log(listTree(list));
+// console.log(listTree(list));
 
 
 // // 哈希
-// function listTree(data) {
-//     // const obj = {}
-//     // data.forEach(item=>{
-//     //     obj[item.id] = item
+function listTree(data) {
+    const obj = {}
+    data.forEach(item=>{
+        obj[item.id] = item
 
-//     // })
-//     // const res = []
-//     // data.forEach(item=>{
-//     //     const parent = obj[item.parentId]
-//     //     if(parent){
-//     //         parent.children = parent.children || []
-//     //         parent.children.push(item)
-//     //     }else{
-//     //         res.push(item)
-//     //     }
-//     // })
-//     // return res
+    })
+    const res = []
+    data.forEach(item=>{
+        const parent = obj[item.parentId]
+        if(parent){
+            parent.children = parent.children || []
+            parent.children.push(item)
+        }else{
+            res.push(item)
+        }
+    })
+    return res
 
-//     const map = new Map()
-//     data.forEach(item=>{
-//             map.set(item.id,item)
+    // const map = new Map()
+    // data.forEach(item=>{
+    //         map.set(item.id,item)
     
-//         })
-//     const res = []
-//     data.forEach(item => {
-//         const parent = map.get(item.parentId)
-//         if (parent) {
-//             parent.children = parent.children || []
-//             parent.children.push(item)
-//         } else {
-//             res.push(item)
-//         }
-//     })
-//     return res
+    //     })
+    // const res = []
+    // data.forEach(item => {
+    //     const parent = map.get(item.parentId)
+    //     if (parent) {
+    //         parent.children = parent.children || []
+    //         parent.children.push(item)
+    //     } else {
+    //         res.push(item)
+    //     }
+    // })
+    // return res
 
-// }
+}
 // console.log(listTree(list));
 
 // console.time();
+
+
+
+
+function listTree(data){
+    let obj = {}
+    data.forEach(item=>{
+        obj[item.id] = item
+    })
+    const res = []
+    data.forEach(node=>{
+        const parent = obj[node.parentId]
+        if(parent){
+            parent.children = parent.children || []
+            parent.children.push(node)
+        }else{
+            res.push(node)
+        }
+    })
+    return res
+}
+console.log(listTree(list));

@@ -18,3 +18,15 @@
 
     贪心和动态规划，以局部最优解或最优子结构来解决问题，只不过贪心只考虑当下，当下的最优解，和之前的没有重叠关系，
     而动态规划存在重叠，
+
+# 深度优先递归
+走进递归（deep(root.right,n+1)）后执行这个递归函数的内容，后面的逻辑等递归结束回来执行
+
+function deep(root,n){
+        if(root === null)return 
+        if(res.length === n){
+            res.push(root.val)  
+        }
+        deep(root.right,n+1)
+        deep(root.left,n+1)
+}
