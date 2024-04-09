@@ -3,7 +3,7 @@ import BrotherA from './components/BrotherA'
 import BrotherB from './components/BrotherB'
 
 // const { Provider, Consumer } = React.createContext() // 创建一个上下文对象
-import { Provider } from './provider.js'
+// import { Provider } from './provider.js'
 
 
 class BApp extends React.Component {
