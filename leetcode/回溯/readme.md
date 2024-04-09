@@ -25,7 +25,7 @@ function backtracking(问题描述) {
     for(选择：本层集合中元素(树中结点孩子的数量就是集合的大小)){
         处理节点;
         backtracking(路径，选择列表); // 递归
-        回溯，撤销处理结果JavaScript的React框架;
+        回溯，撤销处理结果
     }
 }
 ```
