@@ -7,3 +7,4 @@
 2. useEffect() 默认执行一次，当组件中有状态变更导致组件重新渲染，该函数会重新执行
     1. 可以充当 componentDidMount
     2. 可以充当 componentDidMount
+    3. 可以充当 componentWillUnMount
