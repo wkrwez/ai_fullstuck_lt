@@ -1,0 +1,24 @@
+.layout{
+    width: 100vw;
+    height: 100vh;
+  }
+  .ant-layout{
+    height: 100%;
+  }
+  .hd{
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+  }
+  .side{
+    color: #fff;
+  }
+  .aside-item{
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .aside-item:hover{
+    background-color: #668ae7;
+  }

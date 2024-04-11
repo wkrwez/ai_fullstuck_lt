@@ -1,0 +1,13 @@
+.login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-form{
+    width: 600px;
+  }
+  .ant-form-item-control-input-content{
+    text-align: center;
+  }
