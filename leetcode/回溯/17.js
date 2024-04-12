@@ -29,7 +29,7 @@ var letterCombinations = function(digits) {
     const res = []
     if(!digits.length)return res
     let s = ''
-    function foo(digits,s,res,index,map){
+    function foo(digits,s,res,index){
         if(digits.length === index){
             res.push(s)
             return
@@ -38,12 +38,12 @@ var letterCombinations = function(digits) {
             let obj = map[num]
 
             for(let p of obj){
-               foo(digits,s+p,res,index+1,map)
+               foo(digits,s+p,res,index+1)
             }
         
 
     }
-    foo(digits,s,res,0,map)
+    foo(digits,s,res,0)
     console.log(res);
     return res
 }
