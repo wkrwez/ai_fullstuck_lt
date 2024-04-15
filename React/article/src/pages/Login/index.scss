@@ -1,0 +1,27 @@
+
+.login{
+    width: 100%;
+    height: 100%;
+    background: center/cover #eee;
+    &-container{
+        width: 440px;
+        height: 360px;
+        display: block;
+        margin: 0 auto 20px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        box-shadow: 0 0 50px rgb(0 0 0 / 10%);
+    }
+    .login-logo{
+        width: 200px;
+        height: 60px;
+        display: block;
+        object-fit:cover;
+        margin: 0 auto 20px;
+    }
+    .login-checkbox-label{
+        color: #1890ff;
+    }
+}
