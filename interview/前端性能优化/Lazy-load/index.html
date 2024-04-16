@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 300px;
+            width: 300px;
+            margin-bottom: 50px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <img src="" data-origin="https://t7.baidu.com/it/u=2604797219,1573897854&fm=193&f=GIF" alt="">
+    <img src="" data-origin="https://img1.baidu.com/it/u=435134468,1942448903&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=889" alt="">
+    <img src="" data-origin="https://img0.baidu.com/it/u=3628503530,464378779&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800">
+    <img src="" data-origin="https://img2.baidu.com/it/u=855369075,175194576&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="">
+    <img src="" data-origin="https://img2.baidu.com/it/u=2004708195,3393283717&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" alt="">
+    <img src="" data-origin="https://img1.baidu.com/it/u=1331863463,2594844301&fm=253&fmt=auto?w=1067&h=800" alt="">
+    <img src="" data-origin="https://img1.baidu.com/it/u=1331863463,2594844301&fm=253&fmt=auto?w=1067&h=800" alt="">
+    <img src="" data-origin="https://img0.baidu.com/it/u=2788901948,3907873318&fm=253&fmt=auto?w=500&h=281" alt="">
+    <img src="" data-origin="https://img2.baidu.com/it/u=811993169,635123395&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=889" alt="">
+    <img src="" data-origin="https://img0.baidu.com/it/u=924031950,2251460669&fm=253&fmt=auto&app=138&f=JPEG?w=1105&h=500" alt="">
+
+<script>
+    //获取可视区域的高度    offsetHeight包含外部高度（边框）
+    const viewHeight = document.documentElement.clientHeight  //window.innerHeight
+    // console.log(viewHeight);
+    function lazyLoad(){
+        const imgs = document.querySelectorAll('img[data-origin]') //属性选择
+        console.log(imgs);
+        imgs.forEach(item =>{
+            let res = item.getBoundingClientRect()
+            // console.log(res);
+            if(res.top < viewHeight){
+                item.src = item.dataset.origin
+                item.removeAttribute('data-origin')
+            }
+        })
+
+        // 获取可视区域的高度
+    // const viewHeight = document.documentElement.clientHeight
+    // const io = new IntersectionObserver(
+    //   (entries) => {
+    //     entries.forEach(entry => {
+    //       if (entry.isIntersecting) {
+    //         entry.target.src = entry.target.dataset.original || ''
+    //         entry.target.removeAttribute('data-original')
+    //         io.unobserve(entry.target)
+    //       }
+    //     })
+    //   },
+    //   {
+    //     threshold: 0
+    //   }
+    // )
+    // const imgs = document.querySelectorAll('img[data-original]')
+    // imgs.forEach(item => {
+    //   io.observe(item)
+    // })
+
+
+
+    }
+
+    document.addEventListener('scroll',lazyLoad)
+
+    lazyLoad()
+
+</script>
+
+</body>
+</html>
