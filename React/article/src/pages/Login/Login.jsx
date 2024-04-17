@@ -36,8 +36,8 @@ const Login = () => {
           validateTrigger={['onBlur', 'onChange']}
           initialValues={{
             remember:true,
-            username:'19195077082',
-            password:'123456'
+            username:'13911111111',
+            password:'246810'
           }}
         >
           <Form.Item
@@ -90,7 +90,7 @@ const Login = () => {
 
           <Form.Item >
             <Button block size='large' type="primary" htmlType="submit">
-              Submit
+              提交
             </Button>
           </Form.Item>
         </Form>
