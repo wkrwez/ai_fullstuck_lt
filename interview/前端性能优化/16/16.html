@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <h2>hello world</h2>
+  <img src="" alt="" id="previewImage">
+  <input type="file" id="imageInput">
+  <h3>web worker</h3>
+
+  <script>
+    const previewImage = document.getElementById("previewImage")
+    const imageInput = document.getElementById("imageInput")
+
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0]
+      if (file) {
+        const render = new FileReader()
+        render.readAsArrayBuffer(file)
+
+        render.onload = (e) => {
+          const imageData = e.target.result
+
+          // 在开一个线程
+          const worker = new Worker('worker.js')
+
+          createImageBitmap(new Blob([imageData])).then(imageBitmap => {
+            // console.log(imageBitmap);
+            // 将目前的图片数据传给第二个线程
+            worker.postMessage({ imageBitmap }, [imageBitmap])
+            // 从第二个线程中获取数据
+            worker.onmessage = (e) => {
+              // 黑白照
+              // console.log(e.data.processImageBitmap);
+              const processImageBitmap = e.data.processImageBitmap
+              const previewCanvas = document.createElement('canvas')
+              previewCanvas.width = processImageBitmap.width
+              previewCanvas.height = processImageBitmap.height
+              const previewCtx = previewCanvas.getContext('2d')
+              previewCtx.drawImage(processImageBitmap, 0, 0)
+
+              // console.log(previewCanvas.toDataURL());
+              previewImage.src = previewCanvas.toDataURL()
+            }
+
+          })
+          
+        }
+
+      }
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lazy Load Images Example</title>
+<style>
+  /* 图片容器的高度，用于模拟页面滚动 */
+  .image-container {
+    height: 1000px;
+  }
+</style>
+</head>
+<body>
+
+<div class="image-container">
+  <!-- 占位符，用于延迟加载图片 -->
+</div>
+
+<script>
+
+const list = [
+    "https://t7.baidu.com/it/u=2604797219,1573897854&fm=193&f=GIF" ,
+   "https://img1.baidu.com/it/u=435134468,1942448903&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=889" ,
+    "https://img0.baidu.com/it/u=3628503530,464378779&fm=253&fmt=auto&app=120&f=JPEG?w=1200&h=800",
+    "https://img2.baidu.com/it/u=855369075,175194576&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" ,
+    "https://img2.baidu.com/it/u=2004708195,3393283717&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500",
+    "https://img1.baidu.com/it/u=1331863463,2594844301&fm=253&fmt=auto?w=1067&h=800" ,
+    "https://img1.baidu.com/it/u=1331863463,2594844301&fm=253&fmt=auto?w=1067&h=800" ,
+    "https://img0.baidu.com/it/u=2788901948,3907873318&fm=253&fmt=auto?w=500&h=281" ,
+    "https://img2.baidu.com/it/u=811993169,635123395&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=889",
+    "https://img0.baidu.com/it/u=924031950,2251460669&fm=253&fmt=auto&app=138&f=JPEG?w=1105&h=500" 
+
+]
+
+
+let n = 0
+const viewHeight = document.documentElement.clientHeight
+function lazyLoad(){
+     // 创建图片元素
+     var img = document.createElement('img');
+        // 设置图片的 'data-src' 属性为要加载的图片 URL
+        img.setAttribute('data-src',  list[n] );
+        // 添加 'lazy' 类，用于识别需要延迟加载的图片
+        img.classList.add('lazy');
+        // 设置图片的宽高等属性
+        img.width = 200;
+        img.height = 300;
+
+        // 将图片元素添加到图片容器中
+        document.querySelector('.image-container').appendChild(img);
+  // 获取所有带有 'lazy' 类的图片元素
+  const lazyImages = document.querySelectorAll('.lazy');
+  
+  // 遍历每张图片
+  lazyImages.forEach(item=> {
+    let res = item.getBoundingClientRect()
+    // 判断图片是否进入视窗内
+    if(res.top < viewHeight){
+                 // 加载图片
+      img.src = img.dataset.src;
+      // 移除 'lazy' 类，确保图片只加载一次
+      img.classList.remove('lazy');
+    }
+     
+    
+  });
+  n++
+}
+
+// 监听页面滚动事件
+window.addEventListener('scroll', lazyLoad);
+lazyLoad()
+
+
+</script>
+
+</body>
+</html>
