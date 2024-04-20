@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #app{
+      width: 400px;
+      height: 400px;
+      border: 3px solid #000;
+      overflow: scroll;
+    }
+    #box{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div style="height: 500px;"></div>
+
+    <div id="box"></div>
+  </div>
+
+  <script>
+    let io = new IntersectionObserver(entries => {
+      console.log(entries);
+    }, {
+      threshold: [0, 0.5, 1],
+      root: document.getElementById('app')
+    })
+
+    io.observe(document.getElementById('box'))
+
+  </script>
+</body>
+</html>

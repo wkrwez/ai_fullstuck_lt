@@ -20,5 +20,5 @@ function myNew(...args) { // [Person, 'Tom']
   const res = args[0].apply(obj, args.slice(1))
   return (typeof res === 'object' && res !== null) ? res : obj
 }
-// // console.log(p);
-// console.log(p.getName());
+console.log(p);
+console.log(p.getName());

@@ -15,13 +15,12 @@ class EventEmitter {
         }
     }
 
-    // 发布订阅，删除
+    // 只能订阅一次
     once(type, cb) {
-        let fn = () => {
-            cb()
-            this.off(type, fn)
+        if(this.event[type] && this.event[type].indexOf(cb) !== -1){
+            return
         }
-        this.on(type, fn) //先存起来，只要发布就调用fn再删除
+        this.on(type,cb)
     }
     // 发布
     emit(type, ...args) {
@@ -36,27 +35,32 @@ class EventEmitter {
     }
     // 删除
     off(type, cb) {
-        if (!this.event[type]) {
-            return
-        }
-        else {
-            this.event[type] = this.event[type].filter(item => item !== cb)
+        const handles = this.event[type]
+        const index = handles && handles.indexOf(cb)
+        if(index !== -1){
+            handles.splice(index,1)
         }
     }
 
 }
 
-let ev = new EventEmitter()
 
-const func = (str) => {
-    console.log(str);
+
+
+const emiter = new EventEmitter()
+
+function foo(){
+    console.log('去买房');
 }
 
+// emiter.on('sell',foo)
+// emiter.emit('sell')
+
+emiter.once('sell',foo)
+emiter.once('sell',foo)
+emiter.once('sell',foo)
+emiter.emit('sell')
 
 
-// ev.on('say', func)
-ev.once('say', func)
-// ev.emit('say', 'visa')
-// ev.off('say', func);
 
 

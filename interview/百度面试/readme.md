@@ -62,7 +62,7 @@ a.pop()
 ## 解决跨域（开发阶段好测试）、
 1. JSONP --- 借助script标签上的src属性不受同源策略的影响这一机制，来实现跨域
 
-   1). ajax请求收同源策略的影响，但是 <script> 上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求 // 1. 借助script的src属性给后端发送一个请求，且携带一个参数（'callback'） // 2. 前端在widnow对象上添加了一个 callback 函数 // 3. 后端接收到这个参数 'callback' 后，将要返回给前端的数据data和这个参数 'callback' 进行拼接，成 'callback(data)',并返回 // 4. 因为window上已经有一个callback 函数，后端又返回了一个形如'callback(data)'，浏览器会将该字符串执行成callback的调用
+   1). ajax请求受同源策略的影响，但是 <script> 上的src属性不受同源策略的影响，且该属性也会导致浏览器发送一个请求 // 1. 借助script的src属性给后端发送一个请求，且携带一个参数（'callback'） // 2. 前端在widnow对象上添加了一个 callback 函数 // 3. 后端接收到这个参数 'callback' 后，将要返回给前端的数据data和这个参数 'callback' 进行拼接，成 'callback(data)',并返回 // 4. 因为window上已经有一个callback 函数，后端又返回了一个形如'callback(data)'，浏览器会将该字符串执行成callback的调用
 
    2). 缺点： 1.必须要后端配合 2.只能用于get请求
 

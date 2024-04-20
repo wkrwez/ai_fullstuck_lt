@@ -21,6 +21,20 @@ js中有原始类型和引用类型：
 - 原始类型：number string boolean symbol null undefined Bigint
 - 引用类型：Object Function Array Date RegExp Map Set WeakMap WeakSet
 
+## 类型不一致
+- NaN 和任何类型包括自己都是false，[] == [] 会判断引用地址不一致
+### 特殊情况
+- 类型不一致的前提
+    null == undefined    true,但是和他们和其他类型都是false
+### 两种类型
+- 类型不一致的前提
+    - 都是原始类型会转数字比较
+    - 有一端出现基本类型，会转原始
+        首先找Symbol.toPrimitivel可以直接转原始。
+        再调用.valueOf()
+        不行再调用.toString()
+        最后转数字比较
+
 
 通常开发过程中，会用到一些显示的类型转换的手段来完成逻辑开发
 .....
@@ -56,6 +70,20 @@ js中有原始类型和引用类型：
     1. JSON.parse(JSON.stringify(obj))  ----无法处理undefined和symbol，funnction，循环引用
     2. structuredClone()    symbol，funnction
     3.  能处理循环引用
+
+## JSON.parse是JavaScript中的一个内置方法，用于将JSON字符串解析为JavaScript对象。
+
+JSON（JavaScript Object Notation）是一种用于数据交换的轻量级数据格式。
+- 构成
+1. 键/值对的集合，类似于JavaScript对象。
+2. 有序列表，类似于JavaScript数组。
+JSON.parse()方法接受一个JSON格式的字符串作为参数，并将其解析为对应的JavaScript对象。如果提供的字符串不是有效的JSON格式，则会抛出一个SyntaxError异常。
+
+## JSON.stringify() 是 JavaScript 中的一个内置方法，用于将 JavaScript 对象或数组转换为 JSON 字符串。
+- 构成
+1. 键/值对的集合，类似于 JavaScript 对象。
+2. 有序列表，类似于 JavaScript 数组。
+JSON.stringify() 方法接受一个 JavaScript 对象或数组作为参数，并将其转换为对应的 JSON 字符串。如果提供的对象包含函数、undefined 或 symbol 属性，则在转换过程中会自动将其忽略。如果对象包含 Date 对象，则会自动将其转换为字符串。如果对象包含循环引用（即对象之间相互引用），则会在转换过程中抛出一个 TypeError 异常。
 
 # 6.说说你对闭包的理解？
 - 是什么：
@@ -161,7 +189,7 @@ bind：零散传参，还会返回一个函数，需要调用这个函数，参�
     能判断除了null之外的所有原始类型
 
 - instanceof
-
+    会检查原型链，只能检查是否是特殊类或者构造函数创建的实例，不能检查原始类型和自定义的原始构造函数
 - Object.prototype.toString.call(x)
     1. [].toString() 数组版本的toString
     2. Object.prototype.toString.call([])
@@ -196,8 +224,7 @@ bind：零散传参，还会返回一个函数，需要调用这个函数，参�
     JS引擎在执行js过程中会区分同步和异步代码，先执行同步再执行异步，异步中同样先执行同步，再执行异步，以此往复的循环。
 
 - 异步
-    1. 宏任务：script、setTimeout、setInterval、setImmediate、I/O、UI-rendering、
-    postMassage()、 MessageChannel
+    1. 宏任务：script、setTimeout、setInterval、setImmediate、I/O、UI-rendering、postMassage()、 MessageChannel
     2. 微任务：.then()  nextTick(node)  MutationObserver回调
 
 - Event Loop：
@@ -225,5 +252,12 @@ let s = 'asdfa'相当于new String('asdfa')
 
 let s = new String('asdad')可以添加属性
 
-# 去除点击事件
+# 空数组怎么判断
+类型转换
+let arr = []
+- !arr.length
+    这是判断布尔值，如果长度为0就是!0,!会导致转换为true
+    如果!2就为false
+
+
  
