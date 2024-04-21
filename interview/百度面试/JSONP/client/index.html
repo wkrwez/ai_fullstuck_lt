@@ -9,9 +9,32 @@
     <button id="btn">获取数据</button>
 
     <script>
+
+        function Jsonp(url,cb){
+            return new Promise((resolve,reject)=>{
+                //创建标签，添加src，放到html,
+                const script = document.createElement('script')
+                script.src = `${url}?cb=${cb}`
+                document.body.appendChild(script)
+                //将callback作为key，函数为value，挂载到window
+                window[cb] = (data)=>{
+                    resolve(data)
+                }
+            })
+        }
+
+
+
+
+
+
+
         let btn = document.getElementById('btn')
         btn.addEventListener('click',()=>{
-            
+            Jsonp('http://localhost:3000','callback')
+            .then(res=>{
+                console.log(res);
+            })
         })
 
     </script>

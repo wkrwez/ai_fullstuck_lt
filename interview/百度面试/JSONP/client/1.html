@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<button id="app" >点击我</button>
+
+    <script>
+        const app = document.getElementById('app')
+        app.addEventListener('click',()=>{
+            // console.log('被点击')
+            fetch('http://localhost:5500')
+            .then(data=>{
+                console.log(data);
+            })
+        })
+    </script>
+</body>
+</html>
