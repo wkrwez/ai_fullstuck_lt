@@ -26,7 +26,8 @@ const LANGUAGES = {
     "Catalan": "cat_Latn",
     "Cebuano": "ceb_Latn",
     "Chinese (Simplified)": "zho_Hans",
-    "English": "eng_Latn"
+    "English": "eng_Latn",
+    "French":"fra_Latn"
 }
 
 export default function languageSelector({ type, onChange, defaultLanguage }) {
