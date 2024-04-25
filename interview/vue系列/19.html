@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">{{count}}</div>
+
+<input id="content" type="text" :value="defa" @input="input" >
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const count = ref(0)
+      const message = ref('hello')
+      // const defa = ref('5555')
+      const content = document.getElementById('content')
+      
+      content.addEventListener('input',(e)=>{
+        console.log(e.target.value);
+        message.value = e.target.value
+      })
+
+      return {
+        message,
+        content,
+        count,
+        
+      }
+    }
+  }).mount('#app')
+</script>
+    
+    
+</body>
+</html>
