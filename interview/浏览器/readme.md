@@ -27,6 +27,13 @@
 offsetxxx
 clientxxx
 会导致渲染队列强制刷新
+
+优化重排和重绘可以提高页面的性能：
+
+减少重排：避免在动画中频繁修改元素的样式，使用CSS3动画或transform属性可以优化动画效果。
+合并重排和重绘：使用requestAnimationFrame（RAF）等方法将多次重排合并为一次，减少性能损耗。
+使用GPU加速：某些属性如transform、opacity等可以利用GPU加速，减少重排和重绘的消耗。
+优化DOM操作：减少不必要的DOM操作和频繁的DOM操作，尽量一次性修改多个样式，减少重排和重绘的触发次数。
 # 强缓存
 - 设置响应头
 Cache-control:'max-age=多少秒'
@@ -111,7 +118,7 @@ ETag：资源的唯一标识符，通常是资源内容的哈希值或者其他�
 - 副垃圾回收器：
 将新生代分成对象空间和空闲空间。对象空间用于存放新进的小对象，当存满后执行回收处理，再将存活的对象复制到空闲空间，此时就做好了内存整理，再反转对象空间和空闲空间。新对象空间继续接收对象（两次回收仍存活的对象会晋升到老生代区）
 - 主垃圾回收器
-因为存放的对象都比较大，所以适合用副垃圾回收器相同的的算法，只能采用标记清除法，递归一个对象，当对象中任何一个属性都没被使用，则作为垃圾回收掉，再整理空间。
+因为存放的对象都比较大，所以不适合用副垃圾回收器相同的的算法，只能采用标记清除法，递归一个对象，当对象中任何一个属性都没被使用，则作为垃圾回收掉，再整理空间。
 
 ## 全停顿
 - js运行在v8的主线程上，当垃圾回收机制生效时，js的执行要让出线程，那么js执行就会暂停
@@ -128,14 +135,42 @@ js会阻塞html的解析和渲染，解析完成等待js执行再渲染。
 
 # js加载执行会阻塞html的渲染
 1. 在script标签上加async，该js加载就不会阻塞html的解析渲染，加载完开始执行js还是会阻止解析和渲染。
-2. 在script标签上加defer，该js加载就不会阻塞html的解析渲染，加载完会等html加载完执行js（页面完全渲染完前，DOMContentLoaded[当浏览器解析 HTML 文档并构建了 DOM 树,图片，样式表加载前] 事件触发前才执行）。
+2. 在script标签上加defer，该js加载就不会阻塞html的解析渲染，提前加载完会等html解析完执行js（页面完全渲染完前，DOMContentLoaded[当浏览器解析 HTML 文档并构建了 DOM 树,图片，样式表加载前] 事件触发前才执行）。
 
 
 # 浏览器三个存储
 共同点：都会受到同源策略的影响，协议：域名：端口
 
-1. local和session不能在不同域名下通信，可以使用postMessage API或者跨域共享sessionStorage的第三方库来实现
-2. cookie不能在不同域名下通信，可以通过设置cookie的domain和path属性为相同来实现
+1. local可以同源共享数据(子域名会跨域)，可以使用postMessage API或者跨域共享sessionStorage的第三方库来实现
+2. session同源需要同窗口
+    分类看问题：
+    1）在一个窗口下，多个iframe中，是共享；操作互影响;
+    注意：iframe清除，sessionStorage不会清除，sessionStorage只会看不到，当页面重新加载后sessionStorage会在应用中出现；所以一些session会无法保活
+    2）在多个窗口下：
+    本身sessionStorage就是每打开一个新窗口，就有一个自己的sessionStorage对象，关闭窗口即 过期当前窗口的sessionStorage；
+    但是通过A页面打开的B页面（ 如：window.open('同源网址') ），会进行源网页sessionStorage复制，并在窗口B中可以访问到；
+    修改窗口A的sessionStorage，不会对窗口B内部的sessionStorage影响。
+3. cookie不能在不同域名下通信，可以通过设置cookie的domain和path属性为相同来实现
 - domain的设置对子域生效，如domain设置为.a.com，则b.a.com和c.a.com均可使用该cookie
 - path不同，cookie1的path为/b/，而cookie2的path为/b/c/，则在a.com/b页面时只可以访问cookie1，在a.com/b/c页面时，可访问cookie1和cookie2。path以/结尾
 
+# js获取DOM为什么很慢
+DOM结构身上有很多属性，一个div身上就有很多属性。
+js操作DOM的引擎线程和html的渲染线程是互斥的。使用js代码修改DOM过多会导致线程频繁切换，带来性能消耗。
+
+# fetch请求发送多次
+在使用 Fetch API 进行网络请求时，可能会出现请求被发送两次的情况，主要原因可能包括：
+
+重定向：如果服务器对请求进行了重定向，浏览器会自动跟随重定向，并发送第二个请求。这通常是因为服务器返回了一个 3xx 的状态码，指示浏览器重定向到另一个 URL。
+
+CORS 预检请求：当使用 Fetch API 发送跨域请求时，如果请求包含某些非简单的内容类型（例如使用了自定义头部），浏览器会发送一个预检请求（OPTIONS 请求）以确认服务器是否允许跨域请求。在预检请求之后，才会发送实际的请求。因此，实际请求可能会出现两次。
+
+        以下情况会触发浏览器发送预检请求：
+
+        使用了某些非简单请求方法，例如 PUT、DELETE、CONNECT 等。
+        使用了自定义的请求头（例如使用了 Authorization、Content-Type 等非简单请求头）。
+        使用了某些特殊的 Content-Type，例如 application/json、application/xml 等。
+
+浏览器缓存机制：有时浏览器可能会自动发起一次条件性的请求，以确认资源是否已被修改。这通常发生在缓存策略为“协商缓存”（例如，使用 ETag 或 Last-Modified）时。
+
+代码逻辑错误：在代码中可能存在逻辑错误，导致发送了多个请求。这可能是由于事件处理程序多次触发、定时器多次执行或其他因素引起的。
