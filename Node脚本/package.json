@@ -1,0 +1,11 @@
+{
+  "description": "",
+  "scripts": {
+    "my-script": "node index.js",
+    "type": "module",
+    "export": "node ./scripts/autoExport.mjs"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
+}
