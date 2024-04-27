@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="/home">首页</a></li> 
+        <li><a href="/about">关于</a></li>
+    </ul>
+    
+    <div id="routeView"></div>
+    <script>
+        const routes = [
+            {
+                path:'/home',
+                component:'首页内容'
+            },
+            {
+                path:'/about',
+                component:'关于页面'
+            }
+        ]
+        window.addEventListener('DOMContentLoaded', onLoad)
+        window.addEventListener('popstate', onPopState)
+            const routeView = document.getElementById('routeView')
+            function onLoad(){
+                const links = document.querySelectorAll('li a')
+                links.forEach((a) =>{
+                a.addEventListener('click',(e)=>{
+                    //去除a标签的默认刷新行为
+                    e.preventDefault()
+                    //往浏览器的历史栈添加a标签地址
+                    history.pushState(null,'',a.getAttribute('href'))
+                    // 映射对应的DOM
+                    onPopState()
+                })
+            })
+            }
+            //匹配路径显示对应的页面
+            function onPopState(){
+                routes.forEach((item)=>{
+                    if(item.path === location.pathname){
+                        routeView.innerHTML = item.component
+                    }
+                })
+            }
+    </script>
+    
+</body>
+</html>
