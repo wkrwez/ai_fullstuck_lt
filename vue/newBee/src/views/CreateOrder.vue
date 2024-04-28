@@ -54,9 +54,7 @@ onMounted(async() => {
     const cartItemIds = route.query.cartItemIds
     const _cartItemIds = cartItemIds ? JSON.parse(cartItemIds) : JSON.parse(localStorage.getItem('cartItemIds'))
     localStorage.setItem('cartItemIds', JSON.stringify(_cartItemIds))
-    // console.log(_cartItemIds);
     const { data: list } = await getCartItemIds({cartItemIds: _cartItemIds.join(',')})
-    // console.log(list);
     state.cartList = list
 
     // 从地址页面调过来

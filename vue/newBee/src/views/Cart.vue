@@ -44,9 +44,9 @@ import { useStore } from 'vuex'
 import { showFailToast } from 'vant';
 import { useRouter } from 'vue-router'
 
-const result = ref([])
-const list = ref([])
-const checkAll = ref(false)
+const result = ref([]) //选中商品的数量，通过id进行判断
+const list = ref([]) //购物车商品信息的数量
+const checkAll = ref(false) //是否全部选中
 const store = useStore()
 const router = useRouter()
 
@@ -54,6 +54,7 @@ onMounted(() => {
   init()
 })
 
+//重新计算购物车的数量
 const init = async() => {
   const { data } = await getCart({pageNumber: 1})
   console.log(data);
@@ -61,8 +62,8 @@ const init = async() => {
   result.value = data.map(item => item.cartItemId)
 }
 
-
-const groupChange = () => { // 选中商品
+// 选中商品
+const groupChange = () => { 
   console.log(result.value);
   checkAll.value = (result.value.length === list.value.length) && result.value.length > 0 ? true : false
 }
@@ -76,7 +77,8 @@ const numChange = async(value, detail) => {  // 修改数量
   await modifyCart(params)
 
 }
-const onSubmit = () => { // 提交订单
+// 提交订单
+const onSubmit = () => { 
   // 没有选中商品，提示 请选择商品进行结算，选中了商品，则跳转 /create-order
   if (result.value.length == 0) {
     showFailToast('请选择商品进行结算')
@@ -85,6 +87,7 @@ const onSubmit = () => { // 提交订单
   router.push({ path: '/create-order', query: {cartItemIds: JSON.stringify(result.value)} })
 }
 
+//全选，checkAll.value为true代表全部选中
 const allCheck = () => {
   if (!checkAll.value) { // 大家都不选中
     result.value = []

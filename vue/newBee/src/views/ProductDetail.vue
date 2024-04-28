@@ -47,8 +47,9 @@ const state = reactive({
 onMounted(async() => {
   // 从url上取到id值，将商品的id传给后端，获取该商品的详细信息
   const { query: { id } } = route
+  console.log(route);
   const { data } = await getDetail(id)
-  console.log(data);
+  // console.log(data);
   state.detail = data
 })
 </script>
