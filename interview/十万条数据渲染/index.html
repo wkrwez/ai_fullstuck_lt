@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    *{
+      margin: 0;padding: 0;
+    }
+    .v-scroll{
+      width: 300px;
+      height: 400px;
+      border: 1px solid #000;
+      margin: 100px 0 0 100px;
+      overflow-y: scroll;
+    }
+    li{
+      list-style: none;
+      padding-left: 20px;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #d5cece;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="v-scroll" ref="scrollBox" @scroll="doScroll">
+      <ul>
+        <li v-for="(item, index) in currentList">{{index + 1}} -- {{item}}</li>
+      </ul>
+    </div>
+  </div>
+
+  
+  <script>
+    const { createApp, ref, onMounted, computed } = Vue
+  
+    createApp({
+      setup() {
+        const allList = ref([])  // 所有的数据
+        // const currentList = ref([1, 2, 3, 4, 5 ,424, 3121,134124 ,34123,123 ,3131,23423,41,41331,3])  // 可视区域内要渲染的数据
+        
+        const getAllList = (count) => { // 接口请求
+          for (let i = 0; i < count; i++) {
+            allList.value.push(`我是列表${allList.value.length + 1}项`)
+          }
+        }
+        getAllList(300)
+        // ----------------------------------------------------------------
+        const boxHeight = ref(0) // 可视区域高度
+        const itemHeight = ref(40) // 每一项的高度
+        const scrollBox = ref(null) // 可视区域容器
+        onMounted(() => {
+          boxHeight.value = scrollBox.value.clientHeight
+          // console.log(scrollBox.value.clientHeight);
+        })
+        const itemNum = computed(() => {
+          return ~~(boxHeight.value / itemHeight.value) + 2
+        })
+        const startIndex = ref(0)  // 可视区域内的第一项
+
+        // 页面滚动
+        const doScroll = () => {
+          console.log(scrollBox.value.scrollTop);
+          const index = ~~(scrollBox.value.scrollTop / itemHeight.value)
+          if (index === startIndex.value) return
+          startIndex.value = index
+        }
+
+        const endIndex = computed(() => { // 可视区域内的最后项下标
+          let index = startIndex.value + itemNum.value * 2   // 
+          if (!allList.value[index]) {
+            index = allList.value.length - 1
+          }
+          return index
+        })
+
+        // 拿到真正要能被渲染的数据
+        const currentList = computed(() => {
+          let index = 0
+          if (startIndex.value <= itemNum.value) {  // [0, 21]  [0, 22] [0, 23]... [1, 31]
+            index = 0
+          } else {
+            index = startIndex.value - itemNum.value
+          }
+          return allList.value.slice(index, endIndex.value + 1)
+        })
+
+        return {
+          allList,
+          currentList,
+          boxHeight,
+          itemHeight,
+          scrollBox,
+          doScroll
+        }
+      }
+    }).mount('#app')
+  </script>
+
+</body>
+</html>
