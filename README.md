@@ -1,4 +1,5 @@
 # AI全栈工程师
+ios,android,react-native
 ## 前端 + AIGC
   -html5  结构
   -css    layout+样式
