@@ -1,0 +1,23 @@
+/*
+tailwindcss 
+基本样式
+组件样式
+工具样式
+*/
+@tailwind base;                
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .ts-primary {
+        /* @apply tw-bg-[#000000] tw-text-[#ffffff]; */
+        font-size: 20px;
+        gap:10px
+    }
+}
+
+.name{
+    font-size: 24px;
+}
+
+
