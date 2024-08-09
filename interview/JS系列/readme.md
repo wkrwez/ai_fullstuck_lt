@@ -21,6 +21,10 @@ js中有原始类型和引用类型：
 - 原始类型：number string boolean symbol null undefined Bigint
 - 引用类型：Object Function Array Date RegExp Map Set WeakMap WeakSet
 
+有无迭代器（Symbol.iterator）
+- 可迭代：Array,Map,Set
+- 不可迭代：WeakMap WeakSet, Object
+
 ## 类型不一致
 - NaN 和任何类型包括自己都是false，[] == [] 会判断引用地址不一致
 ### 特殊情况
