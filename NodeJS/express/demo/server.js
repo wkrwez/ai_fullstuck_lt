@@ -99,8 +99,9 @@ const app = express();
 // });
 
 //---------模版引擎----------
+
 //静态资源中间键
-app.use(express.static("public"));
+app.use(express.static("./public"));
 //指定模版存放目录
 app.set("views", "view");
 // 指定引擎模版为handlebars
