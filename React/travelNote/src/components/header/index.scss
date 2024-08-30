@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0 50px 0;
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  .avter {
+    border-radius: 100px;
+  }
+}

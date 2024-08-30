@@ -1,0 +1,21 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(214, 226, 237);
+  background-image: url("../../Assest/bgc/login.jpg");
+  background-size: contain;
+  background-repeat: repeat;
+  .login {
+    width: 500px;
+    height: 650px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+    background-color: #fff;
+  }
+}
