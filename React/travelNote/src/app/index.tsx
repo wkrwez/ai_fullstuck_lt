@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./home/home.tsx";
+import Home from "./home/home";
 export default function App() {
   return <Home />;
 }

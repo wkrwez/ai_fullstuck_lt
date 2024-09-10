@@ -1,0 +1,14 @@
+.inputBox {
+  position: relative;
+  .input {
+    width: 350px;
+    height: 40px;
+    border-radius: 50px;
+    padding-left: 20px;
+    border: 1px solid #000;
+    background-color: #fff;
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+  }
+}
