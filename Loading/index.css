@@ -1,0 +1,52 @@
+:root {
+    --loading-color: '#ffffff'
+}
+.box {
+    width: 200px;
+    min-height: 200px;
+    box-shadow: inset 0px 0px 3px black;
+    margin-top: 50px;
+    /* display: flex;
+    justify-content: center; */
+}
+.picture {
+    width: 100%;
+    min-height: 100px;
+}
+.picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+}
+.content {
+    min-height: 30px;
+    margin: 5px;
+    margin-top: 20px;
+}
+.loading .content, .loading .picture{
+    background-color: #ffffff;
+    background: linear-gradient(
+        100deg,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 1) 50%,
+        rgba(255, 255, 255, 0) 60%
+    ) #ffffff;
+    background-size: 200% 100%;
+    background-position-x: 120%;
+    animation: 1s loading ease-in-out infinite;
+}
+@keyframes loading {
+    to{
+        background-position-x: -20%;
+    }
+}
+
+.loading .picture {
+    background-color: #D3D3D3;
+    border-radius: 6px;
+}
+.loading .content {
+    background-color: #D3D3D3;
+    border-radius: 6px;
+}

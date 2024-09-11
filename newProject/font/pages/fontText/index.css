@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'PuHui';
+    src: url('../../font/PuHui.ttf')
+}
+@font-face {
+    font-family: 'PuHui3';
+    src: url('../../font/PuHui3.ttf')
+}
+
+.PuHui3{
+    font-family: 'PuHui3';
+}
