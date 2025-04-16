@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <button id="btn">发送</button>
+    </div>
+    <script>
+      const abort = new AbortController();
+      const signal = abort.signal;
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        fetch("http://localhost:3000")
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+
+      setTimeout(() => {
+        abort.abort();
+        console.log("Request cancelled after 5 seconds");
+      }, 1000);
+    </script>
+  </body>
+</html>
