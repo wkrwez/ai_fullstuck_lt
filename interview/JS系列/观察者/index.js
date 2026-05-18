@@ -30,10 +30,23 @@ class Study {
   }
 }
 
-let a = new Observer("学生");
-let b = new Observer("老师");
+// let a = new Observer("学生");
+// let b = new Observer("老师");
+// let c = new Study();
+// c.add(a, true);
+// c.add(b);
+// c.notify();
+// c.notify();
+
+// 每个观察者都执行了一样的逻辑,为每个观察者单独实现更新逻辑
+
+class Student extends Study {
+  update() {
+    console.log("开始写作业");
+  }
+}
+
+let d = new Student("大学生");
 let c = new Study();
-c.add(a, true);
-c.add(b);
-c.notify();
+c.add(d);
 c.notify();
