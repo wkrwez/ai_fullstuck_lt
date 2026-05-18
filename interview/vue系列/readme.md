@@ -4,13 +4,11 @@
   是一个 js 框架，用于创建一个单页应用的 web 应用框架，主旨是为了简化 web 的开发，主要靠 MVVM 的驱动方式来实现视图的更新。
 
 - 特性
-
   1. MVVM (Model - View - ViewModel)
      1.1. Model--模型层：模板，业务逻辑的代码
      1.2. View--视图层：html 页面
      1.3. ViewModel--视图模型层（用于将模型和视图进行连接通信）
   2. 组件化
-
      1. 代码复用
      2. 降低整体的耦合度
 
@@ -36,7 +34,6 @@
   模板层的数据变更会导致视图层的更新。视图层的数据更新也会导致模板层的数据改变
 
 - 原理 （ViewModel 的原理）
-
   1. 监听器：对所有的数据进行监听
   2. 解析器：对每个元素节点的指令进行解析
 
@@ -48,9 +45,7 @@
 # 4.vue2 和 vue3 的区别
 
 - 选项式 API 和组合式 API - this 不需要，拥抱函数式编程 - 代码量大的话 data + methods + getters 相关的逻辑需要搬来搬去 - 组合式 可以让 reactive/ref + method（逻辑） + onMounted（生命周期） 以业务为单位在一起
-
   - 响应式原理
-
     - vue2 defineProperty （一次性代理完） 数组会有缺点（无法监听索引变化，无法拦截数组方法）
     - vue3 reactive 用的是 Proxy，有 13 种拦截方法 性能更好（懒代理:在访问对象属性时并不会立即触发代理的拦截操作，而是等到真正需要对属性进行操作时才会触发拦截器。拦截更精确，减小性能开销）
     - ref 面向对象的 get set
@@ -71,11 +66,8 @@
 - 虚拟 DOM
   1. 虚拟 DOM 是 vue 中的编译器将模板代码编译成对象
 - diff
-
   1. 将新老 VDOM 的不同点找到并生成一个补丁
-
   - 过程:
-
   1. 同层比较,是不是相同节点,不相同直接废弃老 DOM
   2. 是相同点节点,比较节点上的属性,产生一个补丁包
   3. 继续比较下一层的子节点,采用双端队列的方式,尽量复用,产生一个补丁包
@@ -187,7 +179,6 @@
 # 14.vue 的异步组件
 
 1. Suspense
-
    - default:需要加载的异步组件，一个组件只有一个，还有其他的需要再添加 Suspense
    - fallback：异步组件加载完成前展示的内容
 
@@ -208,6 +199,29 @@ watch：指定监听的响应式变量，变量更改触发
 # 19.输入框不使用 v-model 怎么实现双向绑定？
 
 v-bind 绑定输入框自带的 value，再使用 v-on 绑定 input 事件，通过 js 监听 input 事件，接收一个参数，将参数的 value 值赋给响应式变量
+
+# 20. vue3 响应式更新
+
+Vue3 就是数据驱动视图，数据变 → 触发依赖 → 更新视图
+
+- 在函数中响应式数据发生变化时，数据会同步更新，但是视图的更新会维护一个队列，在下次事件循环时批量更新。
+  优先级：promise.then(微任务) > MessageChannel > setImmediate(宏任务) > setTimeout(宏任务),
+
+```
+function setChatSession(data: ChatSession, id: number) {
+      const targetSession = chatSession.value.find(
+        (item) => item.conversationId === id
+      );
+      if (!targetSession) {
+        <!-- 更新后 -->
+        chatSession.value.push(data);
+      }
+      <!-- 立即获取到最新的数据 -->
+      if (chatSession.value.length > 5) {
+        chatSession.value.shift();
+      }
+}
+```
 
 # setup
 
@@ -233,7 +247,6 @@ watchEffect
 只会对初始对象的属性进行代理，后续添加的属性不会自动成为响应式的。这是因为 Vue2 在初始化时会递归地对对象的属性进行代理，但是对于后续添加的属性，Vue2 无法自动进行代理。无法监视数组的长度属性的变化
 
 - Proxy(递归代理每个属性)
-
   1. 可以拦截对对象的各种操作，包括读取、赋值、删除等，从而更灵活地实现对对象的代理。新添加的属性会自动成为响应式的，无需额外的操作。
 
   2. 懒代理：只有首次访问时才会进行代理。新添加的属性也会被代理是因为这个懒代理。

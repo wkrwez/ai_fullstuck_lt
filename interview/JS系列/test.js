@@ -13,8 +13,8 @@ let obj = {
 // for (let p in obj) {
 //   console.log(p);
 // }
-const res = obj.hasOwnProperty(a);
-console.log(a);
+// const res = obj.hasOwnProperty(a);
+// console.log(a);
 
 // const res = Object.values(obj);
 // const res = Object.getOwnPropertySymbols(obj);
@@ -29,3 +29,18 @@ console.log(a);
 //   return res[n];
 // };
 // console.log(fib(4));
+
+// function Parent(age, name) {
+//   this.name = name;
+//   this.age = age;
+//   this.say = function () {
+//     console.log(this.name, this.age);
+//   };
+// }
+
+// function Child(age, name) {
+//   Parent.call(this, age, name);
+// }
+// // 拿不到Parent的原型链的内容
+// let child = new Child(20, "Tom");
+// console.log(child.say());

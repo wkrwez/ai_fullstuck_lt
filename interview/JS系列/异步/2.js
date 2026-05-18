@@ -1,220 +1,190 @@
 class MyPromise {
-    constructor(executor) {
-      this.state = 'pending'  // promise的状态
-      this.value = undefined // 接受resolve的参数
-      this.reason = undefined // 接受reject的参数
-      this.onFulfilledCallbacks = []
-      this.onRejectedCallbacks = []
-  
-  
-      const resolve = (value) => {
-        if (this.state === 'pending') {
-          this.state = 'fulfilled'
-          this.value = value
-          // 把then中的回调触发掉
-          this.onFulfilledCallbacks.forEach(cb => cb(value))
-        }
+  constructor(executor) {
+    this.status = "pending";
+    this.reason = undefined;
+    this.value = undefined;
+    this.onReject = [];
+    this.onResolve = [];
+    const resolve = (value) => {
+      if (this.status === "pending") {
+        this.status = "fulfilled";
+        this.value = value;
+        this.onResolve.forEach((fn) => fn(value));
       }
-  
-      const reject = (reason) => {
-        if (this.state === 'pending') {
-          this.state = 'rejected'
-          this.reason = reason
-          this.onRejectedCallbacks.forEach(cb => cb(reason))
-        }
+    };
+    const reject = (reason) => {
+      if (this.status === "pending") {
+        this.status = "rejected";
+        this.reason = reason;
+        this.onReject.forEach((fn) => fn(reason));
       }
-  
-      executor(resolve, reject)
-    }
-  
-    then(onFulfilled, onRejected) {
-      // 把 onFulfilled 存起来，供resolve 调用
-      onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value;
-      onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason }
-  
-      // 返回一个promise
-      const newPromise = new MyPromise((resolve, reject) => {
-        if (this.state === 'fulfilled') { // then前面的promise对象状态是同步变更完成了
-          setTimeout(() => { // 官方是微任务，我们宏任务简化一下
-            try {
-              const result = onFulfilled(this.value)
-              resolve(result) // 应该放result里面的resolve中的参数
-            } catch (error) {
-              reject(error)
-            }
-          })
-        }
-  
-        if (this.state === 'rejected') {
+    };
+    executor(resolve, reject);
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled =
+      typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+    onRejected =
+      typeof onRejected === "function"
+        ? onRejected
+        : (reason) => {
+            throw reason;
+          };
+    const myPromise = new MyPromise((resolve, reject) => {
+      if (this.status === "fulfilled") {
+        setTimeout(() => {
+          try {
+            const result = onFulfilled(this.value);
+            resolve(result);
+          } catch (err) {
+            reject(err);
+          }
+        }, 0);
+      }
+      if (this.status === "rejected") {
+        setTimeout(() => {
+          try {
+            const result = onRejected(this.reason);
+            resolve(result);
+          } catch (err) {
+            reject(err);
+          }
+        }, 0);
+      }
+      if (this.status === "pending") {
+        this.onReject.push((reason) =>
           setTimeout(() => {
             try {
-              const result = onRejected(this.reason)
-              resolve(result)
-            } catch (error) {
-              reject(error)
+              const result = onRejected(reason);
+              resolve(result);
+            } catch (err) {
+              reject(err);
             }
-          })
-        }
-  
-        if (this.state === 'pending') { // 缓存then中的回调
-          this.onFulfilledCallbacks.push((value) => {
-            setTimeout(() => {  // 保障将来onFulfilled在resolve中被调用时是一个异步函数
-              try {
-                const result = onFulfilled(value)
-                resolve(result)
-              } catch (error) {
-                reject(error)
-              }
-            })
-          })
-  
-          this.onRejectedCallbacks.push((reason) => {
-            setTimeout(() => {  // 保障将来onFulfilled在resolve中被调用时是一个异步函数
-              try {
-                const result = onRejected(reason)
-                resolve(result)
-              } catch (error) {
-                reject(error)
-              }
-            })
-          })
-        }
-  
-  
-      })
-  
-      return newPromise
-  
-    }
-//   多个异步任务，第一个成功调用then，第一个失败调用catch，
-// 第一个失败，后面有成功的会继续调用then，全部失败就不调用then
-    static race (promises) {
-      return new MyPromise((resolve, reject) => {
-        // 看promises里面的那个对象的状态先变更
-        for (let promise of promises) {
-          promise.then(
-            (value) => {
-              resolve(value)
-            },
-            (reason) => {
-              reject(reason)
+          }, 0),
+        );
+        this.onResolve.push((value) =>
+          setTimeout(() => {
+            try {
+              const result = onFulfilled(value);
+              resolve(result);
+            } catch (err) {
+              reject(err);
             }
-          )
-        }
-        // resolve('')
-      })
-    }
-//   等待所有异步改变状态，都是成功就改变为成功并执行then，
-// 有一个失败，整个all都失败，执行catch
-    static all (promises) {
-      return new MyPromise((resolve, reject) => {
-        let count = 0, arr = []
-        for (let i = 0; i < promises.length; i++) {
-          promises[i].then(
-            (value) => {
-              count++
-              arr[i] = value
-              if (count === promises.length) {
-                resolve(arr)
-              }
-            },
-            (reason) => {
-              reject(reason)
-            }
-          )
-        }
-      }) 
-    }
-// 只要有一个 Promise 对象成功完成就then，所有的都失败就调用catch方法
-    static any () {
-      return new MyPromise((resolve, reject) => {
-        let count = 0, errors = []
-        for (let i = 0; i < promises.length; i++) {
-          promises[i].then(
-            (value) => {
-              resolve(value)
-            },
-            (reason) => {
-              count++
-              errors[i] = reason
-              if (count === promises.length) {
-                reject(new AggregateError(errors))
-              }
-            }
-          )
-        }
-      }) 
-    }
-
-    finally(callback) {
-        return this.then(
-            (value) => {
-                return Promise.resolve(callback().then(() => value))
-            },
-            (res) => {
-                return Promise.resolve(callback().then(() => res))
-            }
-        )
-    }
-
-    static allSettled(promises) {
-        return new myPromise((resolve) => {
-            let arr = []
-            let count = 0;
-            promises.forEach((promis, i) => {
-                promis.then((value) => {
-                    arr[i] = { status: 'fulfilled', value: value }
-
-                }, (reason) => {
-                    arr[i] = { status: 'rejected', reason: reason }
-
-                })
-            }).finally(() => {
-                count++
-                if (count == promises.length)
-                    resolve(arr)
-            })
-
-        })
-    }
-
-    static resolve(value) {
-        return new myPromise((resolve) => {
-            resolve(value)
-        })
-    }
-    static reject(reason) {
-        return new myPromise((reject) => {
-            reject(reason)
-        })
-    }
-
+          }, 0),
+        );
+      }
+    });
+    return myPromise;
   }
-  
-  
-  
-  
-  function a() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log('a');
-        resolve('a')
-      }, 1000)
-    })
+  static race(promiseArr) {
+    return new MyPromise((resolve, reject) => {
+      promiseArr.forEach((promise) => {
+        promise.then(
+          (value) => resolve(value),
+          (reason) => reject(reason),
+        );
+      });
+    });
   }
-  function b() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        console.log('b');
-        reject('b')
-      }, 500)
-    })
+  static all(promiseArr) {
+    return new MyPromise((resolve, reject) => {
+      if (promiseArr.length === 0) resolve(promiseArr);
+      let count = 0;
+      let arr = [];
+      promiseArr.forEach((promise, index) => {
+        MyPromise.resolve(promise).then(
+          (value) => {
+            count += 1;
+            arr[index] = value;
+            if (count === promiseArr.length) {
+              resolve(arr);
+            }
+          },
+          (reason) => {
+            reject(reason);
+          },
+        );
+      });
+    });
   }
-  
-  function c() {
-    console.log('c');
+  // 重点抛出AggregateError，一个正确就resolve
+  static any(promiseArr) {
+    return new MyPromise((resolve, reject) => {
+      if (promiseArr.length === 0)
+        reject(new AggregateError([], "All promises were rejected"));
+      let errArr = [],
+        count = 0;
+      promiseArr.forEach((value, index) =>
+        MyPromise.resolve(value).then(
+          (value) => {
+            resolve(value);
+          },
+          (reason) => {
+            count += 1;
+            errArr[index] = reason;
+            if (count === promiseArr.length) {
+              reject(new AggregateError(errArr, "All promises were rejected"));
+            }
+          },
+        ),
+      );
+    });
   }
-  
-  MyPromise.all([a(), b()]).then((res) =>{
-    console.log(res);
-  })
+  // 等待所有结果返回，不会reject
+  static allSettled(promiseArr) {
+    return new MyPromise((resolve, reject) => {
+      if (promiseArr.length === 0) resolve(promiseArr);
+      let count = 0,
+        arr = [];
+      promiseArr.forEach((promise, index) => {
+        MyPromise.resolve(promise).then(
+          (value) => {
+            count += 1;
+            arr[index] = { status: "fulfilled", value };
+            if (count === promiseArr.length) resolve(arr);
+          },
+          (reason) => {
+            count += 1;
+            arr[index] = { status: "rejected", reason };
+            if (count === promiseArr.length) resolve(arr); // 永远不会reject
+          },
+        );
+      });
+    });
+  }
+  static resolve(value) {
+    return new MyPromise((resolve) => {
+      resolve(value);
+    });
+  }
+  static reject(reason) {
+    return new MyPromise((resolve, reject) => {
+      reject(reason);
+    });
+  }
+}
+
+function a() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("a");
+      resolve("a");
+    }, 1000);
+  });
+}
+function b() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("b");
+      reject("b");
+    }, 500);
+  });
+}
+
+function c() {
+  console.log("c");
+}
+
+MyPromise.all([a(), b()]).then((res) => {
+  console.log(res);
+});

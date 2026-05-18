@@ -1,15 +1,14 @@
-Parent.prototype.say = 'hello'
+Parent.prototype.say = "hello";
 function Parent() {
-  this.name = 'parent'
+  this.name = "parent";
+  this.car = [1, 2];
 }
 
 function Child() {
-  Parent.call(this)      // this.name = 'parent'
-  this.type = 'child'
+  Parent.call(this); //绑定this，无法继承原型上的属性
+  this.type = "child";
 }
 
-let c = new Child()
-let p = new Parent()
-// console.log(p.name);
-console.log(c.name);
-
+let c = new Child();
+c.car.push(3);
+console.log(c.say, c.car);

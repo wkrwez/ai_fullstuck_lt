@@ -1,19 +1,20 @@
 let parent = {
-  name: 'Tom',
-  firends: ['foo', 'bar', 'baz'],
-  age() {
-    return 18
-  }
-}
+  name: "Tom",
+  friends: ["foo", "bar", "baz"],
+  age(age) {
+    return age;
+  },
+};
 
 function clone(origin) {
-  let obj = Object.create(origin)
-  obj.like = function() {
-    return ['coding']
-  }
-  return obj
+  let obj = Object.create(origin);
+  obj.like = function () {
+    return ["coding"];
+  };
+  return obj;
 }
 
-let child = clone(parent)
-console.log(child);
-
+// let child = clone(parent);
+// child.like = "111";
+// let child2 = clone(parent);
+// console.log(child2);

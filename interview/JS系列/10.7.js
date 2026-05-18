@@ -1,7 +1,7 @@
 class Parent {
-  constructor(name) {
+  constructor(name, age) {
     this.name = name;
-    this.age = 18;
+    this.age = age;
   }
   getName() {
     return this.name;
@@ -9,12 +9,12 @@ class Parent {
 }
 
 class Child extends Parent {
-  constructor(type, name) {
-    super(name)  //深度继承
+  constructor(type, name, age) {
+    super(name, age); //深度继承
     this.type = type;
   }
 }
 
-let c = new Child('child', 'Tom')
+let c = new Child("child", "Tom", 20);
 
 console.log(c.age);
