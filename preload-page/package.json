@@ -1,0 +1,24 @@
+{
+  "name": "preload-page",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:spa && npm run prerender",
+    "build:spa": "vite build --outDir dist-spa",
+    "prerender": "node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "preview:spa": "vite preview --outDir dist-spa",
+    "preview:prerender": "vite preview --outDir dist"
+  },
+  "dependencies": {
+    "vue": "^3.5.34",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.6",
+    "puppeteer": "^25.0.4",
+    "vite": "^8.0.12"
+  }
+}
