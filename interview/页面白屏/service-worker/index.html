@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SW 全功能测试</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #38bdf8;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        max-width: 900px;
+      }
+      @media (max-width: 640px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 1.5rem;
+      }
+      .card h2 {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      button {
+        padding: 0.55rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: opacity 0.2s;
+        margin-right: 0.4rem;
+        margin-bottom: 0.4rem;
+      }
+      button:hover {
+        opacity: 0.85;
+      }
+      button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .btn-primary {
+        background: #38bdf8;
+        color: #0f172a;
+      }
+      .btn-success {
+        background: #10b981;
+        color: #fff;
+      }
+      .btn-warn {
+        background: #f59e0b;
+        color: #0f172a;
+      }
+      .btn-danger {
+        background: #ef4444;
+        color: #fff;
+      }
+      .log-area {
+        background: #0f172a;
+        border-radius: 8px;
+        padding: 0.8rem;
+        font-size: 0.78rem;
+        font-family: "Cascadia Code", "Fira Code", monospace;
+        max-height: 220px;
+        overflow-y: auto;
+        line-height: 1.5;
+      }
+      .log-entry {
+        padding: 0.15rem 0;
+        border-bottom: 1px solid #1e293b;
+      }
+      .log-entry .ts {
+        color: #64748b;
+        margin-right: 0.5rem;
+      }
+      .log-entry .ok {
+        color: #10b981;
+      }
+      .log-entry .err {
+        color: #ef4444;
+      }
+      .log-entry .info {
+        color: #38bdf8;
+      }
+      .status-bar {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      .status-item {
+        background: #1e293b;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .dot-green {
+        background: #10b981;
+      }
+      .dot-red {
+        background: #ef4444;
+      }
+      .dot-yellow {
+        background: #f59e0b;
+      }
+      .hint {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔧 Service Worker 全功能演示</h1>
+
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-item">
+        <span
+          class="dot"
+          id="dotSw"
+        ></span
+        ><span id="txtSw">SW: 检测中...</span>
+      </div>
+      <div class="status-item">
+        <span
+          class="dot"
+          id="dotPush"
+        ></span
+        ><span id="txtPush">推送: 未订阅</span>
+      </div>
+      <div class="status-item">
+        <span
+          class="dot"
+          id="dotSync"
+        ></span
+        ><span id="txtSync">后台同步: 待检测</span>
+      </div>
+    </div>
+
+    <!-- 功能卡片 -->
+    <div class="grid">
+      <!-- 卡片 1：消息通信 -->
+      <div class="card">
+        <h2>💬 消息通信</h2>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.6rem">
+          页面 ↔ Service Worker 双向通信
+        </p>
+        <button
+          class="btn-primary"
+          id="sendMsg"
+        >
+          向 SW 发送消息
+        </button>
+        <button
+          class="btn-success"
+          id="sendMsg2"
+        >
+          发送带时间戳的消息
+        </button>
+        <p class="hint">查看页面 alert 弹窗和控制台日志</p>
+      </div>
+
+      <!-- 卡片 2：推送通知 -->
+      <div class="card">
+        <h2>🔔 推送通知</h2>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.6rem">
+          服务器 → 浏览器推送通知
+        </p>
+        <button
+          class="btn-primary"
+          id="requestNotify"
+        >
+          申请通知权限
+        </button>
+        <button
+          class="btn-success"
+          id="subscribePush"
+        >
+          订阅推送通知
+        </button>
+        <p class="hint">
+          订阅后去
+          <a
+            href="/admin"
+            style="color: #38bdf8"
+            target="_blank"
+            >管理控制台</a
+          >
+          发送推送
+        </p>
+      </div>
+
+      <!-- 卡片 3：后台同步 -->
+      <div class="card">
+        <h2>🔄 后台同步</h2>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.6rem">
+          离线数据在联网后自动上传
+        </p>
+        <button
+          class="btn-primary"
+          id="syncData"
+        >
+          注册后台同步任务
+        </button>
+        <p class="hint">
+          注册后在 DevTools → Application → Service Workers → Sync 手动触发<br />
+          或将网络设为 Offline 再恢复 Online
+        </p>
+      </div>
+
+      <!-- 卡片 4：离线缓存 -->
+      <div class="card">
+        <h2>📦 离线缓存</h2>
+        <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.6rem">
+          缓存优先策略，离线可用
+        </p>
+        <button
+          class="btn-primary"
+          id="checkCache"
+        >
+          检查缓存状态
+        </button>
+        <button
+          class="btn-warn"
+          id="unregisterSw"
+        >
+          注销 Service Worker
+        </button>
+        <p class="hint">停止服务器 (Ctrl+C) 后刷新本页，验证离线访问</p>
+      </div>
+    </div>
+
+    <!-- 日志区域 -->
+    <div style="max-width: 900px; margin-top: 1.2rem">
+      <div class="card">
+        <h2>📋 操作日志</h2>
+        <div
+          class="log-area"
+          id="logArea"
+        >
+          <div class="log-entry">
+            <span class="ts">--:--:--</span>等待操作...
+          </div>
+        </div>
+        <button
+          class="btn-danger"
+          style="margin-top: 0.5rem"
+          onclick="document.getElementById('logArea').innerHTML='<div class=\\'log-entry\\'><span class=\\'ts\\'>--:--:--</span>日志已清空</div>'"
+        >
+          清空日志
+        </button>
+      </div>
+    </div>
+
+    <script src="sw-register.js"></script>
+  </body>
+</html>
