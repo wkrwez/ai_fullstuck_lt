@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分页加载 - 十万条数据渲染</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+      #app {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        padding: 16px 20px;
+        background: #4a90d9;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .toolbar {
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .toolbar input {
+        flex: 1;
+        min-width: 120px;
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        outline: none;
+      }
+      .toolbar input:focus {
+        border-color: #4a90d9;
+      }
+      .toolbar button {
+        padding: 5px 12px;
+        border: 1px solid #ccc;
+        background: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        white-space: nowrap;
+        transition: all 0.15s;
+      }
+      .toolbar button:hover {
+        border-color: #4a90d9;
+        color: #4a90d9;
+      }
+      .toolbar button.active {
+        background: #4a90d9;
+        color: #fff;
+        border-color: #4a90d9;
+      }
+      .list {
+        max-height: 500px;
+        overflow-y: auto;
+      }
+      .item {
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+        color: #333;
+      }
+      .item:nth-child(even) {
+        background: #fafafa;
+      }
+      .empty {
+        padding: 40px 20px;
+        text-align: center;
+        color: #999;
+      }
+      .pager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px 20px;
+        border-top: 1px solid #eee;
+      }
+      .pager button {
+        padding: 8px 20px;
+        border: 1px solid #4a90d9;
+        background: #fff;
+        color: #4a90d9;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+      .pager button:hover:not(:disabled) {
+        background: #4a90d9;
+        color: #fff;
+      }
+      .pager button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .pager .info {
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="header">十万条数据 - 分页渲染</div>
+
+      <div class="toolbar">
+        <input
+          placeholder="搜索 id 或随机数..."
+          @input="onSearch"
+        />
+        <button
+          :class="{ active: sortKey === 'id' && sortOrder === 'asc' }"
+          @click="setSort('id', 'asc')"
+        >ID ↑</button>
+        <button
+          :class="{ active: sortKey === 'id' && sortOrder === 'desc' }"
+          @click="setSort('id', 'desc')"
+        >ID ↓</button>
+        <button
+          :class="{ active: sortKey === 'val' && sortOrder === 'asc' }"
+          @click="setSort('val', 'asc')"
+        >值 ↑</button>
+        <button
+          :class="{ active: sortKey === 'val' && sortOrder === 'desc' }"
+          @click="setSort('val', 'desc')"
+        >值 ↓</button>
+      </div>
+
+      <div class="list" ref="listRef">
+        <template v-if="pageData.length">
+          <div
+            class="item"
+            v-for="(item, idx) in pageData"
+            :key="item.id"
+          >
+            第 {{ idx + 1 }} 行 — ID: {{ item.id }} — 随机数: {{ item.val }}
+          </div>
+        </template>
+        <div v-else class="empty">无匹配数据</div>
+      </div>
+
+      <div class="pager">
+        <button :disabled="page === 1" @click="page--">上一页</button>
+        <span class="info">第 {{ page }} / {{ totalPages }} 页（共 {{ total }} 条）</span>
+        <button :disabled="page === totalPages" @click="page++">下一页</button>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const TOTAL = 100000;
+      const PAGE_SIZE = 100;
+
+      const listData = [];
+      for (let i = 1; i <= TOTAL; i++) {
+        listData.push({ id: i, val: Math.floor(Math.random() * 100000) });
+      }
+
+      const { createApp, ref, computed, shallowRef } = Vue;
+      createApp({
+        setup() {
+          const page = ref(1);
+          const keyword = ref('');
+          const sortKey = ref('id');
+          const sortOrder = ref('asc');
+
+          let timer;
+          function onSearch(e) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+              keyword.value = e.target.value;
+              page.value = 1;
+            }, 200);
+          }
+
+          function setSort(key, order) {
+            sortKey.value = key;
+            sortOrder.value = order;
+            page.value = 1;
+          }
+
+          // 第一层：筛选
+          const filteredData = computed(() => {
+            const kw = keyword.value.toLowerCase();
+            if (!kw) return listData;
+            return listData.filter(item =>
+              String(item.id).includes(kw) ||
+              String(item.val).includes(kw)
+            );
+          });
+
+          // 第二层：排序
+          const sortedData = shallowRef(filteredData.value);
+          computed(() => {
+            const arr = [...filteredData.value];
+            const key = sortKey.value;
+            const order = sortOrder.value;
+            arr.sort((a, b) =>
+              order === 'asc' ? a[key] - b[key] : b[key] - a[key]
+            );
+            sortedData.value = arr;
+          });
+
+          const total = computed(() => sortedData.value.length);
+          const totalPages = computed(() => Math.ceil(total.value / PAGE_SIZE));
+
+          // 第三层：分页切片
+          const pageData = computed(() => {
+            const start = (page.value - 1) * PAGE_SIZE;
+            return sortedData.value.slice(start, start + PAGE_SIZE);
+          });
+
+          // 筛选/排序后总条数变了，当前页可能越界
+          computed(() => {
+            if (total.value > 0 && page.value > totalPages.value) {
+              page.value = totalPages.value;
+            }
+          });
+
+          return {
+            page, total, totalPages, pageData,
+            sortKey, sortOrder,
+            onSearch, setSort,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

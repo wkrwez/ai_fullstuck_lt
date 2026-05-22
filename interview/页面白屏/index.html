@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      #box {
+        width: 100px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const box = document.getElementById("box");
+        /*
+         * 以下两种写法，第一种只会发生一次强制重排，第二种发生1000次
+         * 浏览器每次读取布局属性都会触发重排
+         * 在Performance选项卡的火焰图的DOMContentLoaded事件Event中可以看到
+         * /
+         /****       image1       **/
+        // const width = box.offsetWidth;
+        // const styles = [];
+        // for (let i = 0; i < 1000; i++) {
+        //   styles.push(`${width + i}px`);
+        // }
+        // // 第二步：批量修改 DOM
+        // for (let i = 0; i < 1000; i++) {
+        //   box.style.width = styles[i];
+        // }
+        /****          image2            **/
+        for (let i = 0; i < 1000; i++) {
+          // 读 DOM
+          const width = box.offsetWidth;
+          // 写 DOM
+          box.style.width = `${width + i}px`;
+        }
+      });
+    </script>
+  </body>
+</html>
