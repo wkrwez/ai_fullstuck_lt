@@ -2,9 +2,9 @@
   "name": "three",
   "version": "1.0.0",
   "description": "",
-  "main": "examples/01.html",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite  --open /几何体.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

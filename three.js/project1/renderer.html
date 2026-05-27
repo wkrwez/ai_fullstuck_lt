@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+        <title>Document</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+          }
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+          }
+          .canvas-box {
+            display: flex;
+          }
+          .cvs1,
+          .cvs2 {
+            border: 1px solid #ccc;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="canvas-box">
+          <!-- 画布 -->
+          <canvas
+            class="cvs1"
+            width="500px"
+            height="500px"
+          ></canvas>
+          <canvas
+            class="cvs2"
+            width="500px"
+            height="500px"
+          ></canvas>
+        </div>
+        <!-- 视觉圆周运动 -->
+        <script type="module">
+          import * as THREE from "three";
+          // 创建场景
+
+          const scene = new THREE.Scene();
+          //   添加背景
+          scene.background = new THREE.Color(0x000000);
+
+          // 创建透视相机
+          const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000,
+          );
+
+          camera.position.set(0, 2, 5);
+          // 更改视野方向，向上下左右看
+          camera.lookAt(0, 0, 0);
+          //   创建渲染器,追加到对应的DOM
+          const renderer = new THREE.WebGLRenderer({
+            // canvas: document.querySelector(".cvs2"),
+            antialias: true,
+          });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          document.body.appendChild(renderer.domElement);
+
+          //   创建几何体
+          const cube1 = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.MeshBasicMaterial(),
+          );
+          const cube2 = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.MeshBasicMaterial({
+              color: 0xff0000,
+            }),
+          );
+          cube2.position.z = 3;
+          //   添加到场景，多个
+          scene.add(cube1, cube2);
+          function animate() {
+            requestAnimationFrame(animate);
+            cube1.rotation.x += 0.01;
+            cube1.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+          }
+          animate();
+        </script>
+      </body>
+    </html>
+  </body>
+</html>

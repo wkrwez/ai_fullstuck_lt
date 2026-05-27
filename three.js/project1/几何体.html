@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+        <title>Document</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+          }
+          html,
+          body {
+            width: 100%;
+            height: 100%;
+          }
+          .canvas-box {
+            display: flex;
+          }
+          .cvs1,
+          .cvs2 {
+            border: 1px solid #ccc;
+          }
+        </style>
+      </head>
+      <body>
+        <!-- 使用OrbitControls -->
+        <script type="module">
+          import * as THREE from "three";
+          import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+          // 创建场景
+
+          const scene = new THREE.Scene();
+          //   添加背景
+          scene.background = new THREE.Color(0x000000);
+
+          // 创建透视相机
+          const camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth / window.innerHeight,
+            0.1,
+            1000,
+          );
+
+          camera.position.set(2, 20, 20);
+          // 更改视野方向，向上下左右看
+          camera.lookAt(0, 0, 0);
+          //   创建渲染器,追加到对应的DOM
+          const renderer = new THREE.WebGLRenderer({
+            // canvas: document.querySelector(".cvs2"),
+            antialias: true,
+          });
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          document.body.appendChild(renderer.domElement);
+          //   创建结构几何体
+          //   const geometry = new THREE.PlaneGeometry(5, 5);
+          const geometry = new THREE.BufferGeometry();
+
+          //   Float32Array 类型化数组
+          const vertices = new Float32Array([
+            -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0,
+            1.0, 1.0, -1.0, -1.0, 1.0,
+          ]);
+          const color = new Float32Array([
+            1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0,
+          ]);
+          geometry.setAttribute(
+            "position",
+            new THREE.BufferAttribute(vertices, 3),
+          );
+          //   创建材质 外观
+          const material = new THREE.MeshBasicMaterial({
+            color: 0xff0000,
+            wireframe: true,
+          });
+          //   结构和材质，生成几何体
+          const cube = new THREE.Mesh(geometry, material);
+          scene.add(cube);
+          const controls = new OrbitControls(camera, renderer.domElement);
+          //   阻尼,惯性，需要调用update
+          controls.enableDamping = true;
+          controls.autoRotate = true;
+
+          //   添加监听change
+          controls.addEventListener("change", function () {
+            renderer.render(scene, camera);
+          });
+          function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+          }
+          animate();
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
