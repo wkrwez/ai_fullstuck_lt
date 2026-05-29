@@ -135,6 +135,9 @@
 
 # 10. 什么是虚拟 DOM
 
+- 从框架设计的层面：vue框架是组件开发的思想，本质是为了提升开发效率，当数据发生变更，难以精确到对应的DOM节点去更新视图，就使用js对象来描述DOM结构，这样就避免去操作大量不相干的真实DOM，最后通过diff对比找出新旧虚拟DOM的差异去更新真实DOM
+- 为了在运行时解耦：如果直接去生成真实DOM，每个环境不一样，难免出现问题，通过js对象去描述UI，只要当前环境支持js，就能根据当前环境生成对应的真实DOM
+
 1. 一个用 js 对象来描述的 DOM 结构
 2. 当一次操作导致多处 DOM 更新，不使用虚拟 DOM，浏览器需要重新一个一个构建 DOM 树，导致多次渲染。
    但是少量 DOM 更新，diff 算法同样会存在性能开销。
@@ -189,7 +192,88 @@
 
 # 17.ref 和 reactive 区别
 
-ref 使用在引用类型上修改需要.value，更复杂一点。
+- ref代理原始类型使用RefImpl，引用类型抛给reactive
+- ref 使用在引用类型上修改需要.value，更复杂一点。
+- ref 的出现是为了解决Proxy只能监听对象的问题
+- 为了处理基本类型，ref会将基本类型通过RefImpl包装成一个拥有.value的对象,访问.value后触发getter或setter，以此收集依赖
+
+## 为什么模板中不需要使用.value？
+
+模板识别ref后会自动添加
+
+## 为什么不在reactive中将原始类型包装成对象？
+
+1. reactive本身不需要.value访问，包装成RefImpl对象后需要通过.value访问，导致语义混乱
+
+## 为什么ref将引用类型丢给reactive处理还是需要.value访问
+
+从代码看的出，RefImpl对象的构造器中将reactive代理后的对象赋值给了this.\_value,
+并且如果不访问value反而访问\_value时，虽然响应式变量的value和\_value都会修改，但是因为没有经过getter，没有收集依赖，所以无法做到响应式，页面值不会变化。
+
+        ```js
+          this._value = isShallow ? value : toReactive(value)
+          export const toReactive = <T extends unknown>(value: T): T =>isObject(value) ? reactive(value) : value
+        ```
+
+        ```js
+        class RefImpl<T = any> {
+          _value: T                          // 实例能够直接访问
+          private _rawValue: T               // 不能直接访问
+
+          dep: Dep = new Dep()
+
+          public readonly [ReactiveFlags.IS_REF] = true
+          public readonly [ReactiveFlags.IS_SHALLOW]: boolean = false
+
+          constructor(value: T, isShallow: boolean) {
+            this._rawValue = isShallow ? value : toRaw(value)
+            this._value = isShallow ? value : toReactive(value)
+            this[ReactiveFlags.IS_SHALLOW] = isShallow
+          }
+
+          get value() {
+            if (__DEV__) {
+              this.dep.track({
+                target: this,
+                type: TrackOpTypes.GET,
+                key: 'value',
+              })
+            } else {
+              this.dep.track()
+            }
+            return this._value
+          }
+
+          set value(newValue) {
+            const oldValue = this._rawValue
+            const useDirectValue =
+              this[ReactiveFlags.IS_SHALLOW] ||
+              isShallow(newValue) ||
+              isReadonly(newValue)
+            newValue = useDirectValue ? newValue : toRaw(newValue)
+            if (hasChanged(newValue, oldValue)) {
+              this._rawValue = newValue
+              this._value = useDirectValue ? newValue : toReactive(newValue)
+              if (__DEV__) {
+                this.dep.trigger({
+                  target: this,
+                  type: TriggerOpTypes.SET,
+                  key: 'value',
+                  newValue,
+                  oldValue,
+                })
+              } else {
+                this.dep.trigger()
+              }
+            }
+          }
+        }
+
+        ```
+
+## RefImpl对象是什么？
+
+是vue内部实现的类，用于ref将原始类型包装成带有响应式能力的对象，并通过getter/setter来收集/触发依赖
 
 # 18.watchEffect 和 watch
 
@@ -299,4 +383,14 @@ URL 略显复杂，不够友好，不利于 SEO。
 无法直接使用浏览器的后退、前进功能，需要通过 JavaScript 控制路由的切换。
 总的来说，哈希模式在前端单页面应用（SPA）中是一种常见的路由模式，特别适用于不支持 HTML5 History API 的浏览器环境。
 
-# 创建指令
+# 数据嵌套层级很深，使用vue响应式做代理会导致页面卡顿，响应慢，怎么处理？
+
+1. 取消非必要数据响应式代理
+
+- vue3 ：使用shallowRef只带理第一层响应式对象；markRaw() 禁止vue代理
+- vue2 ：使用Object.freeze冻结对象防止响应式代理。只冻结第一层对象，只有第一层无法直接修改，可以使用vue.set()修改冻结对象的某个数据，为单个数据做响应式
+
+2. 数据结构扁平化
+3. 数据懒加载，初始只展示一层数据，点击节点后加载子节点数据，适合长列表、树形结构。
+4. 虚拟滚动，解决长数据渲染问题，每次只渲染一部分节点，数据嵌套层级深。
+5. 利用vue父子组件响应式隔离，父组件只传递数据，子组件内部做浅代理，子组件更新，不影响父组件。

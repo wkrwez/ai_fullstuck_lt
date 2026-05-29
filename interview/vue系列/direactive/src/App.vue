@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ state.deep.count }}
+  <div @click="handleClick">
+    {{ state }}
     <!-- <h1>Hello World</h1>
     <div style="height: 1000px"></div>
     <ul class="image-container">
@@ -14,12 +14,18 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-const state = reactive({});
-state.deep = { count: 0 };
-state.deep.count = 3;
-setTimeout(() => {
-  state.deep.count = 3;
-}, 1000);
+const state = ref(0);
+console.log(state);
+const handleClick = () => {
+  state._value += 1;
+  console.log(state);
+};
+
+// state.deep = { count: 0 };
+// state.deep.count = 3;
+// setTimeout(() => {
+//   state.deep.count = 3;
+// }, 1000);
 
 // const images = ref([
 //   {
