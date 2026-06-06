@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+      }
+      .drop-list {
+        width: 20vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+      .drop-item {
+        width: 100px;
+        height: 50px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .drop-box {
+      }
+      table {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="drop-list">
+        <div
+          draggable="true"
+          class="drop-item math"
+        >
+          数学
+        </div>
+        <div
+          draggable="true"
+          class="drop-item english"
+        >
+          英语
+        </div>
+        <div
+          draggable="true"
+          class="drop-item chinese"
+        >
+          语文
+        </div>
+        <div
+          draggable="true"
+          class="drop-item physics"
+        >
+          物理
+        </div>
+        <div
+          draggable="true"
+          class="drop-item chemistry"
+        >
+          化学
+        </div>
+        <div
+          draggable="true"
+          class="drop-item biology"
+        >
+          生物
+        </div>
+        <div
+          draggable="true"
+          class="drop-item history"
+        >
+          历史
+        </div>
+        <div
+          draggable="true"
+          class="drop-item geography"
+        >
+          地理
+        </div>
+        <div
+          draggable="true"
+          class="drop-item politics"
+        >
+          政治
+        </div>
+        <div
+          draggable="true"
+          class="drop-item art"
+        >
+          美术
+        </div>
+      </div>
+      <div class="drop-box">
+        <table>
+          <thead>
+            <tr>
+              <th>列1</th>
+              <th>列2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>111</td>
+              <td>111</td>
+            </tr>
+            <tr>
+              <td>222</td>
+              <td></td>
+              <!-- 补齐第二列，或根据业务留空 -->
+            </tr>
+            <tr>
+              <td>333</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>111</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

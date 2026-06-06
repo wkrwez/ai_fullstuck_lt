@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>基础拖放示例</title>
+    <style>
+      #draggable {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        line-height: 100px;
+        cursor: move;
+      }
+
+      #dropzone {
+        width: 300px;
+        height: 300px;
+        border: 2px dashed #2c3e50;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .drop-active {
+        background-color: #ecf0f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="draggable"
+      draggable="true"
+    >
+      拖动我
+    </div>
+    <div id="dropzone">放置区域</div>
+
+    <script>
+      const draggable = document.getElementById("draggable");
+      const dropzone = document.getElementById("dropzone");
+
+      // 拖动源事件
+      draggable.addEventListener("dragstart", (e) => {
+        // 设置拖动数据
+        e.dataTransfer.setData("text/plain", e.target.id);
+        // 设置拖动效果
+        e.dataTransfer.effectAllowed = "move";
+      });
+
+      // 目标区域事件
+      dropzone.addEventListener("dragenter", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("drop-active");
+      });
+
+      dropzone.addEventListener("dragover", (e) => {
+        // 阻止默认行为以允许放置
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+      });
+
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("drop-active");
+      });
+
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("drop-active");
+
+        // 获取拖动的元素ID
+        const id = e.dataTransfer.getData("text/plain");
+        const draggableElement = document.getElementById(id);
+
+        // 将拖动元素添加到放置区
+        dropzone.appendChild(draggableElement);
+      });
+    </script>
+  </body>
+</html>

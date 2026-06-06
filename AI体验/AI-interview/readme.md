@@ -270,6 +270,13 @@ def cliff_topk(rerank_results, min_drop=0.15, min_k=3):
 
 ## Function Calling 是怎么设计的?
 
+### 工作原理
+
+见 functionCalling.py 文件。
+
+- 调用模型后，根据模型是否需要使用工具决定是否调用工具，调用工具后将结果和之前的模型回答的数据携带一起，再次调用模型。
+- langchain：定义@tool 装饰器定义函数工具，模型会自动生成工具描述，更简单
+
 ## Agent的任务规划是怎么做的?
 
 ## (追问)规划是由模型完成还是通过规则实现?
