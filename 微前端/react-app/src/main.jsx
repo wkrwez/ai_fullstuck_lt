@@ -1,0 +1,38 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+let root = null
+
+// 通用渲染函数 - 兼容qiankun容器和独立运行
+function render(props = {}) {
+  const { container } = props
+  const mountNode = container
+    ? container.querySelector('#root')
+    : document.getElementById('root')
+  root = ReactDOM.createRoot(mountNode)
+  root.render(<App mainProps={props} />)
+}
+
+// qiankun生命周期钩子（通过index.html桥接脚本调用）
+// bootstrap: 初始化时调用一次（预加载时可提前执行）
+// mount: 每次进入子应用时调用，执行DOM挂载
+// unmount: 每次离开时调用，必须销毁实例避免内存泄漏
+export function bootstrap() {
+  console.log('[React] 初始化完成 - bootstrap阶段可做资源预加载')
+}
+
+export function mount(props) {
+  render(props)
+  console.log('[React] 已挂载，收到主应用数据:', props)
+}
+
+export function unmount() {
+  root.unmount()
+  root = null
+  console.log('[React] 已卸载 - 释放内存')
+}
+
+export function update(props) {
+  console.log('[React] 主应用数据更新:', props)
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>React 子应用</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- qiankun生命周期桥接 - 在沙箱中检测并注册 -->
+  <script>
+    (function () {
+      var appName = 'react-app'
+
+      if (window.__POWERED_BY_QIANKUN__) {
+        // === qiankun模式 ===
+        // __INJECTED_PUBLIC_PATH_BY_QIANKUN__ 是qiankun注入的资源基础路径
+        var publicPath = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ || ''
+        // 按需加载ES模块（qiankun fetch后由浏览器解析import()）
+        var ready = import(publicPath + 'src/main.jsx')
+
+        // 暴露生命周期钩子到 window[appName]，qiankun通过此名称查找
+        window[appName] = {
+          bootstrap: function () {
+            return Promise.resolve()
+          },
+          mount: function (props) {
+            return ready.then(function (m) {
+              return m.mount(props)
+            })
+          },
+          unmount: function () {
+            return ready.then(function (m) {
+              return m.unmount()
+            })
+          },
+          update: function (props) {
+            return ready.then(function (m) {
+              if (m.update) return m.update(props)
+            })
+          },
+        }
+      } else {
+        // === 独立运行模式 ===
+        import('/src/main.jsx').then(function (m) {
+          m.mount({})
+        })
+      }
+    })()
+  </script>
+</body>
+</html>

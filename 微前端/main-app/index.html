@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微前端主应用 - Qiankun Demo</title>
+</head>
+<body>
+  <div id="main-app">
+    <nav id="main-nav">
+      <h1>微前端演示平台</h1>
+      <div class="nav-links">
+        <a href="/vue3" class="nav-link">Vue3 子应用</a>
+        <a href="/react" class="nav-link">React 子应用</a>
+      </div>
+      <div id="loading-indicator" style="display:none">⏳ 子应用加载中...</div>
+      <div id="perf-info"></div>
+    </nav>
+
+    <!-- 通信中心面板 -->
+    <div id="com-panel">
+      <h3>通信中心（主应用端）</h3>
+
+      <!-- 方法①：qiankun GlobalState -->
+      <div class="com-card">
+        <div class="com-title">① qiankun initGlobalState（官方内置）</div>
+        <div class="com-body">
+          <input id="gs-input" placeholder="输入用户名..." value="开发者" />
+          <button onclick="__mainActions.updateGlobalState()">更新全局状态</button>
+          <div class="com-log">
+            <div>旧值: <code id="global-state-prev">—</code></div>
+            <div>新值: <code id="global-state-curr">—</code></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 方法②：自定义 EventBus -->
+      <div class="com-card">
+        <div class="com-title">② 自定义 EventBus（发布/订阅）</div>
+        <div class="com-body">
+          <input id="event-input" placeholder="输入消息..." />
+          <button onclick="__mainActions.emitEvent()">发送给子应用</button>
+          <ul id="event-log" class="event-log"></ul>
+        </div>
+      </div>
+
+      <!-- 方法③：Props + Callback -->
+      <div class="com-card">
+        <div class="com-title">③ Props 回调函数（直接函数调用）</div>
+        <div class="com-body">
+          <p class="note">通过 props 将 <code>onSubAppMessage</code> 传给子应用，子应用调用即回传</p>
+          <button onclick="__mainActions.callSubAppCallback()">触发 update 通知子应用</button>
+        </div>
+      </div>
+
+      <!-- 方法④：共享 window Store -->
+      <div class="com-card">
+        <div class="com-title">④ 共享 window Store（响应式数据）</div>
+        <div class="com-body">
+          <input id="store-key" placeholder="key" style="width:100px" />
+          <input id="store-val" placeholder="value" />
+          <button onclick="__mainActions.updateStore()">写入 Store</button>
+          <pre id="store-display" class="store-display">{}</pre>
+        </div>
+      </div>
+
+      <!-- 方法⑤：URL 参数 -->
+      <div class="com-card">
+        <div class="com-title">⑤ URL 参数传递</div>
+        <div class="com-body">
+          <input id="url-input" placeholder="filter 值..." />
+          <button onclick="__mainActions.updateURL()">更新 URL</button>
+          <div>当前参数: <code id="url-display">—</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 子应用挂载容器 -->
+    <div id="sub-app-container"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

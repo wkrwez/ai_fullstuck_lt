@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm start *)",
+      "Bash(npx vite *)",
+      "Bash(curl -s http://localhost:8000)"
+    ]
+  }
+}

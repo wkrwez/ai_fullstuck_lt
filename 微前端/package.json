@@ -1,0 +1,16 @@
+{
+  "name": "qiankun-micro-frontend-demo",
+  "private": true,
+  "description": "微前端初学者参考项目 - qiankun + Vue3 + React",
+  "scripts": {
+    "install:all": "cd main-app && npm install && cd ../vue3-app && npm install && cd ../react-app && npm install",
+    "start": "concurrently -n main,vue3,react -c blue,green,red \"cd main-app && npm run dev\" \"cd vue3-app && npm run dev\" \"cd react-app && npm run dev\"",
+    "build": "npm run build:main && npm run build:vue3 && npm run build:react",
+    "build:main": "cd main-app && npm run build",
+    "build:vue3": "cd vue3-app && npm run build",
+    "build:react": "cd react-app && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

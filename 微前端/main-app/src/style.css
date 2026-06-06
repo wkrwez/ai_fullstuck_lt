@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
+#main-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 32px;
+  background: #1a1a2e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+#main-nav h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+.nav-link {
+  color: #a0a0c0;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+  background: #16213e;
+}
+#loading-indicator {
+  margin-left: auto;
+  color: #f0c040;
+  font-size: 13px;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+#perf-info {
+  font-size: 11px;
+  color: #6a6;
+  margin-left: 12px;
+}
+
+/* ===== 通信中心面板 ===== */
+#com-panel {
+  max-width: 1100px;
+  margin: 16px auto;
+  padding: 20px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+#com-panel h3 {
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: #1a1a2e;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+.com-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  transition: border-color 0.2s;
+}
+.com-card:hover { border-color: #c0c0e0; }
+.com-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+}
+.com-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.com-body input {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.com-body input:focus { border-color: #667eea; }
+.com-body button {
+  padding: 6px 14px;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.com-body button:hover { background: #5a6fd6; }
+.com-body .note {
+  font-size: 11px;
+  color: #999;
+  width: 100%;
+}
+.com-body code {
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  word-break: break-all;
+}
+.com-log { font-size: 12px; color: #666; }
+.event-log {
+  width: 100%;
+  max-height: 120px;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 11px;
+  color: #555;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 6px;
+  margin-top: 6px;
+}
+.event-log li {
+  padding: 2px 0;
+  border-bottom: 1px solid #f5f5f5;
+  font-family: monospace;
+}
+.store-display {
+  width: 100%;
+  background: #f8f8fa;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+/* 子应用容器 */
+#sub-app-container {
+  min-height: calc(100vh - 200px);
+}
