@@ -1,0 +1,8 @@
+:global(.btn-wrapper) {
+  /* global 默认不导出 */
+  padding: 20px;
+}
+
+.btn {
+  background: blue;
+}
