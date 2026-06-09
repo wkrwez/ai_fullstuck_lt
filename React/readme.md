@@ -76,6 +76,11 @@ react 使用Object.is 来比较依赖项，对象比较引用地址
      引用类型：Object.is({}, {})，引用地址不同，重新渲染
      Object.is(objState, objState)，同一个state，跳过
 
+## onClick{()=> setCount(1)} 和 onClick{setCount(1)} 有什么区别？
+
+- onClick{()=> setCount(1)} 创建一个函数引用给 onClick，点击时调用。
+- onClick{setCount(1)} onClick存储setCount的返回值undefined，组件每次渲染时执行，导致多次渲染报错。点击不执行。
+
 # react 18 性能优化
 
 1. 并发渲染:根据任务的紧急程度来分配不同的优先级。并发渲染允许 React 中断正在进行的渲染工作，并在稍后恢复。其实就是 stratTransition、批处理等等。
