@@ -7,9 +7,9 @@
 
 1. React的ErrorBoundary（原生只支持类组件）,在组件发生JS错误时，使用备用ui
 
-   ```react
+   ```jsx
    <ErrorBoundary fallback={<div>小部件加载失败啦！</div>}>
-       <MyWidget />
+     <MyWidget />
    </ErrorBoundary>
    ```
 
@@ -75,6 +75,51 @@ react 使用Object.is 来比较依赖项，对象比较引用地址
      原始值：值相同会跳过，Object.is(5, 5)，相同则跳过
      引用类型：Object.is({}, {})，引用地址不同，重新渲染
      Object.is(objState, objState)，同一个state，跳过
+2. 更新嵌套对象时
+
+- 逐层展开，直到抵达更新的层级
+- 使用immer
+- use-immer
+
+```js
+const [user, setUser] = useState({
+  name: "Tom",
+  profile: {
+    age: 20,
+    address: {
+      city: "Beijing",
+      zip: "100000",
+    },
+  },
+});
+// 修改 address.city，需要逐层展开
+const updateCity = (newCity) => {
+  setUser((prev) => ({
+    ...prev, // 第一层：user
+    profile: {
+      ...prev.profile, // 第二层：profile
+      address: {
+        ...prev.profile.address, // 第三层：address
+        city: newCity, // 实际修改的字段
+      },
+    },
+  }));
+};
+const updateCity = (newCity) => {
+  setUser(
+    produce((draft) => {
+      // immer
+      draft.profile.address.city = newCity;
+    }),
+  );
+};
+// use-immer
+const updateCity = (newCity) => {
+  setUser((draft) => {
+    draft.profile.address.city = newCity;
+  });
+};
+```
 
 ## onClick{()=> setCount(1)} 和 onClick{setCount(1)} 有什么区别？
 
@@ -87,22 +132,21 @@ react 使用Object.is 来比较依赖项，对象比较引用地址
 2. 自动批处理
 3. stratTransition 和 useTransition 标记非紧急更新
 
-```
+```js
 function selectTab(nextTab) {
-    startTransition(() => {
-      setTab(nextTab);
-    });
-  }
+  startTransition(() => {
+    setTab(nextTab);
+  });
+}
 
+const [isPending, startTransition] = useTransition(); //isPending是否处理完成
+const [tab, setTab] = useState("about");
 
-const [isPending, startTransition] = useTransition();//isPending是否处理完成
-const [tab, setTab] = useState('about');
-
-  function selectTab(nextTab) {
-    startTransition(() => {
-      setTab(nextTab);
-    });
-  }
+function selectTab(nextTab) {
+  startTransition(() => {
+    setTab(nextTab);
+  });
+}
 ```
 
 4. suspense 扩展，允许组件的部分内容先加载，包裹的内容后续延迟加载
@@ -114,15 +158,15 @@ const [tab, setTab] = useState('about');
   如果在循环或者条件语句中调用 hooks，就会导致 hooks 的调用顺序和预期不一致，从而导致错误。
   如下
 
-  ```
-    function BadComponent({ shouldUseState }) {
-        if (shouldUseState) {
-            const [count, setCount] = useState(0); // 错误：在条件语句内部使用Hook
-        }
-        //正确
-        const [count, setCount] = useState(0);
-        useEffect(() => {})
+  ```js
+  function BadComponent({ shouldUseState }) {
+    if (shouldUseState) {
+      const [count, setCount] = useState(0); // 错误：在条件语句内部使用Hook
     }
+    //正确
+    const [count, setCount] = useState(0);
+    useEffect(() => {});
+  }
   ```
 
 # 如何保证 react 的父组件更新，而子组件不更新
