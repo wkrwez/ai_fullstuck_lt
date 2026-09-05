@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-node-start: #22c55e;
+    --color-node-task: #3b82f6;
+    --color-node-end: #ef4444;
+    --color-node-condition: #f59e0b;
+  }
+}
+
+/* React Flow overrides */
+.react-flow__node {
+  font-size: 14px;
+}
+
+/* 拖拽时关闭节点内部的 CSS transition，避免浏览器为其维护额外的 compositing layer */
+.react-flow__node.dragging * {
+  transition: none !important;
+}
+
+.react-flow__handle {
+  width: 10px;
+  height: 10px;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+/* Custom scrollbar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}

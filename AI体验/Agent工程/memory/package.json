@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@langchain/anthropic": "^1.5.4",
+    "@langchain/core": "^1.2.5",
+    "@langchain/langgraph": "^1.4.9",
+    "langchain": "^1.5.5"
+  }
+}

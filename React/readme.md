@@ -193,3 +193,10 @@ function selectTab(nextTab) {
 
 1. 将计算好的更新应用到 DOM 上
 2. 无法中断
+
+# ts 类型方法
+
+Partial：创建一个类型，将传入的类型的属性变为可选的。
+Required：创建一个类型，将传入的类型的属性变为必填的。
+Omit：删除选中的类型。Omit<Props, T>,T 为类型或字符串。
+Record：创建一个类型，将传入的 key 映射为传入的 value。Record<Key, Value>
